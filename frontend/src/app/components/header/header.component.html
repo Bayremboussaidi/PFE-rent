@@ -1,0 +1,94 @@
+<header class="header">
+  <div class="header__top">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6">
+          <div class="header__top__left">
+            <span>Besoin d'aide?</span>
+            <span class="header__top__help">
+              <i class="ri-phone-fill"></i>+216 27 932 190
+            </span>
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6">
+          <div class="header__top__right d-flex align-items-center justify-content-end gap-3">
+            <ng-container *ngIf="user; else guestLinks">
+              <h5 class="mb-0">{{ user.username }}</h5>
+              <a routerLink="/login" class="btn btn-dark">Se connecter</a>
+              <a routerLink="/register" class="btn btn-dark">S'inscrire</a>
+            </ng-container>
+            <ng-template #guestLinks>
+              <a routerLink="/login" class="d-flex align-items-center gap-1">
+                <i class="ri-login-circle-line"></i> Se connecter
+              </a>
+              <a routerLink="/register" class="d-flex align-items-center gap-1">
+                <i class="ri-user-line"></i> S'inscrire
+              </a>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="header__middle">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 col-md-3 col-sm-4">
+          <div class="logo">
+            <h1>
+              <a routerLink="/home" class="d-flex align-items-center gap-3 logo-background">
+                <span>Comparator</span>
+              </a>
+            </h1>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-4">
+          <div class="header__location d-flex align-items-center gap-2">
+            <span><i class="ri-earth-line"></i></span>
+            <div class="header__location-content">
+              <h4>Tunisia</h4>
+              <h6>Les berges du lac 2, Tunis</h6>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-4">
+          <div class="header__location d-flex align-items-center gap-2">
+            <span><i class="ri-time-line"></i></span>
+            <div class="header__location-content">
+              <h4>Ouvert 7j/7</h4>
+              <h6>9h - 20h</h6>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-3 col-sm-0 d-flex align-items-center justify-content-end">
+          <button class="header__btn btn">
+            <a routerLink="/contact">
+              <i class="ri-phone-line"></i> appel
+            </a>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="main__navbar">
+    <div class="container">
+      <div class="navigation__wrapper d-flex align-items-center justify-content-between">
+        <span class="mobile__menu">
+          <i class="ri-menu-line" (click)="toggleMenu()"></i>
+        </span>
+        <div class="navigation" (click)="toggleMenu()">
+          <div class="menu">
+            <ul class="nav__list" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="300">
+              <li *ngFor="let item of navLinks">
+                <a [routerLink]="item.path" routerLinkActive="nav__active" class="nav__item">
+                  {{ item.display }}
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="nav__right">
+          <div class="search__box">

@@ -1,0 +1,15 @@
+<div class="faq-wrapper">
+  <div class="faq-container">
+    <h2>Questions fréquentes</h2>
+
+    <div class="faq-item" *ngFor="let item of faqItems; let i = index">
+      <div class="question" (click)="toggleItem(i)">
+        <span class="question-text">{{ item.question }}</span>
+        <span class="toggle-icon">{{ item.isOpen ? '∨' : '>' }}</span>
+      </div>
+      <div class="answer" [class.open]="item.isOpen">
+        <p>{{ item.answer }}</p>
+      </div>
+    </div>
+  </div>
+</div>

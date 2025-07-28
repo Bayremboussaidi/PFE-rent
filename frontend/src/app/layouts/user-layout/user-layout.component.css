@@ -1,0 +1,12 @@
+.top-menu {
+  width: 100%;
+  background: #f8f9fa; /* Light background */
+  height: 30px;
+  line-height: 16px;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1); /* Slight shadow for visibility */
+  margin-bottom: 10px; /* Add spacing between top-menu and the next component */
+}
+
+
+
+

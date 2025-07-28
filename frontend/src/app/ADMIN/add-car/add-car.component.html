@@ -1,0 +1,125 @@
+<button class="go-back-btn" (click)="goBack()">Back</button>
+
+
+
+<div class="form-container">
+  <div class="header">
+    <h2>Add New Car</h2>
+  </div>
+
+  <!-- Car Name -->
+  <div class="input-group">
+    <label>Car Name</label>
+    <input type="text" [(ngModel)]="voiture.carName" class="form-input" required>
+  </div>
+
+  <!-- Brand -->
+  <div class="input-group">
+    <label>Brand</label>
+    <input type="text" [(ngModel)]="voiture.brand" class="form-input" required>
+  </div>
+
+  <!-- Category -->
+  <div class="input-group">
+    <label>Category</label>
+    <select [(ngModel)]="voiture.category" class="form-input">
+      <option value="sedan">Sedan</option>
+      <option value="suvan">SUV</option>
+      <option value="Luxury Car">Luxury Car</option>
+      <option value="Hybrid">Hybrid</option>
+      <option value="truck">Truck</option>
+      <option value="electric">Electric</option>
+    </select>
+  </div>
+
+
+  <!-- Transmission -->
+  <div class="input-group">
+    <label>Transmission</label>
+    <input type="text" [(ngModel)]="voiture.transmission" class="form-input">
+  </div>
+
+  <!-- Matricule -->
+  <div class="input-group">
+    <label>Matricule</label>
+    <input type="text" [(ngModel)]="voiture.matricule" class="form-input" required>
+  </div>
+
+  <!-- Fuel Type -->
+  <div class="input-group">
+    <label>Fuel Type</label>
+    <select [(ngModel)]="voiture.carburant" class="form-input">
+      <option value="Gasoline">Gasoline</option>
+      <option value="Diesel">Diesel</option>
+      <option value="Electric">Electric</option>
+      <option value="Hybrid">Hybrid</option>
+    </select>
+  </div>
+
+  <!-- Agency -->
+  <div class="input-group">
+    <label for="agency">Agency</label>
+    <select [(ngModel)]="voiture.agence" class="form-input" id="agency">
+      <option *ngFor="let agency of agencies" [value]="agency.agencyName">
+        {{ agency.agencyName }}  <!-- Use agencyName instead of name -->
+      </option>
+    </select>
+  </div>
+
+
+  <div class="input-group">
+    <label>Roof Type</label>
+    <select [(ngModel)]="voiture.toit" class="form-input">
+      <option value="Standard">Standard</option>
+      <option value="Panoramic">Panoramic</option>
+      <option value="Sunroof">Sunroof</option>
+      <option value="Convertible">Convertible</option>
+      <option value="Hardtop">Hardtop</option>
+      <option value="Softtop">Softtop</option>
+    </select>
+  </div>
+
+  <!-- Location -->
+  <div class="input-group">
+    <label>Location</label>
+    <input type="text" [(ngModel)]="voiture.local" class="form-input">
+  </div>
+
+  <!-- Price Per Day -->
+  <div class="input-group">
+    <label>Price per day</label>
+    <input type="number" [(ngModel)]="voiture.price" class="form-input" min="0" required>
+  </div>
+
+  <!-- Description -->
+  <div class="input-group">
+    <label>Description</label>
+    <textarea [(ngModel)]="voiture.description" class="form-input" rows="3"></textarea>
+  </div>
+
+
+
+<!-- Car Images -->
+<div class="input-group">
+  <label>Car Images (Max 4)</label>
+  <input type="file" (change)="onImageSelect($event)" multiple accept="image/*" class="form-input">
+
+  <!-- Image Upload Placeholders -->
+  <div class="image-upload-grid">
+    <div class="image-upload-box" *ngFor="let index of [0,1,2,3]; let i = index">
+      <div *ngIf="imageFiles[i] as file" class="image-preview">
+        <img [src]="getImagePreview(file)" alt="Preview">
+        <button type="button" (click)="removeImage(i)" class="remove-btn">×</button>
+      </div>
+      <div *ngIf="!imageFiles[i]" class="upload-placeholder">
+        <span>Slot {{i+1}}</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  <div class="button-container">
+    <button class="submit-btn" (click)="onSubmit()">Add Car</button>
+  </div>
+</div>

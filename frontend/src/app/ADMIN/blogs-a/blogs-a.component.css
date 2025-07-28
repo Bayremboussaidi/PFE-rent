@@ -1,0 +1,146 @@
+/* Blog card styling */
+.blog-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 28px;
+}
+
+.blog-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* Blog image */
+.blog-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px 8px 0 0;
+}
+
+.blog-card:hover .blog-image {
+  opacity: 0.9;
+}
+
+/* Blog details */
+.blog-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+/* Blog title */
+.blog-title {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  color: #2d3748;
+}
+
+.blog-title a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.blog-title a:hover {
+  color: #007bff;
+}
+
+/* Blog metadata */
+.blog-meta {
+  font-size: 0.9rem;
+  color: #6b7280;
+  margin-bottom: 15px;
+}
+
+/* Blog description */
+.blog-description {
+  font-size: 1rem;
+  color: #4a5568;
+  margin-bottom: 15px;
+  height: 60px;
+  overflow: hidden;
+}
+
+/* Action buttons */
+.action-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: auto;
+  gap: 10px;
+}
+
+.btn {
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  cursor: pointer;
+  border: none;
+  flex: 1;
+  text-align: center;
+}
+
+.btn-view {
+  background-color: #4a5568;
+  color: #fff;
+}
+
+.btn-view:hover {
+  background-color: #2d3748;
+  transform: translateY(-2px);
+}
+
+.btn-view:disabled {
+  background-color: #a0a0a0;
+  cursor: not-allowed;
+}
+
+.btn-delete {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+.btn-delete:hover {
+  background-color: #a71d2a;
+  transform: translateY(-2px);
+}
+
+.btn-edit {
+  background-color: #146a03f6;
+  color: #fff;
+}
+
+.btn-edit:hover {
+  background-color: #0e2e03;
+  transform: translateY(-2px);
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+  .col-lg-4 {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+}
+
+@media (max-width: 768px) {
+  .col-md-6 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  .blog-image {
+    height: 180px;
+  }
+}

@@ -1,0 +1,57 @@
+<header id="header" class="header sticky-top">
+
+  <!-- Top Bar -->
+  <div class="topbar d-flex align-items-center">
+    <div class="container d-flex justify-content-center justify-content-md-between">
+      <div class="d-none d-md-flex align-items-center">
+        <i class="bi bi-clock me-1"></i> Monday - Saturday, 8AM to 10PM
+      </div>
+      <div class="d-flex align-items-center">
+        <i class="bi bi-phone me-1"></i> Call us now +216 22 559 645
+      </div>
+    </div>
+  </div>
+
+  <!-- Branding & Navigation -->
+  <div class="branding d-flex align-items-center">
+    <div class="container position-relative d-flex align-items-center justify-content-end">
+
+      <a routerLink="/admin/carlista" class="logo d-flex align-items-center me-auto">
+        <div class="logo" data-aos="zoom-in" data-aos-duration="1500">
+          Mylock<span>_Administrator</span>
+        </div>
+
+
+      </a>
+
+      <nav id="navmenu" class="navmenu">
+        <ul>
+          <li><a routerLink="/admin/add-car" class="active">Add Car</a></li>
+          <li><a routerLink="/admin/carlista" class="active">Cars</a></li>
+          <li><a routerLink="/admin/usera">Users</a></li>
+          <li><a routerLink="/admin/chat">Contact</a></li>
+          <li><a routerLink="/admin/admin-show-blogs">Blogs</a></li>
+
+
+
+          <div class="dropdown" (mouseleave)="isDropdownVisible = false">
+            <span (mouseover)="toggleDropdown()">Agencies</span>
+            <div class="dropdown-content" *ngIf="isDropdownVisible">
+              <li><a routerLink="/admin/add-agence" (click)="closeDropdown($event)">Add Agence</a></li>
+              <li><a routerLink="/admin/show-agence" (click)="closeDropdown($event)">Ag List</a></li>
+            </div>
+          </div>
+
+          <li><a (click)="onLogout()">Logout</a></li>
+
+
+
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+
+  </div>
+
+</div>
+
+</header>

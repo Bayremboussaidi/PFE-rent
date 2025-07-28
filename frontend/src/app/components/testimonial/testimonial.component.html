@@ -1,0 +1,24 @@
+<!--div class="container section-title" data-aos="fade-up">
+  <h2>Testimonials</h2>
+  <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+</div-->
+
+<div class="container" data-aos="fade-up" data-aos-delay="100">
+  <div class="swiper-container mySwiper">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide" *ngFor="let testimonial of testimonials">
+        <div class="testimonial-item">
+          <p>
+            <i class="bi bi-quote quote-icon-left"></i>
+            <span>{{ testimonial.text }}</span>
+            <i class="bi bi-quote quote-icon-right"></i>
+          </p>
+          <img [src]="testimonial.image" class="testimonial-img" alt="">
+          <h3>{{ testimonial.name }}</h3>
+          <h4>{{ testimonial.role }}</h4>
+        </div>
+      </div>
+    </div>
+    <div class="swiper-pagination"></div>
+  </div>
+</div>

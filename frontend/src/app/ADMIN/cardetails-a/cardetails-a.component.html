@@ -1,0 +1,69 @@
+<div class="car-details-container" *ngIf="car">
+  <div class="car-content">
+    <div class="car-main-content">
+      <h1>{{ car.carName }}</h1>
+      <img [src]="carImage" alt="{{ car.carName }}" class="w-100" />
+      <div class="car__publisher d-flex align-items-center gap-4 mb-4">
+        <span class="car__brand">
+          <i class="ri-car-line"></i> {{ car.brand }}
+        </span>
+        <span class="d-flex align-items-center gap-1 section__description">
+          <i class="ri-settings-line"></i> Transmission: {{ car.transmission }}
+        </span>
+        <span class="d-flex align-items-center gap-1 section__description">
+          <i class="ri-dashboard-line"></i> Category: {{ car.category }}
+        </span>
+      </div>
+      <p class="section__description">{{ car.description }}</p>
+      <ul class="car-details-list">
+        <li><strong>Toit:</strong> {{ car.toit }}</li>
+        <li><strong>Carburant:</strong> {{ car.carburant }}</li>
+        <li><strong>Price:</strong> ${{ car.price }}</li>
+      </ul>
+    </div>
+
+    <!-- Reviews Section -->
+    <div class="reviews-section" *ngIf="reviews.length">
+      <h4>Les Avis des Clients</h4>
+      <div class="reviews-list">
+        <div class="review-item" *ngFor="let review of reviews">
+          <div class="review-header">
+            <strong>{{ review.username }}</strong>
+            <span class="review-date">{{ review.createdAt | date: 'shortDate' }}</span>
+          </div>
+          <p class="review-text">{{ review.reviewText }}</p>
+          <div class="review-rating">
+            <span *ngFor="let star of getStars(review.rating)">⭐</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Leave a Comment -->
+    <div class="leave__comment-form mt-5">
+      <h4>Laisser une commentaire</h4>
+      <p class="section__description">
+        Vous devez vous connecter pour créer ou commenter une publication
+      </p>
+
+      <form>
+        <div class="form-group d-flex gap-3">
+          <input type="text" class="form-control" placeholder="Full name" />
+          <input type="email" class="form-control" placeholder="Email" />
+        </div>
+
+        <div class="form-group">
+          <textarea rows="5" class="form-control w-100 py-2 px-3" placeholder="Comment..."></textarea>
+        </div>
+
+        <button class="btn comment__btn mt-3">
+          Poster un commentaire
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+
+<app-voiture-table></app-voiture-table>

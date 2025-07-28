@@ -1,0 +1,31 @@
+<section class="testimonial"
+         [ngStyle]="{'cursor': cursorStyle}">
+
+  <div class="testimonials-slider">
+    <ul class="slides">
+      <li *ngFor="let testimonial of testimonials; let i = index"
+          [ngClass]="{'active-slide': i === activeSlide}">
+        <div class="testimonial-content">
+          <div class="module-icon"><span class="icon-quote">❝</span></div>
+          <blockquote class="testimonial-text">
+            {{ testimonial.text }}
+          </blockquote>
+          <div class="testimonial-author">
+            <div class="testimonial-title">{{ testimonial.author }}</div>
+            <div class="testimonial-descr">{{ testimonial.company }}</div>
+          </div>
+          <!-- New Button -->
+          <button class="btn become__driver-btn mt-4" (click)="navigateToCars()">Réservez maintenant</button>
+        </div>
+      </li>
+    </ul>
+
+    <!-- Pagination Dots -->
+    <div class="carousel-pagination">
+      <span *ngFor="let testimonial of testimonials; let i = index"
+            (click)="setActiveSlide(i)"
+            [ngClass]="{'active-dot': i === activeSlide}">
+      </span>
+    </div>
+  </div>
+</section>

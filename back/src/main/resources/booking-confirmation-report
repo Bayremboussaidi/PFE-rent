@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" 
+            name="BookingConfirmation"
+            pageWidth="595"
+            pageHeight="842"
+            columnWidth="555"
+            leftMargin="20"
+            rightMargin="20"
+            topMargin="20"
+            bottomMargin="20">
+
+    
+    <parameter name="bookingId" class="java.lang.String"/>
+    <parameter name="carName" class="java.lang.String"/>
+    <parameter name="startDate" class="java.util.Date"/>
+    <parameter name="endDate" class="java.util.Date"/>
+    <parameter name="userName" class="java.lang.String"/>
+    <parameter name="userEmail" class="java.lang.String"/>
+
+
+    <title>
+        <band height="120">
+            <!-- Company Header -->
+            <staticText>
+                <reportElement x="0" y="0" width="555" height="30"/>
+                <textElement textAlignment="Center">
+                    <font size="20" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Car Rental Service]]></text>
+            </staticText>
+            
+            <!-- Confirmation Title -->
+            <staticText>
+                <reportElement x="0" y="40" width="555" height="25"/>
+                <textElement textAlignment="Center">
+                    <font size="16" isBold="true"/>
+                </textElement>
+                <text><![CDATA[BOOKING CONFIRMATION]]></text>
+            </staticText>
+
+            <!-- QR Code -->
+            <image>
+                <reportElement x="400" y="10" width="150" height="150"/>
+                <imageExpression>
+                    <![CDATA[net.sf.jasperreports.renderers.BarcodeRenderer.createBarcode(
+                        new net.sourceforge.barbecue.BarcodeFactory.createQRCode($P{bookingId}, 150, 150)
+                    )]]>
+                </imageExpression>
+            </image>
+
+            <!-- Separator Line -->
+            <line>
+                <reportElement x="0" y="110" width="555" height="1"/>
+                <graphicElement>
+                    <pen lineWidth="0.5"/>
+                </graphicElement>
+            </line>
+        </band>
+    </title>
+
+    <!-- Detail Section -->
+    <detail>
+        <band height="250">
+            <!-- Booking Details -->
+            <staticText>
+                <reportElement x="0" y="10" width="200" height="20"/>
+                <textElement>
+                    <font isBold="true"/>
+                </textElement>
+                <text><![CDATA[Booking ID:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="100" y="10" width="200" height="20"/>
+                <textFieldExpression><![CDATA[$P{bookingId}]]></textFieldExpression>
+            </textField>
+
+            <!-- Car Details -->
+            <staticText>
+                <reportElement x="0" y="40" width="200" height="20"/>
+                <textElement>
+                    <font isBold="true"/>
+                </textElement>
+                <text><![CDATA[Vehicle:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="100" y="40" width="300" height="20"/>
+                <textFieldExpression><![CDATA[$P{carName}]]></textFieldExpression>
+            </textField>
+
+            <!-- Rental Period -->
+            <staticText>
+                <reportElement x="0" y="70" width="200" height="20"/>
+                <textElement>
+                    <font isBold="true"/>
+                </textElement>
+                <text><![CDATA[Rental Period:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="100" y="70" width="300" height="20"/>
+                <textFieldExpression>
+                    <![CDATA[new java.text.SimpleDateFormat("dd MMM yyyy").format($P{startDate}) 
+                        + "  to  " 
+                        + new java.text.SimpleDateFormat("dd MMM yyyy").format($P{endDate})]]>
+                </textFieldExpression>
+            </textField>
+
+            <!-- User Information -->
+            <staticText>
+                <reportElement x="0" y="110" width="200" height="20"/>
+                <textElement>
+                    <font isBold="true"/>
+                </textElement>
+                <text><![CDATA[Customer Name:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="100" y="110" width="300" height="20"/>
+                <textFieldExpression><![CDATA[$P{userName}]]></textFieldExpression>
+            </textField>
+
+            <staticText>
+                <reportElement x="0" y="140" width="200" height="20"/>
+                <textElement>
+                    <font isBold="true"/>
+                </textElement>
+                <text><![CDATA[Customer Email:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="100" y="140" width="300" height="20"/>
+                <textFieldExpression><![CDATA[$P{userEmail}]]></textFieldExpression>
+            </textField>
+
+            <!-- Terms and Conditions -->
+            <staticText>
+                <reportElement x="0" y="190" width="555" height="40"/>
+                <textElement textAlignment="Center">
+                    <font size="10" isItalic="true"/>
+                </textElement>
+                <text><![CDATA[Present this confirmation with valid ID at pickup. 
+Cancellations must be made 24 hours prior to pickup.]]></text>
+            </staticText>
+        </band>
+    </detail>
+
+    <!-- Footer -->
+    <pageFooter>
+        <band height="50">
+            <line>
+                <reportElement x="0" y="0" width="555" height="1"/>
+                <graphicElement>
+                    <pen lineWidth="0.5"/>
+                </graphicElement>
+            </line>
+            <staticText>
+                <reportElement x="0" y="10" width="555" height="20"/>
+                <textElement textAlignment="Center">
+                    <font size="10"/>
+                </textElement>
+                <text><![CDATA[Thank you for choosing our service! | Contact: support@carrental.com | Phone: +1-800-123-4567]]></text>
+            </staticText>
+        </band>
+    </pageFooter>
+</jasperReport>

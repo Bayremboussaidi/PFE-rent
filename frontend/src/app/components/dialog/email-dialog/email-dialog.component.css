@@ -1,0 +1,92 @@
+/* General Dialog Styling */
+mat-dialog-content {
+  padding: 20px;
+}
+
+/* Booking Container */
+.booking-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-height: 400px;
+  overflow-y: auto;
+  padding: 10px;
+}
+
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+/* Booking Item Card */
+.booking-item {
+  display: flex;
+  align-items: center;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.booking-item:hover {
+  transform: scale(1.02);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Booking Image */
+.booking-image {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-right: 15px;
+}
+
+/* Booking Info */
+.booking-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+/* Booking Status */
+.pending {
+  color: #ff9800;
+  font-weight: bold;
+}
+
+.confirmed {
+  color: #4caf50;
+  font-weight: bold;
+}
+
+.canceled {
+  color: #f44336;
+  font-weight: bold;
+}
+
+/* Delete Button */
+.btn-danger {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.btn-danger:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.btn-danger:hover:not(:disabled) {
+  background-color: #d32f2f;
+}

@@ -1,0 +1,11 @@
+<div class="row">
+  <ng-container *ngFor="let item of services">
+    <div
+      class="service-item"
+      data-aos="zoom-in"
+
+    >
+      <app-service-item [item]="item"></app-service-item>
+    </div>
+  </ng-container>
+</div>

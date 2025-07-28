@@ -1,0 +1,88 @@
+<div class="blog-details-container" *ngIf="blog">
+  <div class="blog-content">
+    <div class="blog-main-content">
+      <h1>{{ blog.title }}</h1>
+      <img [src]="blog.imgUrl" alt="" class="w-100" />
+      <div class="blog__publisher d-flex align-items-center gap-4 mb-4">
+        <span class="blog__author">
+          <i class="ri-user-line"></i> {{ blog.author }}
+        </span>
+        <span class="d-flex align-items-center gap-1 section__description">
+          <i class="ri-calendar-line"></i> {{ blog.date }}
+        </span>
+        <span class="d-flex align-items-center gap-1 section__description">
+          <i class="ri-time-line"></i> {{ blog.time }}
+        </span>
+      </div>
+      <p class="section__description">{{ blog.description }}</p>
+      <h6 class="ps-5 fw-normal">
+        <blockquote class="fs-4">{{ blog.quote }}</blockquote>
+      </h6>
+    </div>
+
+
+
+    <div class="comments-section mt-5">
+      <h4>Commentaires</h4>
+      <div *ngFor="let comment of blog.comments" class="comment-box mb-4">
+        <p><strong>{{ comment.fullName || 'Anonyme' }}</strong> (<i>{{ comment.email }}</i>)</p>
+        <p>{{ comment.content || 'Aucun contenu.' }}</p>
+      </div>
+    </div>
+
+
+    <!-- Comment Form -->
+    <div class="leave__comment-form mt-5">
+      <h4>Laisser une commentaire</h4>
+      <p class="section__description">
+        Vous devez vous connecter pour créer ou commenter une publication
+      </p>
+
+      <form (ngSubmit)="submitComment()">
+        <div class="form-group d-flex gap-3">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Full name"
+            [(ngModel)]="review.username"
+            name="username"
+            readonly
+          />
+          <input
+            type="email"
+            class="form-control"
+            placeholder="Email"
+            [(ngModel)]="review.email"
+            name="email"
+            readonly
+          />
+        </div>
+
+        <div class="form-group mt-3">
+          <textarea
+            rows="5"
+            class="form-control w-100 py-2 px-3"
+            placeholder="Comment..."
+            [(ngModel)]="review.commentText"
+            name="commentText"
+            required
+          ></textarea>
+        </div>
+
+        <button type="submit" class="btn comment__btn mt-3">
+          Poster un commentaire
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Sidebar -->
+  <div class="blog-sidebar">
+    <h5>Articles récents</h5>
+    <ul>
+      <li *ngFor="let otherBlog of otherBlogs" class="blog-item-box">
+        <a [routerLink]="['/blogs', otherBlog.id]">{{ otherBlog.title }}</a>
+      </li>
+    </ul>
+  </div>
+</div>

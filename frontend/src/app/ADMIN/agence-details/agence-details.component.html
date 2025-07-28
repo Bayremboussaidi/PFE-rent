@@ -1,0 +1,55 @@
+<app-header-a></app-header-a>
+
+
+<div class="container" *ngIf="agency">
+  <div class="card">
+    <div class="card-header">
+      <h2>Agency Details</h2>
+      <button class="update-button" (click)="updateAgency()" [disabled]="!hasChanges">
+        <i class="pi pi-pencil"></i> Update Agency
+      </button>
+    </div>
+
+    <div class="form-container">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Agency Name</label>
+          <input type="text" [(ngModel)]="agency.agencyName" (ngModelChange)="onChange()"
+                 class="form-input" placeholder="Enter agency name">
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" [(ngModel)]="agency.email" (ngModelChange)="onChange()"
+                 class="form-input" placeholder="Enter email address">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Phone Number</label>
+          <input type="text" [(ngModel)]="agency.phoneNumber" (ngModelChange)="onChange()"
+                 class="form-input" placeholder="Enter phone number">
+        </div>
+        <div class="form-group">
+          <label>City</label>
+          <input type="text" [(ngModel)]="agency.city" (ngModelChange)="onChange()"
+                 class="form-input" placeholder="Enter city">
+        </div>
+      </div>
+
+      <div class="info-row">
+        <div class="info-item">
+          <span class="info-label"></span>
+          <span class="info-value">{{ agency.createdAt | date: 'mediumDate' }}</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label"></span>
+          <span class="info-value">{{ agency.updatedAt | date: 'mediumDate' }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p *ngIf="!agency && !loading" class="status-message">No agency found.</p>
+<p *ngIf="loading" class="status-message">Loading agency details...</p>

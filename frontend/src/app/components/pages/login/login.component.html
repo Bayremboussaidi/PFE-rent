@@ -1,0 +1,166 @@
+<div class="conditions-overlay" *ngIf="showConditions">
+  <div class="conditions-dialog">
+    <div class="dialog-header">
+      <h3>Conditions de location</h3>
+      <button class="close-btn" (click)="closeConditions()">&times;</button>
+    </div>
+
+    <div class="dialog-content">
+      <app-faq></app-faq>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+<!--section>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 m-auto">
+        <div class="login__container d-flex justify-content-between">
+          <div class="login__img" data-aos="fade-left" data-aos-duration="1500" data-aos-delay="500">
+            <img src="assets/all-images/login.jpg" alt="login" />
+          </div>
+
+          <div class="login__form" data-aos="fade-right" data-aos-duration="1500" data-aos-delay="500">
+            <div class="user">
+              <img src="../../assets/all-images/logo2.png" alt="User Icon" />
+            </div>
+            <h2>Se connecter</h2>
+
+            <p *ngIf="errorMessage" class="text-danger">{{ errorMessage }}</p>
+
+            <form (ngSubmit)="handleClick($event)">
+              <div class="form-group">
+                <input type="email" placeholder="Email" required id="email" [(ngModel)]="credentials.email" name="email">
+              </div>
+              <div class="form-group">
+                <input type="password" placeholder="Mot de passe" required id="password" [(ngModel)]="credentials.password" name="password">
+              </div>
+
+              <div class="robot-check">
+                <label>
+                  <input type="checkbox" [(ngModel)]="isRobot" name="robotCheck">
+                  <span>J'accepte les conditions de location</span>
+                  <button class="conditions-button" (click)="showConditions = true">
+                    <span class="button-icon">!</span>
+                    <span class="hover-text">Lire les conditions de location</span>
+                  </button>
+                </label>
+              </div>
+              <div class="robot-check">
+                <label>
+                  <input type="checkbox" [checked]="isUser" name="userCheck" (change)="toggleCheck('user')">
+                  Je suis un client
+                </label>
+              </div>
+
+              <div class="robot-check">
+                <label>
+                  <input type="checkbox" [checked]="isAgence" name="agenceCheck" (change)="toggleCheck('agence')">
+                  Je suis agence
+                </label>
+              </div>
+              <button class="btn secondary__btn auth__btn" type="submit">
+                <p>Se connecter</p>
+              </button>
+            </form>
+            <p>Vous n'avez pas de compte ? <a routerLink="/register" class="text-black">Créer</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section-->
+
+
+
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 m-auto">
+        <div class="login__container d-flex justify-content-between">
+          <!-- Login Image -->
+          <div class="login__img" data-aos="fade-left" data-aos-duration="1500" data-aos-delay="500">
+            <img src="assets/all-images/login.jpg" alt="login" />
+          </div>
+
+          <!-- Login Form -->
+          <div class="login__form" data-aos="fade-right" data-aos-duration="1500" data-aos-delay="500">
+            <div class="user">
+              <img src="../../assets/all-images/logo2.png" alt="User Icon" />
+            </div>
+            <h2>Se connecter</h2>
+
+            <p *ngIf="errorMessage" class="text-danger">{{ errorMessage }}</p>
+
+            <form (ngSubmit)="handleClick($event)">
+              <!-- Email Field -->
+              <div class="form-group">
+                <input
+                  type="email"
+                  placeholder="Email"
+                  required
+                  id="email"
+                  [(ngModel)]="credentials.email"
+                  name="email"
+                />
+              </div>
+
+              <!-- Password Field -->
+              <div class="form-group">
+                <input
+                  type="password"
+                  placeholder="Mot de passe"
+                  required
+                  id="password"
+                  [(ngModel)]="credentials.password"
+                  name="password"
+                />
+              </div>
+
+              <!-- Terms & Conditions Checkbox -->
+              <div class="robot-check">
+                <label>
+                  <input
+                    type="checkbox"
+                    [(ngModel)]="isRobot"
+                    name="robotCheck"
+                    required
+                  />
+                  <span>J'accepte les conditions de location</span>
+                  <button
+                    class="conditions-button"
+                    type="button"
+                    (click)="showConditions = true"
+                  >
+                    <span class="button-icon">!</span>
+                    <span class="hover-text">Lire les conditions de location</span>
+                  </button>
+                </label>
+              </div>
+
+              <!-- Submit Button -->
+              <button class="btn secondary__btn auth__btn" type="submit">
+                <p>Se connecter</p>
+              </button>
+            </form>
+
+            <p>
+              Vous n'avez pas de compte ?
+              <a routerLink="/register" class="text-black">Créer</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+

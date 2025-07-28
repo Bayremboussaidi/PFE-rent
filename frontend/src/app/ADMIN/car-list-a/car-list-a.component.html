@@ -1,0 +1,89 @@
+<app-header-a></app-header-a>
+
+
+
+
+
+<!-- Simplified Dialog -->
+<p-dialog
+  [(visible)]="isAddModalOpen"
+  header="Add New Car"
+  [modal]="true"
+  [style]="{ width: '50vw' }"
+  [draggable]="false"
+  [resizable]="false">
+
+  <form (ngSubmit)="onAddCar()">
+    <div class="form-group">
+      <label>Car Name</label>
+      <input pInputText type="text" [(ngModel)]="newCar.carName" name="carName" required>
+    </div>
+
+    <div class="form-group">
+      <label>Brand</label>
+      <input pInputText type="text" [(ngModel)]="newCar.brand" name="brand" required>
+    </div>
+
+    <div class="dialog-footer">
+      <button pButton type="button" label="Cancel" (click)="closeAddModal()"></button>
+      <button pButton type="submit" label="Add" class="p-button-success"></button>
+    </div>
+  </form>
+</p-dialog>
+
+
+
+
+<div class="site-section bg-light">
+  <div class="container">
+    <div class="row">
+      <div *ngFor="let car of displayedCars" class="col-lg-4 col-md-6 mb-4">
+        <div class="car-card">
+          <a [routerLink]="['/car-details', car.id]">
+            <img [src]="car.images[0] ?
+            'data:' + car.images[0].type + ';base64,' + car.images[0].base64Data :
+            '/assets/images/default-car.png'"
+           alt="{{ car.carName }}"
+           class="car-image">
+          </a>
+          <div class="car-details">
+            <div class="text-center">
+              <h3 class="car-name"><a [routerLink]="['/car-details', car.id]">{{ car.carName }}</a></h3>
+              <p class="car-meta">Brand: {{ car.brand }} | Category: {{ car.category }}</p>
+              <div class="rating">
+                <span *ngFor="let star of [].constructor(car.rating)" class="icon-star text-warning"></span>
+              </div>
+              <div class="rent-price"><span>${{ car.price }}/</span>day</div>
+            </div>
+            <ul class="specs">
+              <li><span>Transmission</span><span class="spec">{{ car.transmission }}</span></li>
+              <li><span>Roof Type</span><span class="spec">{{ car.toit }}</span></li>
+              <li><span>Fuel</span><span class="spec">{{ car.carburant }}</span></li>
+              <li><span>Availability</span><span class="spec">{{ car.disponible ? 'Available' : 'Not Available' }}</span></li>
+              <li><span>Agency</span><span class="spec">{{ car.agence }} ({{ car.local }})</span></li>
+              <li><span>Reviews</span><span class="spec">{{ car.reviews.length || 0 }} Reviews</span></li>
+              <li><span>Added On</span><span class="spec">{{ car.createdAt | date: 'medium' }}</span></li>
+              <li><span>Last Updated</span><span class="spec">{{ car.updatedAt | date: 'medium' }}</span></li>
+            </ul>
+            <div class="action-buttons">
+              <button (click)="viewCarDetails(car.id)" [disabled]="!car.id" class="btn btn-view">View</button>
+
+
+              <button (click)="deleteCar(car)" class="btn btn-delete">Delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pagination text-center mt-4">
+      <button (click)="previousPage()" [disabled]="currentPage === 1" class="btn btn-pagination">Previous</button>
+      <span class="page-info">Page {{ currentPage }} of {{ totalPages }}</span>
+      <button (click)="nextPage()" [disabled]="currentPage === totalPages" class="btn btn-pagination">Next</button>
+    </div>
+  </div>
+</div>
+
+
+
+

@@ -1,0 +1,215 @@
+/* General styling */
+.site-section {
+  padding: 80px 0;
+  background-color: #f9fafb;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: -10px;
+}
+
+.col-lg-4, .col-md-6 {
+  padding: 10px;
+  flex: 0 0 33.333%;
+  max-width: 33.333%;
+}
+
+/* Car card styling */
+.car-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  /* Ensures all cards have the same height */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%; /* Makes sure all cards are the same height */
+  min-height: 500px; /* Adjust based on content */
+}
+
+.car-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* Car image */
+.car-image {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+}
+
+/* Car details section */
+.car-details {
+  padding: 20px;
+  text-align: center;
+
+  /* Ensures the content fills available space evenly */
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Car name and meta info */
+.car-name {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  color: #2d3748;
+}
+
+.car-name a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.car-name a:hover {
+  color: #007bff;
+}
+
+.car-meta {
+  font-size: 0.9rem;
+  color: #6b7280;
+  margin-bottom: 15px;
+}
+
+/* Ratings */
+.rating {
+  margin-bottom: 15px;
+}
+
+.icon-star {
+  color: #ffc107;
+  margin: 0 2px;
+}
+
+/* Rent price */
+.rent-price {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #28a745;
+  margin-bottom: 20px;
+}
+
+/* Car specifications */
+.specs {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px;
+}
+
+.specs li {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.specs li:last-child {
+  border-bottom: none;
+}
+
+.specs .spec {
+  font-weight: bold;
+  color: #4a5568;
+}
+
+/* Ensure all car meta & specs take up the same space */
+.car-meta,
+.specs {
+  min-height: 90px; /* Ensures equal spacing in all cards */
+}
+
+/* Action buttons */
+.action-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: auto; /* Ensures buttons always stay at the bottom */
+}
+
+/* Buttons */
+.btn {
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* View button */
+.btn-view {
+  background-color: #4a5568;
+  color: #fff;
+  border: none;
+}
+
+.btn-view:hover {
+  background-color: #4a5568;
+  transform: translateY(-2px);
+}
+
+/* Delete button */
+.btn-delete {
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+}
+
+.btn-delete:hover {
+  background-color: #a71d2a;
+  transform: translateY(-2px);
+}
+
+/* Pagination styling */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+}
+
+.btn-pagination {
+  background-color: #4a5568;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.btn-pagination:disabled {
+  background-color: #a0a0a0;
+  cursor: not-allowed;
+}
+
+.btn-pagination:hover:not(:disabled) {
+  background-color: #4a5568;
+}
+
+.page-info {
+  font-size: 1.1rem;
+  margin: 0 15px;
+  color: #4a5568;
+}
+
+
+
+
+
+

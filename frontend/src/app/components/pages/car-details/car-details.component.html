@@ -1,0 +1,212 @@
+<div class="car-details-container" *ngIf="car">
+  <div class="car-content">
+    <div class="car-main-content">
+      <h1 class="main-car-title">{{ detail.carName }}</h1>
+
+      <!-- Car Images -->
+      <div class="car-images-container">
+        <div class="image-viewer">
+          <button class="nav-button left" (click)="previousImage()" [disabled]="carImages.length <= 1">
+            &lt;
+          </button>
+
+          <div class="image-container">
+            <img [src]="carImages[currentImageIndex]"
+                [alt]="car.carName + ' image ' + (currentImageIndex + 1)"
+                class="main-car-image">
+          </div>
+
+          <button class="nav-button right" (click)="nextImage()" [disabled]="carImages.length <= 1">
+            &gt;
+          </button>
+        </div>
+
+        <!-- Centered Counter -->
+        <div class="counter-container">
+          <div class="image-counter">
+            {{ currentImageIndex + 1 }} / {{ carImages.length }}
+          </div>
+        </div>
+      </div>
+
+      <!-- Car Details -->
+      <div class="car__publisher d-flex align-items-center gap-4 mb-4">
+        <span class="d-flex align-items-center gap-1 section__description">
+          <i class="ri-car-line"></i> {{ detail.brand }}
+        </span>
+        <span class="d-flex align-items-center gap-1 section__description">
+          <i class="ri-settings-line"></i> Transmission: {{ detail.transmission }}
+        </span>
+        <span class="d-flex align-items-center gap-1 section__description">
+          <i class="ri-dashboard-line"></i> Category: {{ detail.category }}
+        </span>
+        <span class="d-flex align-items-center gap-1 section__description">
+          <i class="ri-building-line"></i> Agence: {{ detail.agence }}
+        </span>
+      </div>
+
+      <p class="section__description">{{ detail.description }}</p>
+
+      <ul class="car-details-list">
+        <li><strong>Toit:</strong> {{ detail.toit }}</li>
+        <li><strong>Carburant:</strong> {{ detail.carburant }}</li>
+        <li><strong>Price:</strong> ${{ detail.price }}</li>
+      </ul>
+
+      <!-- Reviews Section (Les Avis des Clients) -->
+      <div class="reviews-section" *ngIf="car?.reviews?.length">
+        <h4>Les Avis des Clients</h4>
+        <div class="reviews-list">
+          <div class="review-item" *ngFor="let review of car.reviews">
+            <div class="review-header">
+              <strong>{{ review.username }}</strong>
+              <span class="review-date">{{ review.createdAt | date: 'shortDate' }}</span>
+            </div>
+            <p class="review-text">{{ review.reviewText }}</p>
+            <div class="review-rating">
+              <span *ngFor="let star of getStars(review.rating)">⭐</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--  Star Rating System - Placed Above the Comment Section -->
+      <div class="rating">
+        <input type="radio" name="rating" id="r5" (click)="review.rating = 5">
+        <label for="r5">★</label>
+
+        <input type="radio" name="rating" id="r4" (click)="review.rating = 4">
+        <label for="r4">★</label>
+
+        <input type="radio" name="rating" id="r3" (click)="review.rating = 3">
+        <label for="r3">★</label>
+
+        <input type="radio" name="rating" id="r2" (click)="review.rating = 2">
+        <label for="r2">★</label>
+
+        <input type="radio" name="rating" id="r1" (click)="review.rating = 1">
+        <label for="r1">★</label>
+      </div>
+
+
+      <div class="purchase-cta">
+        <p class="cta-text">🚗 Don’t miss your opportunity — <strong>purchase now!</strong></p>
+        <button class="purchase-btn" (click)="openBookingModal(car)">
+          <i class="pi pi-cart-minus"></i> Purchase
+        </button>
+      </div>
+
+      <!--  Comment Section (Laisser une commentaire) - Placed Below Star Rating -->
+      <div class="leave__comment-form mt-5">
+        <div class="comment-section mt-4 p-4 rounded shadow-sm bg-light">
+          <h4 class="mb-2 text-primary fw-bold">Laisser un commentaire</h4>
+          <p class="section__description text-muted mb-0">
+            Vous devez vous connecter pour créer ou commenter une publication.
+          </p>
+        </div>
+
+
+        <form (submit)="submitReview()">
+          <div class="form-group d-flex gap-3">
+          <input type="text"
+            class="form-control"
+            placeholder="Full name"
+            [(ngModel)]="review.username"
+            name="username"
+            [disabled]="true"
+            required />
+
+          </div>
+
+          <div class="form-group comment-textarea-group">
+            <textarea
+              rows="5"
+              class="form-control comment-textarea"
+              placeholder="💬 Write your comment here..."
+              [(ngModel)]="review.reviewText"
+              name="reviewText"
+              required>
+            </textarea>
+          </div>
+
+          <button type="submit" class="submit-comment-btn">
+            📝 Poster un commentaire
+          </button>
+
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+  <!--  Sidebar: Voitures similaires (Alone on Sidebar) -->
+
+
+  <div class="car-sidebar">
+
+    <div class="carousel-container">
+      <h5 style="margin-top: 40px;">Voitures similaires</h5>
+
+      <div class="carousel-box" *ngIf="otherCars.length">
+        <div
+          class="car-item-box"
+          *ngFor="let otherCar of otherCars; let i = index"
+          [class.active]="i === currentCarIndex"
+        >
+          <a
+            *ngIf="i === currentCarIndex"
+            [routerLink]="['/listcars', otherCar.id]"
+          >
+            <div class="car-image">
+              <img [src]="otherCar.imgUrl" [alt]="otherCar.carName" />
+            </div>
+            <div class="car-details">
+              <h1>{{ otherCar.carName }}</h1>
+              <p>{{ otherCar.description }}</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+<!-- Booking Modal Component -->
+<app-booking
+*ngIf="showBookingModal"
+[showModal]="showBookingModal"
+[voitureId]="selectedCar?.id"
+[carName]="selectedCar?.carName"
+[carPrice]="selectedCar?.price"
+(close)="closeBookingModal()">
+</app-booking>
+
+
+
+
+
+
+
+<!-- Backdrop and Modal -->
+<div class="signin-prompt-backdrop" *ngIf="showSignInPrompt" (click)="closeSignInPrompt()">
+  <div class="signin-prompt-modal" (click)="$event.stopPropagation()">
+    <h3>🔒 Sign In Required</h3>
+    <p>To proceed with booking this vehicle, please sign in to your account. Don't have an account yet? You can create one during the booking process.</p>
+    <div class="modal-actions">
+      <button class="btn btn-primary" (click)="navigateToLogin()">
+        <i class="ri-login-box-line"></i>
+        Sign In
+      </button>
+      <button class="btn btn-secondary" (click)="closeSignInPrompt()">
+        <i class="ri-close-line"></i>
+        Cancel
+      </button>
+    </div>
+  </div>
+</div>

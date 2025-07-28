@@ -1,0 +1,276 @@
+/* Remove left margin and center content */
+.card {
+  padding: 1.5rem;
+  background: #ffffff !important; /* Pure white background */
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto; /* Remove left space */
+}
+
+/* Scrollable Table */
+.table-container {
+  max-height: 400px; /* Adjust height */
+  margin-top: 10px; /* Space between sticky header and table */
+  overflow-y: auto; /* Vertical scroll */
+  overflow-x: auto; /* Horizontal scroll */
+  border: 1px solid #dee2e6;
+  background: #ffffff !important; /* White background */
+}
+
+/* Make Table Take Full Width */
+.p-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Arial', sans-serif;
+}
+
+/* Keep Table Headers Fixed */
+.table-container thead {
+  position: sticky;
+  top: 0;
+  background: #ffffff !important; /* White header */
+  z-index: 100;
+}
+
+/* Table Header */
+.p-table th {
+  background: #ffffff !important;
+  padding: 12px;
+  text-align: left;
+  font-weight: bold;
+  border-bottom: 2px solid #dee2e6;
+}
+
+/* Table Body */
+.p-table td {
+  padding: 12px;
+  border-bottom: 1px solid #dee2e6;
+  vertical-align: middle;
+  background: #ffffff !important; /* White background */
+}
+
+/* Buttons */
+button {
+  border: none;
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Delete Button */
+.delete-button {
+  background-color: #e74c3c;
+  color: white;
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.delete-button:hover {
+  background-color: #c0392b;
+  transform: scale(1.05);
+}
+
+.delete-button:active {
+  background-color: #a93226;
+  transform: scale(0.95);
+}
+
+/* Top Buttons */
+.top-buttons {
+  position: sticky;
+  top: 0;
+  background: #ffffff !important; /* Ensure it stays visible */
+  z-index: 1000; /* Keep it above other elements */
+  padding: 1.2rem;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Add Record Button */
+.add-record-button {
+  padding: 12px 20px;
+  font-size: 1rem;
+  background-color: #007bff;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.add-record-button:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+/* Export Button */
+.export-button {
+  padding: 12px 20px;
+  font-size: 1rem;
+  background-color: #28a745;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.export-button:hover {
+  background-color: #218838;
+  transform: scale(1.05);
+}
+
+/* General modal styling */
+.p-dialog {
+  width: 50vw; /* Adjust width for better layout */
+  max-width: 600px; /* Prevents the modal from being too large */
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  background-color: #ffffff !important; /* White background */
+}
+
+/* Modal Header */
+.p-dialog .p-dialog-header {
+  background-color: #ffffff !important;
+  border-bottom: 2px solid #dee2e6;
+  padding: 1.5rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+/* Modal Content */
+.p-dialog .p-dialog-content {
+  padding: 2rem;
+  background-color: #ffffff !important;
+  border-radius: 0 0 12px 12px;
+}
+
+/* Form field styling */
+.p-field {
+  margin-bottom: 1.8rem;
+}
+
+.p-field label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #444;
+}
+
+/* Input and textarea styles */
+.p-field .p-inputtext {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #ced4da;
+  border-radius: 6px;
+  font-size: 1rem;
+  color: #333;
+  transition: all 0.3s ease;
+  background-color: #ffffff !important;
+}
+
+.p-field .p-inputtext:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
+}
+
+/* Checkbox styling */
+.p-field-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.p-field-checkbox .p-checkbox {
+  transform: scale(1.2);
+}
+
+.p-field-checkbox label {
+  color: #333;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+/* Buttons */
+.modal-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1.5rem;
+}
+
+.modal-actions .p-button {
+  padding: 0.7rem 1.2rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+/* Success Button */
+.modal-actions .p-button-success {
+  background-color: #28a745;
+  border: 1px solid #28a745;
+  color: #ffffff;
+}
+
+.modal-actions .p-button-success:hover {
+  background-color: #218838;
+  transform: scale(1.05);
+}
+
+/* Secondary Button */
+.modal-actions .p-button-secondary {
+  background-color: #6c757d;
+  border: 1px solid #6c757d;
+  color: #ffffff;
+}
+
+.modal-actions .p-button-secondary:hover {
+  background-color: #5a6268;
+  transform: scale(1.05);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .p-dialog {
+    width: 90vw;
+    max-width: 100%;
+  }
+
+  .p-dialog .p-dialog-content {
+    padding: 1.5rem;
+  }
+
+  .modal-actions {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .card {
+    max-width: 100%;
+    padding: 1rem;
+  }
+
+  .p-table th, .p-table td {
+    padding: 10px;
+    font-size: 0.9rem;
+  }
+
+  .add-record-button, .export-button {
+    padding: 10px 18px;
+    font-size: 0.9rem;
+  }
+}

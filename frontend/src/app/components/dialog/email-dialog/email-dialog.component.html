@@ -1,0 +1,50 @@
+<h2 mat-dialog-title>Your Bookings</h2>
+
+<mat-dialog-content>
+  <!-- Loading State -->
+  <div *ngIf="isLoading" class="loading-container">
+    <mat-spinner diameter="40"></mat-spinner>
+    <p>Loading your bookings...</p>
+  </div>
+
+  <!-- Bookings List -->
+  <div *ngIf="!isLoading" class="booking-container">
+    <ng-container *ngIf="bookings.length > 0; else noBookings">
+      <ul>
+        <li *ngFor="let booking of bookings" class="booking-item">
+          <a [routerLink]="['/listcars', booking.voitureId]" class="booking-link">
+            <img [src]="booking.imgUrl" [alt]="booking.carName" class="booking-image" />
+
+            <div class="booking-info">
+              <strong>{{ booking.carName }}</strong>
+              <div class="booking-dates">
+                {{ booking.startDate | date }} - {{ booking.endDate | date }}
+              </div>
+              <span class="booking-status" [ngClass]="booking.bookingStatus.toLowerCase()">
+                {{ booking.bookingStatus }}
+              </span>
+
+              <button mat-icon-button
+                      (click)="deleteBooking(booking.id); $event.stopPropagation()"
+                      [disabled]="booking.bookingStatus !== 'PENDING'"
+                      class="delete-button">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+          </a>
+        </li>
+      </ul>
+    </ng-container>
+
+    <ng-template #noBookings>
+      <div class="no-bookings">
+        <mat-icon>shopping_cart</mat-icon>
+        <p>No bookings found</p>
+      </div>
+    </ng-template>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Close</button>
+</mat-dialog-actions>

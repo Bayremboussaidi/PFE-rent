@@ -1,0 +1,68 @@
+<app-head-agence></app-head-agence>
+
+<div class="card">
+  <h2>Réservations</h2>
+
+  <div class="switch-buttons">
+    <button
+      [ngClass]="{'active': activeButton === 'pending'}"
+      (click)="showPending()"
+    >
+      En Cours
+    </button>
+    <button
+      [ngClass]="{'active': activeButton === 'traited'}"
+      (click)="showTraited()"
+    >
+      Traité
+    </button>
+  </div>
+
+  <!-- Added table container div -->
+  <div class="table-container">
+    <table class="p-table" *ngIf="filteredBookings.length > 0">
+      <thead>
+        <tr>
+          <th>Nom du Client</th>
+          <th>Voiture</th>
+          <th>Email</th>
+          <th>Jours</th>
+          <th>Prix</th>
+          <th>Téléphone</th>
+          <th>Description</th>
+          <th>Période de Réservation</th>
+          <th>Agence</th>
+          <th>Statut</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let booking of filteredBookings">
+          <td>{{ booking.username }}</td>
+          <td>{{ booking.carName }}</td>
+          <td>{{ booking.userEmail }}</td>
+          <td>{{ booking.nbrJrs }}</td>
+          <td>{{ booking.price | currency }}</td>
+          <td>{{ booking.phone }}</td>
+          <td>{{ booking.description }}</td>
+          <td>{{ booking.formattedDate }}</td>
+          <td>{{ booking.agence }}</td>
+          <td>
+            <span [ngClass]="{
+              'status-confirmed': booking.bookingStatus === 'CONFIRMED',
+              'status-declined': booking.bookingStatus === 'CANCELED'
+            }">
+              {{ booking.bookingStatus }}
+            </span>
+          </td>
+          <td>
+            <button (click)="accept(booking)" class="btn-accept">Accepter</button>
+            <button (click)="refuse(booking)" class="btn-refuse">Refuser</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p *ngIf="filteredBookings.length === 0">Aucune réservation disponible.</p>
+</div>

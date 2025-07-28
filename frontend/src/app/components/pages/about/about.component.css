@@ -1,0 +1,117 @@
+
+div > app-common-section {
+  margin: 0;
+  padding: 0;
+}
+
+div > .container {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin-bottom: 30vh;
+  padding: 0;
+}
+
+div {
+  margin: 0;
+  padding: 0;
+}
+
+app-common-section {
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  margin: 0;
+  padding: 0;
+}
+
+.integr {
+  background-color: #fbf7f7;
+  padding-top: -30px;
+  width: 100%;
+  padding-bottom: 120px;
+  margin-top: -200px;
+  margin-left: 150px;
+  margin-bottom: 150px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(182, 11, 11, 0.1);
+}
+
+
+.row {
+  margin-top: -30px;
+}
+
+.about__page-img {
+  background-image: url('../../../../assets/all-images/drive.jpg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center left;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding-inline-start: 3rem;
+  padding-inline-start: 20px;
+  margin-inline-start: 10px;
+  block-size: 380px;
+  inline-size: 100px;
+  inline-size: 100%;
+  border-radius: 25px;
+}
+
+.section__title {
+  font-size: 2rem;
+  margin-block-end: 1rem;
+}
+
+.section__description {
+  margin-block-end: 0.5rem;
+}
+
+.section__subtitle {
+  font-size: 1rem;
+}
+
+.bod{
+  height:230vh;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.gap-3 {
+  gap: 1rem;
+}
+
+.mt-4 {
+  margin-block-start: 1rem;
+}
+
+@media only screen and (max-width: 992px) {
+  .about__page-content h2 {
+    font-size: 1.5rem;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .about__page-img {
+    display: none;
+    margin-block-start: 40px;
+  }
+}
+
+
+
+
+
+

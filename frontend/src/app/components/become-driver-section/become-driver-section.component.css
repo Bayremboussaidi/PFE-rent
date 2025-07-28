@@ -1,0 +1,126 @@
+/* Testimonial Section */
+.testimonial {
+  width: 100%;
+  height: 100vh;
+  max-height: 1000vh;
+  background: url("../../../assets/all-images/drive.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  transition: background-image 1s ease-in-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 80px 20px;
+  position: relative;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Centered Content */
+.testimonial-content {
+  max-width: 900px;
+  text-align: center;
+  color: white;
+}
+
+/* Testimonial Text */
+.testimonial-text {
+  font-size: 2rem;
+  font-weight: 300;
+  line-height: 1.5;
+  color: #fff;
+  margin: 20px auto;
+  font-style: italic;
+}
+
+/* Testimonial Author */
+.testimonial-author {
+  margin-top: 15px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #f1f1f1;
+}
+
+/* Testimonial Author Description */
+.testimonial-descr {
+  font-size: 1rem;
+  font-weight: 400;
+  color: #ddd;
+}
+
+/* Quote Icon */
+.module-icon span {
+  font-size: 3rem;
+  color: #fff;
+  opacity: 0.6;
+}
+
+/* "Réservez maintenant" Button */
+.become__driver-btn {
+  background: transparent;
+  border: 2px solid white;
+  color: white;
+  font-size: 1.2rem;
+  padding: 10px 25px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  border-radius: 5px;
+  margin-top: 30px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.become__driver-btn:hover {
+  background-color: white;
+  color: black;
+  transform: scale(1.05);
+}
+
+
+
+/* Button Hover Effect */
+.become__driver-btn:hover {
+  background: rgba(255, 255, 255, 0.7);
+  color: black;
+}
+
+/* Active Slide */
+.active-slide {
+  display: block;
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.slides li {
+  display: none;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.slides .active-slide {
+  display: block;
+  opacity: 1;
+}
+
+/* Pagination */
+.carousel-pagination {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.carousel-pagination span {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin: 5px;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.carousel-pagination .active-dot {
+  background: white;
+}
