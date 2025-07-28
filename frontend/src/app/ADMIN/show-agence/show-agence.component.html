@@ -1,0 +1,47 @@
+<app-header-a></app-header-a>
+
+
+
+<div class="site-section bg-light">
+  <div class="container">
+    <div class="row">
+      <div *ngFor="let agency of agencies" class="col-lg-4 col-md-6 mb-4">
+        <div class="agency-card">
+          <a [routerLink]="['/agency-details', agency.id]">
+            <img
+              [src]="agency.photo ? 'data:image/png;base64,' + agency.photo : '/assets/images/default-agency.png'"
+              alt="{{ agency.agencyName }}"
+              class="agency-image">
+          </a>
+          <div class="agency-details">
+            <div class="text-center">
+              <h3 class="agency-name">
+                <a [routerLink]="['/agency-details', agency.id]">{{ agency.agencyName }}</a>
+              </h3>
+              <p class="agency-meta">Location: {{ agency.city }}</p>
+              <div class="rating">
+                <span *ngFor="let star of [].constructor(4)" class="icon-star text-warning"></span>
+              </div>
+            </div>
+            <ul class="specs">
+              <li><span>Email</span><span class="spec">{{ agency.email }}</span></li>
+              <li><span>Phone</span><span class="spec">{{ agency.phoneNumber }}</span></li>
+              <li><span>Member Since</span><span class="spec">{{ agency.createdAt | date: 'mediumDate' }}</span></li>
+              <li><span>Last Updated</span><span class="spec">{{ agency.updatedAt | date: 'mediumDate' }}</span></li>
+            </ul>
+            <div class="action-buttons">
+              <!--button (click)="viewAgencyDetails(agency.agencyName)" [disabled]="!agency.agencyName" class="btn btn-view">View</button-->
+              <button (click)="editAgency(agency)" class="btn btn-edit">Edit</button>
+              <button (click)="deleteAgency(agency)" class="btn btn-delete">Delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+

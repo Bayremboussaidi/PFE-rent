@@ -1,0 +1,322 @@
+.clickable-image {
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+
+
+.reset__btn {
+  background-color: #6c757d;
+  margin-left: 10px;
+}
+
+.reset__btn:hover {
+  background-color: #5a6268;
+}
+
+.clickable-image:hover {
+  transform: scale(1.08);
+}
+
+/* Responsive Row Layout */
+.row {
+  display: flex;
+  flex-wrap: wrap; /* Allow wrapping */
+  gap: 20px; /* Space between items */
+  justify-content: space-between; /* Distribute space evenly */
+  align-items: stretch; /* Ensures all columns have equal height */
+}
+
+/* Consistent column width */
+.col-lg-4 {
+  flex: 0 0 calc(33.333% - 20px); /* Each box takes one-third width with spacing */
+  box-sizing: border-box; /* Include padding and border in width */
+  display: flex; /* Ensures all child elements stretch evenly */
+}
+
+/* Car Item Container */
+.car-item {
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+
+  /* Ensuring all items have the same size */
+  width: 100%;
+  min-height: 550px; /* Ensure uniform height for all car items */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Ensure content spacing */
+.car-details {
+  flex-grow: 1; /* Pushes the button to the bottom */
+}
+
+/* Hover Effect */
+.car-item:hover {
+  transform: translateY(-5px); /* Slight lift on hover */
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); /* Enhanced shadow */
+}
+
+/* Car Image */
+.car-item img {
+  width: 100%;
+  height: 200px; /* Consistent height for images */
+  object-fit: cover; /* Ensure the image fills the area */
+  border-radius: 6px; /* Rounded corners */
+  margin-bottom: 15px; /* Space between image and content */
+}
+
+/* Title */
+.car-item h3 {
+  font-size: 1.2rem; /* Larger title size */
+  font-weight: bold;
+  color: #333; /* Darker text for readability */
+  margin-bottom: 10px; /* Space below the title */
+}
+
+/* Description */
+.car-item p {
+  font-size: 1rem; /* Standard text size */
+  color: #666; /* Subtle text color */
+  margin-bottom: 10px; /* Space below the paragraph */
+  flex-grow: 1; /* Push other content to the bottom */
+}
+
+/* Details List */
+.car-item ul {
+  list-style-type: none; /* Remove bullets */
+  padding: 0; /* No padding for the list */
+  margin: 0; /* No margin for the list */
+  flex-grow: 1; /* Make sure the list fills space */
+}
+
+.car-item ul li {
+  font-size: 0.9rem; /* Slightly smaller text */
+  color: #555; /* Subtle text color */
+  margin-bottom: 5px; /* Space between items */
+}
+
+/* Car Item Link */
+.car-item-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Link Hover Effect */
+.car-item-link:hover .car-item {
+  transform: scale(1.01); /* Slight zoom */
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Purchase Button */
+.purchase-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background-color: #28a745; /* Green color for purchase */
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s ease;
+
+  width: 100%; /* Full width inside .car-item */
+  margin-top: auto; /* Push the button to the bottom */
+}
+
+/* Purchase Button Icon */
+.purchase-btn i {
+  font-size: 1rem;
+}
+
+.purchase-btn:hover {
+  background-color: #218838; /* Darker green on hover */
+}
+
+/* Disponibility (Availability) */
+.available {
+  color: green;
+  font-weight: bold;
+}
+
+.not-available {
+  color: red;
+  font-weight: bold;
+}
+
+/* ✅ Pagination Styling */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+  gap: 10px;
+}
+
+.btn-pagination {
+  background-color: #4a5568;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.btn-pagination:disabled {
+  background-color: #a0a0a0;
+  cursor: not-allowed;
+}
+
+.btn-pagination:hover:not(:disabled) {
+  background-color: #374151;
+  transform: scale(1.02);
+}
+
+.page-info {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #4a5568;
+}
+
+
+
+
+
+/* Remove underline from all links */
+a {
+  text-decoration: none;
+}
+
+/* Remove hover effects */
+a:hover {
+  text-decoration: none;
+}
+
+
+
+
+
+/* Sign In Prompt Styles */
+.signin-prompt-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 10002;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(3px);
+  opacity: 0;
+  animation: backdropFadeIn 0.3s ease forwards;
+}
+
+@keyframes backdropFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.signin-prompt-modal {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+  transform: scale(0.95);
+  animation: modalEnter 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  position: relative;
+}
+
+@keyframes modalEnter {
+  0% {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.signin-prompt-modal h3 {
+  margin: 0 0 1rem 0;
+  color: #2d3748;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.signin-prompt-modal p {
+  color: #4a5568;
+  margin: 0 0 2rem 0;
+  line-height: 1.5;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+
+.btn {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-primary {
+  background: #2563eb;
+  color: white;
+  box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
+}
+
+.btn-primary:hover {
+  background: #1d4ed8;
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background: #f1f5f9;
+  color: #64748b;
+  border: 1px solid #e2e8f0;
+}
+
+.btn-secondary:hover {
+  background: #e2e8f0;
+  transform: translateY(-1px);
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+  .signin-prompt-modal {
+    padding: 1.5rem;
+  }
+
+  .modal-actions {
+    flex-direction: column;
+  }
+
+  .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}

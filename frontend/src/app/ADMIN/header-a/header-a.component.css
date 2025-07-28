@@ -1,0 +1,337 @@
+/* ====================================
+  🌟 Global CSS Variables
+==================================== */
+:root {
+  --default-color: #333;
+  --background-color: #fff;
+  --accent-color: #007bff;
+  --contrast-color: #fff;
+  --heading-color: #222;
+  --nav-color: #222;
+  --nav-hover-color: #007bff;
+  --nav-dropdown-color: #222;
+  --nav-dropdown-hover-color: #007bff;
+  --nav-dropdown-background-color: #fff;
+  --nav-font: "Poppins", sans-serif;
+}
+
+/* ====================================
+  🌟 Header Styling
+==================================== */
+.header {
+  background-color: var(--background-color);
+  transition: all 0.5s;
+  z-index: 997;
+  box-shadow: 0px 0 18px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+/* 🌟 Top Bar */
+.header .topbar {
+  background-color: var(--accent-color);
+  color: var(--contrast-color);
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.header .topbar .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* ====================================
+  🌟 Branding Section
+==================================== */
+.header .branding {
+  padding: 10px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header .logo img {
+  max-height: 36px;
+  margin-right: 8px;
+}
+
+.header .logo h1 {
+  font-size: 30px;
+  margin: 0;
+  font-weight: 700;
+  color: var(--heading-color);
+}
+
+/* ====================================
+  🌟 Navigation Menu
+==================================== */
+
+/* Navigation Menu */
+.navmenu {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Centers the navigation menu */
+  gap: 20px; /* Adds space between menu items */
+}
+
+.navmenu ul {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  list-style: none;
+  align-items: center;
+  gap: 15px; /* Adds spacing between items */
+}
+
+.navmenu li {
+  position: relative;
+}
+
+/* Link Styling */
+.navmenu a {
+  color: var(--nav-color);
+  padding: 12px 20px; /* Adjusted padding for better spacing */
+  font-size: 16px; /* Slightly larger font for readability */
+  font-weight: 600; /* Bold font for emphasis */
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  transition: all 0.3s ease-in-out;
+  text-decoration: none; /* Removes underline */
+  border-radius: 8px; /* Soft rounded edges */
+}
+
+.navmenu a:hover {
+  color: var(--nav-hover-color);
+  background: rgba(0, 123, 255, 0.1); /* Adds a light hover background */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Hover shadow effect */
+  transform: translateY(-2px); /* Lift effect on hover */
+}
+
+.navmenu .active {
+  color: var(--nav-hover-color); /* Matches hover color */
+  font-weight: 700; /* Highlight active link */
+}
+
+/* Dropdown Menu Styling */
+.navmenu .dropdown ul {
+  position: absolute;
+  left: 0;
+  top: 100%;
+  background: var(--nav-dropdown-background-color);
+  padding: 10px 0;
+  min-width: 220px; /* Adjusted width for consistency */
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1); /* Enhanced shadow effect */
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  transform: translateY(10px);
+  border-radius: 8px; /* Smooth rounded edges */
+  z-index: 999; /* Ensures dropdown is above other content */
+}
+
+.navmenu .dropdown:hover > ul {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.navmenu .dropdown ul li {
+  position: relative;
+}
+
+.navmenu .dropdown ul a {
+  padding: 12px 20px; /* Consistent spacing */
+  font-size: 15px; /* Slightly smaller font for dropdown links */
+  color: var(--nav-dropdown-color);
+  text-transform: none;
+  display: block;
+  transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+  border-radius: 6px; /* Smooth edges for dropdown items */
+}
+
+.navmenu .dropdown ul a:hover {
+  color: var(--nav-dropdown-hover-color);
+  background: rgba(0, 123, 255, 0.1); /* Adds hover background for dropdown items */
+}
+
+/* Deep Dropdown Styling */
+.navmenu .dropdown .dropdown ul {
+  left: 100%;
+  top: 0;
+  visibility: hidden;
+  opacity: 0;
+  transform: translateX(10px);
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); /* Adds subtle shadow */
+}
+
+.navmenu .dropdown .dropdown:hover > ul {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(0);
+}
+
+
+
+
+
+
+.logo {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #04066e92;
+}
+
+.logo span {
+  color: #a19d1b; /* Add some color to the secondary name */
+}
+/* ====================================
+  🌟 Mobile Navigation
+==================================== */
+@media (max-width: 1199px) {
+  .navmenu {
+    display: none;
+  }
+
+  .mobile-nav-toggle {
+    display: block;
+    font-size: 24px;
+    cursor: pointer;
+  }
+
+  .navmenu.active {
+    display: block;
+    position: absolute;
+    background: var(--background-color);
+    width: 100%;
+    left: 0;
+    top: 60px;
+    padding: 20px;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .navmenu ul {
+    flex-direction: column;
+  }
+
+  .navmenu a {
+    padding: 10px 0;
+    display: block;
+  }
+}
+
+/* ====================================
+  🌟 CTA Button
+==================================== */
+.header .cta-btn {
+  color: var(--contrast-color);
+  background: var(--accent-color);
+  font-size: 14px;
+  padding: 8px 20px;
+  margin-left: 20px;
+  border-radius: 4px;
+  transition: 0.3s;
+  text-decoration: none;
+}
+
+.header .cta-btn:hover {
+  background: rgba(0, 123, 255, 0.85);
+}
+
+
+
+
+
+
+
+/* Style the dropdown container */
+.dropdown {
+  position: relative; /* Position relative to the button */
+  display: inline-block;
+}
+
+/* Style the dropdown content */
+.dropdown-content {
+  display: none; /* Hidden by default */
+  position: absolute;
+  top: 100%; /* Position directly below the button */
+  left: 0;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  padding: 12px 16px;
+  z-index: 999999999999999;
+}
+
+/* Show the dropdown content when it's toggled */
+.dropdown-content p {
+  margin: 0;
+}
+
+/* Optional: Show the dropdown content on button click */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Optional: If you want the dropdown to appear only when toggled by a click */
+.dropdown-content {
+  display: block;
+}
+
+
+
+
+/* Style the dropdown container */
+.dropdown {
+  position: relative; /* Position relative to the button */
+  display: inline-block;
+}
+
+/* Style the dropdown content */
+.dropdown-content {
+  display: none; /* Hidden by default */
+  position: absolute;
+  top: 100%; /* Position directly below the button */
+  left: 0;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  padding: 12px 16px;
+  z-index: 1;
+}
+
+/* Style the list in the dropdown */
+.dropdown-content ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Style the individual list items in the dropdown */
+.dropdown-content li {
+  padding: 8px;
+}
+
+/* Style the links inside the dropdown */
+.dropdown-content a {
+  text-decoration: none; /* Remove the underline */
+  color: black; /* Set text color */
+  display: block; /* Make the link fill the entire list item */
+  padding: 5px;
+}
+
+/* Add a hover effect to the links */
+.dropdown-content a:hover {
+  background-color: #ddd; /* Change background color on hover */
+  color: #333; /* Optional: Change text color on hover */
+}
+
+/* Show the dropdown content when it's toggled */
+.dropdown:hover .dropdown-content,
+.dropdown-content {
+  display: block; /* Show the dropdown when toggled */
+}

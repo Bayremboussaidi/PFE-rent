@@ -1,0 +1,105 @@
+<button class="go-back-btn" (click)="goBack()">Back</button>
+
+<div class="container-fluid h-100 mt-5">
+  <div class="row justify-content-center h-100">
+
+    <!-- Left Body (All Users) -->
+    <div class="col-md-4 col-xl-2 chat order-last order-lg-2">
+      <div class="card mb-sm-3 mb-md-0 contacts_card">
+        <div class="card-header">
+          <h1 class="chat-list-title">Contacts</h1>
+        </div>
+        <div class="card-body contacts_body">
+          <ul class="contacts chatList">
+            <li *ngFor="let user of allUsers">
+              <div *ngIf="user.email !== senderCheck" class="d-flex bd-highlight">
+                <div class="img_cont">
+                  <div class="rounded-circle user_img text_inside_circle">
+                    {{ (user.userName || '').substring(0, 1) || '?' }}
+                  </div>
+                </div>
+                <div class="user_info" (click)="goToChat(user)">
+                  <div>{{ user.userName }}</div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Chat Body -->
+    <div class="col-md-8 col-xl-5 chat order-md-1 order-lg-4">
+      <div class="card">
+        <div class="card-header msg_head">
+          <div class="d-flex bd-highlight">
+            <div class="img_cont">
+              <div class="rounded-circle user_img text_inside_circle1">
+                {{ (secondUserEmail !== senderCheck ? secondUserName : firstUserName).substring(0, 1) || '?' }}
+              </div>
+            </div>
+            <div class="user_info">
+              <span>{{ (secondUserEmail !== senderCheck ? secondUserName : firstUserName) || 'Loading...' }}</span>
+              <p>Messages</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-body msg_card_body" #scrollMe [scrollTop]="scrollMe.scrollHeight">
+          <!-- Added empty state -->
+          <div *ngIf="!messageList?.length" class="text-center text-muted p-3">
+            No messages yet. Start the conversation!
+          </div>
+
+          <!-- Message list -->
+          <div *ngFor="let msg of messageList">
+            <!-- Message sent by current user -->
+            <div *ngIf="msg.senderEmail === senderCheck" class="d-flex justify-content-end mb-4">
+              <div class="msg_cotainer_send">
+                {{ msg.content }}
+                <span class="msg_time_send">{{ msg.time | date:'shortTime' }}</span>
+              </div>
+              <div class="img_cont_msg">
+                <span class="rounded-circle user_img_msg text_inside_circle2">
+                  {{ (msg.senderEmail || '').substring(0, 1) || '?' }}
+                </span>
+              </div>
+            </div>
+
+            <!-- Message from other user -->
+            <div *ngIf="msg.senderEmail !== senderCheck" class="d-flex justify-content-start mb-4">
+              <div class="img_cont_msg">
+                <span class="rounded-circle user_img_msg text_inside_circle3">
+                  {{ (msg.senderEmail || '').substring(0, 1) || '?' }}
+                </span>
+              </div>
+              <div class="msg_cotainer">
+                {{ msg.content }}
+                <span class="msg_time">{{ msg.time | date:'shortTime' }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-footer">
+          <form [formGroup]="chatForm" (ngSubmit)="sendMessage()">
+            <div class="input-group">
+              <textarea
+                class="form-control type_msg"
+                placeholder="Type your message..."
+                formControlName="messageContent"
+                [disabled]="!currentChatId"></textarea>
+              <div class="input-group-append">
+                <button mat-raised-button class="input-group-text send_btn" type="submit"
+                        [disabled]="!chatForm.valid || !currentChatId">
+                  <i class="fa fa-location-arrow"></i>
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

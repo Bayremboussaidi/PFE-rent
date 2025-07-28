@@ -1,0 +1,78 @@
+<app-header-a></app-header-a>
+
+
+<div class="signup-container">
+  <div class="signup-card">
+    <h2>Create Agency Account</h2>
+    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="agencyName">Agency Name</label>
+        <input type="text" id="agencyName" formControlName="agencyName" placeholder="Enter agency name">
+        <div *ngIf="signupForm.get('agencyName')?.invalid && signupForm.get('agencyName')?.touched" class="error-message">
+          Agency name is required
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" formControlName="email" placeholder="Enter email">
+        <div *ngIf="signupForm.get('email')?.invalid && signupForm.get('email')?.touched" class="error-message">
+          Please enter a valid email address
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" formControlName="password" placeholder="Enter password">
+        <div *ngIf="signupForm.get('password')?.invalid && signupForm.get('password')?.touched" class="error-message">
+          Password must be at least 6 characters
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="phoneNumber">Phone Number</label>
+        <input type="tel" id="phoneNumber" formControlName="phoneNumber" placeholder="Enter phone number">
+        <div *ngIf="signupForm.get('phoneNumber')?.invalid && signupForm.get('phoneNumber')?.touched" class="error-message">
+          Please enter a valid phone number
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="city">City</label>
+        <input type="text" id="city" formControlName="city" placeholder="Enter city">
+      </div>
+
+      <div class="form-group image-upload-container">
+        <label for="photo">Agency Logo</label>
+
+        <div class="upload-wrapper" *ngIf="!previewImage; else previewTemplate">
+          <label for="photo" class="upload-area">
+            <i class="ri-upload-cloud-2-line"></i>
+            <span>Click to upload logo</span>
+            <input type="file" id="photo" (change)="onFileChange($event)" accept="image/*" class="file-input">
+          </label>
+        </div>
+
+        <ng-template #previewTemplate>
+          <div class="image-preview-container">
+            <img [src]="previewImage" class="preview-image">
+            <button class="remove-btn" (click)="removeImage()">
+              <i class="ri-close-line"></i>
+            </button>
+          </div>
+        </ng-template>
+      </div>
+
+
+
+      <button type="submit" [disabled]="signupForm.invalid || isLoading" class="submit-btn">
+        <span *ngIf="!isLoading">Create Account</span>
+        <span *ngIf="isLoading">Creating...</span>
+      </button>
+
+      <div *ngIf="errorMessage" class="error-message server-error">
+        {{ errorMessage }}
+      </div>
+    </form>
+  </div>
+</div>

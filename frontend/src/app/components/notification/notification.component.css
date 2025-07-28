@@ -1,0 +1,76 @@
+.notifications-container {
+  padding: 16px;
+  color: #000;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  height: 100%; /* Ensure full height if needed */
+  display: flex;
+  flex-direction: column;
+}
+
+.notifications-container h2 {
+  font-size: 20px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 8px;
+  color: #fff; /* Keep title white if navbar is dark */
+}
+
+/* Scrollable section */
+.notifications-container ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 75vh;
+  overflow-y: auto;
+  padding-right: 6px;
+}
+
+/* Scrollbar styles */
+.notifications-container ul::-webkit-scrollbar {
+  width: 6px;
+}
+.notifications-container ul::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 4px;
+}
+.notifications-container ul::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Notification list item */
+.notifications-container li {
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  color: #000;
+  padding: 16px;
+  margin-bottom: 12px;
+  border-radius: 10px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  transition: background 0.2s ease, transform 0.2s ease;
+  cursor: pointer;
+}
+
+.notifications-container li:hover {
+  background-color: #f0f0f0;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.notifications-container li strong {
+  font-size: 15px;
+  font-weight: bold;
+  color: #000;
+  margin-bottom: 6px;
+}
+
+.notifications-container .timestamp {
+  font-size: 13px;
+  color: #555;
+}
+
+/* No notifications template */
+.notifications-container p {
+  color: #ccc;
+  font-size: 14px;
+}

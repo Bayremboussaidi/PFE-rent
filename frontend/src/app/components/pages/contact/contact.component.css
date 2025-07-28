@@ -1,0 +1,314 @@
+/*sign in component */
+.signin-prompt-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  z-index: 2000;
+  width: 90%; /* Adjust based on screen size */
+  max-width: 400px;
+  text-align: center;
+}
+
+.modal-actions {
+  margin-top: 15px;
+}
+
+.btn {
+  padding: 10px 20px;
+  margin: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+}
+
+.btn-secondary {
+  background-color: #f8f9fa;
+  color: #000;
+  border: 1px solid #ccc;
+}
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent dark background */
+  z-index: 1000; /* Ensure it's behind the modal but above other elements */
+}
+
+.signin-prompt-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  z-index: 1100; /* Above the overlay */
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+}
+
+
+
+
+
+
+
+
+/* Flex Container */
+.formbold-flex-container {
+  display: flex;
+  gap: 150px; /* Space between the form and image */
+  align-items: stretch;
+  justify-content: center;
+  flex-wrap: wrap; /* Ensure responsiveness on smaller screens */
+  padding: 48px;
+}
+
+/* Form Section */
+.formbold-main-wrapper {
+  /* background-image: url('../../../../assets/maps.PNG'); */
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 550px;
+  width: 100%;
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+}
+
+.background-image {
+  width: 100%; /* Ensure the image covers the entire container */
+  height: 100%; /* Ensure the image covers the entire container */
+  background-image: url('../../../../assets/maps.PNG'); /* Replace with the correct image path */
+  background-size: cover; /* Adjusts the image to cover the entire div */
+  background-position: center; /* Centers the image */
+  border-radius: 8px; /* Match the border-radius of the form */
+  transition: transform 0.3s ease; /* Add a smooth hover effect */
+}
+
+/* Hover Effect for Background Image */
+.background-link:hover .background-image {
+  transform: scale(1.05); /* Slight zoom-in on hover */
+}
+
+/* Form Wrapper */
+.formbold-form-wrapper {
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Form Header */
+.formbold-form-header {
+  background: #000d6b;
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Space between header text and icons */
+  padding: 12px 36px;
+  border-radius: 8px 8px 0px 0px;
+  position: relative; /* Allows positioning of child elements */
+}
+
+.formbold-form-header h3 {
+  font-weight: 700;
+  font-size: 20px;
+  color: white;
+}
+
+/* Social Icons */
+.social-icons {
+  position: absolute;
+  top: 12px;
+  right: 36px; /* Adjust the position in the top-right corner */
+  display: flex;
+  gap: 15px; /* Space between the icons */
+}
+
+.social-icon {
+  color: #fff;
+  font-size: 20px;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.social-icon:hover {
+  color: #f7a600; /* Yellow on hover */
+}
+
+/* Form Content */
+.formbold-chatbox-form {
+  padding: 32px 36px;
+}
+
+/* Form Labels */
+.formbold-form-label {
+  display: block;
+  font-weight: 500;
+  font-size: 16px;
+  color: #07074d;
+  margin-bottom: 12px;
+}
+
+/* Form Inputs */
+.formbold-form-input {
+  width: 100%;
+  padding: 12px 24px;
+  border-radius: 6px;
+  border: 1px solid #e0e0e0;
+  background: white;
+  font-weight: 500;
+  font-size: 16px;
+  color: #6b7280;
+  outline: none;
+}
+
+.formbold-form-input:focus {
+  border-color: #000d6b;
+  box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* Button */
+.formbold-btn {
+  text-align: center;
+  font-size: 16px;
+  border-radius: 6px;
+  padding: 14px 32px;
+  border: none;
+  font-weight: 600;
+  background-color: #000d6b;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.formbold-btn:hover {
+  background-color: #1a2faf; /* lighter blue on hover */
+  color: #fff;
+  font-size: 17px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  transform: scale(1.01); /* slight zoom effect */
+}
+
+
+
+
+
+
+
+
+
+
+.contact-image {
+  display: flex;
+  flex: 1; /* Take up the available space */
+  align-items: center;
+  justify-content: center;
+  width: 100%; /* Fill the entire width */
+  height: 100%; /* Fill the entire height of the parent container */
+  max-width: 100%; /* Ensure no extra width constraints */
+  background-image: url('../../../../assets/maps.PNG'); /* Replace with your correct image path */
+  background-size: cover; /* Make the image cover the entire background */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Prevent the image from repeating */
+}
+
+.contact-image img {
+  width: 100%; /* Make the image fill the container */
+  height: 100%; /* Make the image fill the container */
+  border-radius: 8px; /* Match the border radius of the container */
+  object-fit: cover; /* Ensure the image scales properly */
+  box-shadow: 0 0 10px #077b32; /* Optional shadow for better visibility */
+}
+/*
+.formbold-image-wrapper {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 550px;
+  background: #f8f8f8;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+}*/
+
+.formbold-image {
+  max-width: 100%; /* Ensure the image fits within the container */
+  border-radius: 8px; /* Match the border-radius of the form */
+  object-fit: cover; /* Ensure the image scales properly */
+}
+
+
+
+
+
+
+
+/*sign in */
+.signin-prompt-modal {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  animation: modalSlideIn 0.3s ease-out;
+}
+
+
+.signin-prompt-modal h3 {
+  margin-top: 0;
+  color: #333;
+  font-size: 1.5rem;
+}
+
+.signin-prompt-modal p {
+  color: #666;
+  margin-bottom: 1.5rem;
+}
+
+/* Responsive Design */
+@media only screen and (max-width: 768px) {
+  .formbold-flex-container {
+    flex-direction: column; /* Stack form and image vertically */
+  }
+
+  .contact-image {
+    max-width: 100%; /* Allow the image wrapper to expand fully on smaller screens */
+    padding: 20px; /* Adjust padding for smaller screens */
+  }
+  /*
+  .formbold-main-wrapper,
+  .formbold-image-wrapper {
+    max-width: 100%;
+  }*/
+
+  .social-icons {
+    right: 20px; /* Adjust position for smaller screens */
+    gap: 10px; /* Smaller gap between icons */
+  }
+}
+
+
+
+@media (max-width: 768px) {
+  .signin-prompt-modal {
+    width: 95%;
+  }
+}

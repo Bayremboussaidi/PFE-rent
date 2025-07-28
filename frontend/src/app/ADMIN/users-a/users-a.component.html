@@ -1,0 +1,144 @@
+<app-header-a></app-header-a>
+
+
+<div class="card">
+  <div class="top-buttons">
+    <button class="add-record-button" (click)="openAddModal()">
+      <i class="pi pi-plus"></i> Add User
+    </button>
+    <button class="update-button" (click)="updateSelectedUsers()" [disabled]="selectedUsers.length === 0">
+      <i class="pi pi-pencil"></i> Update Selected
+    </button>
+  </div>
+
+
+
+<!-- ✅ Add User Modal -->
+<div class="modal-overlay" *ngIf="isAddModalOpen">
+  <div class="modal-content">
+    <h2>Add User</h2>
+    <form (ngSubmit)="onAddUserSubmit()" #addUserForm="ngForm">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" [(ngModel)]="newUser.username" required />
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" [(ngModel)]="newUser.email" required />
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" [(ngModel)]="newUser.password" required />
+      </div>
+      <div class="form-group">
+        <label for="role">Role</label>
+        <select id="role" name="role" [(ngModel)]="newUser.role" required>
+          <option value="USER">User</option>
+          <option value="ADMIN">Admin</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="phone">Phone</label>
+        <input
+        type="tel"
+        pattern="[0-9]*"
+        [(ngModel)]="newUser.phone"
+        (keypress)="validateNumber($event)"
+        name="phone"
+      >
+      </div>
+      <div class="form-group">
+        <label for="workplace">Workplace</label>
+        <input type="text" id="workplace" name="workplace" [(ngModel)]="newUser.workplace" />
+      </div>
+
+      <div class="form-group">
+        <label>Profile Image</label>
+        <div class="image-upload-container">
+          <!-- Hidden file input -->
+          <input
+            type="file"
+            id="profileImage"
+            (change)="onFileSelected($event)"
+            accept="image/*"
+            style="display: none;"
+          >
+
+          <!-- Custom upload button -->
+          <label for="profileImage" class="upload-button">
+            <span *ngIf="!newUser.photo">Choose Image</span>
+            <img *ngIf="newUser.photo" [src]="newUser.photo" alt="Preview" class="image-preview">
+          </label>
+        </div>
+      </div>
+
+
+      <div class="form-actions">
+        <button type="button" (click)="closeAddModal()">Cancel</button>
+        <button type="submit" [disabled]="addUserForm.invalid">Add User</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+
+  <div class="table-container">
+    <table class="p-table" *ngIf="users.length > 0">
+      <thead>
+        <tr>
+          <th>
+            <input type="checkbox" (change)="toggleSelectAll($event)" [checked]="selectedUsers.length === users.length" />
+          </th>
+          <th>ID</th>
+          <th>Username</th>
+          <th>Email</th>
+          <th>Role</th>
+          <th>Phone</th>
+          <th>Workplace</th>
+          <th>Created At</th>
+          <th>Updated At</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users; let i = index">
+          <td>
+            <input type="checkbox" [checked]="isSelected(user)" (change)="toggleSelection(user)" />
+          </td>
+          <td>{{ user.id }}</td>
+          <td>{{ user.username || 'N/A' }}</td>
+          <td>{{ user.email }}</td>
+          <td>
+            <select *ngIf="isSelected(user)" [(ngModel)]="user.role">
+              <option value="USER">User</option>
+              <option value="ADMIN">admin</option>
+            </select>
+            <span *ngIf="!isSelected(user)">{{ user.role }}</span>
+          </td>
+          <td>
+            <input *ngIf="isSelected(user)" type="text" [(ngModel)]="user.phone" />
+            <span *ngIf="!isSelected(user)">{{ user.phone || 'N/A' }}</span>
+          </td>
+          <td>
+            <input *ngIf="isSelected(user)" type="text" [(ngModel)]="user.workplace" />
+            <span *ngIf="!isSelected(user)">{{ user.workplace || 'N/A' }}</span>
+          </td>
+          <td>{{ user.createdAt ? (user.createdAt | date:'yyyy-MM-dd HH:mm') : 'N/A' }}</td>
+          <td>{{ user.updatedAt ? (user.updatedAt | date:'yyyy-MM-dd HH:mm') : 'N/A' }}</td>
+          <td>
+            <button class="delete-button" *ngIf="user.id !== undefined" (click)="deleteUser(user.id!, i)">
+              Delete
+            </button>
+            <button class="Historique-button" *ngIf="user.id !== undefined" (click)="viewHistory(user.id!)">
+              Details
+            </button>
+
+
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p *ngIf="users.length === 0">No users available.</p>
+</div>

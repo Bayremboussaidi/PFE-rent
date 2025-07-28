@@ -1,0 +1,423 @@
+/* Modified Modal Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  padding: 25px;
+  border-radius: 8px; /* Updated from 5px */
+  width: 500px; /* Slightly larger */
+  max-width: 90%;
+  max-height: 90vh; /* Add for scroll */
+  overflow-y: auto; /* Enable vertical scroll */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Enhanced shadow */
+}
+
+/* Enhanced Form Styles */
+.form-group {
+  margin-bottom: 1rem; /* Increased spacing */
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600; /* Bolder labels */
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 0.75rem; /* Increased padding */
+  border: 1px solid #ddd;
+  border-radius: 6px; /* Smoother corners */
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+  outline: none;
+}
+
+/* Image Upload Specific Styles */
+.image-upload-container {
+  position: relative;
+  margin: 1rem 0;
+}
+
+.upload-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 150px;
+  height: 150px;
+  border: 2px dashed #ddd;
+  border-radius: 8px;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  background: #f8f9fa;
+}
+
+.upload-button:hover {
+  border-color: #3b82f6;
+  background: #f0f6ff;
+}
+
+.image-preview {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+/* Enhanced Form Actions */
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.form-actions button {
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.form-actions button:first-child {
+  background: transparent;
+  border: 1px solid #ddd;
+  color: #444;
+}
+
+.form-actions button:first-child:hover {
+  background: #f8f9fa;
+}
+
+.form-actions button:last-child {
+  background: #3b82f6;
+  color: white;
+}
+
+.form-actions button:last-child:hover {
+  background: #2563eb;
+}
+
+/* Keep existing card and table styles below */
+.card {
+  padding: 1rem;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.table-container {
+  max-height: 400px;
+  margin-top: 10px;
+  overflow-y: auto;
+  overflow-x: auto;
+  border: 1px solid #dee2e6;
+}
+
+/* ... rest of your existing styles remain unchanged ... */
+
+
+
+
+
+
+
+
+
+
+
+
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 5px;
+  width: 400px;
+  max-width: 90%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.form-group {
+  margin-bottom: 10px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: bold;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.form-actions button {
+  padding: 10px 15px;
+  border: none;
+  cursor: pointer;
+}
+
+.form-actions button:first-child {
+  background: #ccc;
+}
+
+.form-actions button:last-child {
+  background: #28a745;
+  color: white;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Remove left margin and center content */
+.card {
+  padding: 1rem;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto; /* Remove left space */
+}
+
+/* Scrollable Table */
+.table-container {
+  max-height: 400px; /* Adjust height */
+  margin-top: 10px; /* Space between sticky header and table */
+  overflow-y: auto; /* Vertical scroll */
+  overflow-x: auto; /* Horizontal scroll */
+  border: 1px solid #dee2e6;
+}
+
+/* Make Table Take Full Width */
+.p-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Arial', sans-serif;
+}
+
+/* Keep Table Headers Fixed */
+.table-container thead {
+  position: sticky;
+  top: 0;
+  background: #f8f9fa;
+  z-index: 100;
+}
+
+/* Table Header */
+.p-table th {
+  background: #f8f9fa;
+  padding: 10px;
+  text-align: left;
+  font-weight: bold;
+  border-bottom: 2px solid #dee2e6;
+}
+
+/* Table Body */
+.p-table td {
+  padding: 10px;
+  border-bottom: 1px solid #dee2e6;
+  vertical-align: middle;
+}
+
+/* Buttons */
+button {
+  border: none;
+  cursor: pointer;
+  padding: 6px 10px;
+  border-radius: 4px;
+}
+
+button .pi {
+  font-size: 1.2rem;
+  background-color: #28a745;
+}
+
+/* Delete Button */
+/* Button Container */
+td {
+  white-space: nowrap; /* Prevent buttons from wrapping */
+}
+
+/* Base Button Styles */
+.delete-button,
+.Historique-button {
+  display: inline-block; /* Ensure buttons stay on same line */
+  width: auto; /* Allow buttons to size based on content */
+  min-width: 80px; /* Set minimum width */
+  height: 32px; /* Fixed height */
+  padding: 6px 12px !important; /* Consistent padding */
+  font-size: 12px !important; /* 0.8 of original 14px */
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+  line-height: 1; /* Fix vertical alignment */
+  margin: 0 4px; /* Consistent spacing */
+  border: none;
+}
+
+/* Delete Button */
+.delete-button {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.delete-button:hover {
+  background-color: #c0392b;
+  transform: scale(1.02);
+}
+
+.delete-button:active {
+  background-color: #a93226;
+  transform: scale(0.98);
+}
+
+/* Historique Button */
+.Historique-button {
+  background-color: #091606;
+  color: white;
+  margin-left: 8px; /* Consistent spacing */
+}
+
+.Historique-button:hover {
+  background-color: #57595a;
+  transform: scale(1.02);
+}
+
+.Historique-button:active {
+  background-color: #3a3b3c;
+  transform: scale(0.98);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .delete-button,
+  .Historique-button {
+    min-width: 70px;
+    padding: 5px 10px !important;
+    font-size: 11px !important;
+    margin: 0 3px;
+  }
+}
+
+
+/*historique button */
+
+
+/* Top Buttons */
+.top-buttons {
+  position: sticky;
+  top: 0;
+  background: white; /* Ensure it stays visible */
+  z-index: 0; /* Keep it above other elements */
+  padding: 1rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Optional shadow for better visibility */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Add Record Button */
+.add-record-button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  background-color: #007bff;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.add-record-button:hover {
+  background-color: #0056b3;
+}
+
+/* Export Button */
+.export-button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  background-color: #28a745;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.export-button:hover {
+  background-color: #218838;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .card {
+    max-width: 100%;
+    padding: 0.5rem;
+  }
+  .p-table th, .p-table td {
+    padding: 8px;
+    font-size: 0.9rem;
+  }
+  .add-record-button, .export-button {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+  }
+}

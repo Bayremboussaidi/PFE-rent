@@ -1,0 +1,71 @@
+<app-header-a></app-header-a>
+
+
+<div class="container" *ngIf="blog">
+  <div class="card">
+    <div class="card-header">
+      <h2>Blog Details</h2>
+      <button class="update-button" (click)="updateBlog()" [disabled]="!hasChanges">
+        <i class="pi pi-pencil"></i> Update Blog
+      </button>
+    </div>
+
+    <div class="form-container">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Blog Title</label>
+          <input type="text" [(ngModel)]="blog.title" (ngModelChange)="onChange()"
+                 class="form-input" placeholder="Enter blog title">
+        </div>
+        <div class="form-group">
+          <label>Author</label>
+          <input type="text" [(ngModel)]="blog.author" (ngModelChange)="onChange()"
+                 class="form-input" placeholder="Enter author's name">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Content</label>
+          <textarea [(ngModel)]="blog.description" (ngModelChange)="onChange()"
+                    class="form-input" placeholder="Enter blog content"></textarea>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Quote</label>
+          <input type="text" [(ngModel)]="blog.quote" (ngModelChange)="onChange()"
+                 class="form-input" placeholder="Enter blog quote">
+        </div>
+        <div class="form-group">
+          <label>Image URL</label>
+          <input type="text" [(ngModel)]="blog.imgUrl" (ngModelChange)="onChange()"
+                 class="form-input" placeholder="Enter image URL">
+        </div>
+      </div>
+
+      <div class="info-row">
+        <div class="info-item">
+          <span class="info-label">Created At</span>
+          <span class="info-value">{{ blog.date | date: 'mediumDate' }}</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Posted At</span>
+          <span class="info-value">{{ blog.time }}</span>
+        </div>
+      </div>
+
+      <div *ngIf="blog.comments && blog.comments.length > 0" class="comments-section">
+        <h3>Comments</h3>
+        <div *ngFor="let comment of blog.comments" class="comment-item">
+          <div class="comment-author">{{ comment.author }}</div>
+          <div class="comment-text">{{ comment.text }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p *ngIf="!blog && !loading" class="status-message">No blog found.</p>
+<p *ngIf="loading" class="status-message">Loading blog details...</p>

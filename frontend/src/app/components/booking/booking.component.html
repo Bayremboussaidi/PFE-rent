@@ -1,0 +1,104 @@
+<!-- Modal de réservation -->
+<div class="modal-overlay" *ngIf="showModal" (click)="closeModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <span class="close-btn" (click)="closeModal()">&times;</span>
+    <h2>Réservez votre voiture</h2>
+
+    <form (ngSubmit)="onSubmit()">
+
+      <label for="username">Nom complet :</label>
+      <input type="text" id="username" [(ngModel)]="bookingData.username" name="username" required />
+
+      <label for="carName">Nom de la voiture :</label>
+      <input type="text" id="carName" [(ngModel)]="bookingData.carName" name="carName" readonly />
+
+      <div class="form-group">
+        <label for="userEmail">E-mail :</label>
+        <input type="email"
+              id="userEmail"
+              name="userEmail"
+              [(ngModel)]="bookingData.userEmail"
+              required
+              pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}"
+              [disabled]="true"
+              class="form-control">
+      </div>
+
+
+
+      <div class="form-group">
+        <label for="phone">Numéro de téléphone :</label>
+        <input type="tel"
+              id="phone"
+              name="phone"
+              [(ngModel)]="bookingData.phone"
+              required
+              pattern="^(\+216[2459]\d{7}|[29]\d{7}|0)$"
+              title="Entrez un numéro Tunisien valide (ex: +21612345678 ou 99123456)"
+              class="form-control">
+      </div>
+
+      <label for="description">Description :</label>
+      <textarea id="description" [(ngModel)]="bookingData.description" name="description"></textarea>
+
+<!-- Start Date with X button -->
+<div class="datepicker-wrapper">
+  <label for="startDate">Date de début <span style="color: red;">(Doit être aujourd'hui ou plus tard)</span></label>
+  <div class="input-with-x">
+    <input type="text"
+          id="startDate"
+          [(ngModel)]="bookingData.startDate"
+          name="startDate"
+          bsDatepicker
+          #startDp="bsDatepicker"
+          [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD', minDate: today, datesDisabled: unavailableDates }"
+          readonly
+          (keydown)="$event.preventDefault()"
+          required
+          (ngModelChange)="calculateDaysAndPrice()"/>
+    <button type="button" class="x-btn" (click)="startDp.hide()">✖</button>
+  </div>
+</div>
+
+<!-- End Date with X button -->
+<div class="datepicker-wrapper">
+  <label for="endDate">Date de fin <span style="color: red;">(Doit être après la date de début)</span></label>
+  <div class="input-with-x">
+    <input type="text"
+          id="endDate"
+          [(ngModel)]="bookingData.endDate"
+          name="endDate"
+          bsDatepicker
+          #endDp="bsDatepicker"
+          [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD', minDate: today, datesDisabled: unavailableDates }"
+          readonly
+          (keydown)="$event.preventDefault()"
+          required
+          (ngModelChange)="calculateDaysAndPrice()"/>
+    <button type="button" class="x-btn" (click)="endDp.hide()">✖</button>
+  </div>
+</div>
+
+
+      <p><strong>Agence :</strong> {{ bookingData.agence }}</p>
+
+
+      <p><strong>Nombre de jours :</strong> {{ bookingData.nbrJrs }}</p>
+
+
+      <p><strong>Prix total :</strong> DT {{ bookingData.price }}</p>
+
+
+
+      <label for="pickupLocation">Lieu de prise en charge :</label>
+      <input type="text" id="pickupLocation" [(ngModel)]="bookingData.pickupLocation" name="pickupLocation" required />
+
+      <label for="dropoffLocation">Lieu de dépôt :</label>
+      <input type="text" id="dropoffLocation" [(ngModel)]="bookingData.dropoffLocation" name="dropoffLocation" required />
+
+      <button type="submit">Confirmer la réservation</button>
+    </form>
+
+    <p *ngIf="responseMessage">{{ responseMessage }}</p>
+  </div>
+</div>
