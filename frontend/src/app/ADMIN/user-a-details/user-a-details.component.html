@@ -1,0 +1,174 @@
+<div class="user-details-container">
+  <!-- Loading overlay -->
+  <div *ngIf="isLoading" class="loading-overlay">
+    <div class="loading-spinner">
+      <i class="pi pi-spinner pi-spin"></i> Loading user details...
+    </div>
+  </div>
+
+  <div class="user-card" *ngIf="!isLoading && user">
+    <!-- Back button -->
+    <button class="back-button" (click)="goBack()">
+      <i class="pi pi-arrow-left"></i> Back to Users
+    </button>
+
+    <!-- Error message -->
+    <div *ngIf="errorMessage" class="error-message">
+      {{ errorMessage }}
+    </div>
+
+
+
+    <div class="profile-section">
+      <div class="profile-picture-container">
+        <img class="profile-pic"
+        [src]="safePhotoUrl"
+        alt="Profile Picture"
+        (error)="handleImageError($event)"
+        *ngIf="safePhotoUrl">
+
+    </div>
+    <h2 class="user-name">{{ user.username || 'N/A' }}</h2>
+    <p class="user-email">{{ user.email }}</p>
+  </div>
+
+    <!-- User Details Section -->
+    <div class="details-section">
+      <div class="detail-row">
+        <span class="detail-label">User ID:</span>
+        <span class="detail-value">{{ user.id }}</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Role:</span>
+        <span class="detail-value" [ngClass]="{'admin': user.role === 'ADMIN', 'user': user.role === 'USER'}">
+          {{ user.role }}
+        </span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Phone:</span>
+        <span class="detail-value">{{ user.phone || 'Not provided' }}</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Workplace:</span>
+        <span class="detail-value">{{ user.workplace || 'Not provided' }}</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Member Since:</span>
+        <span class="detail-value">{{ user.createdAt | date }}</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Status:</span>
+        <span class="detail-value" [ngClass]="{'active': true, 'inactive': false}">
+          Active
+        </span>
+      </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="action-buttons">
+
+      <button class="delete-button" (click)="deleteUser()">
+        <i class="pi pi-trash"></i> Delete User
+      </button>
+    </div>
+
+    <!-- User reviews Section -->
+    <div class="section-container" *ngIf="user.comments && user.comments.length > 0">
+      <h3 class="section-title">User Comments</h3>
+      <div class="comments-list">
+        <div class="comment-item" *ngFor="let comment of user.comments">
+          <div class="comment-header">
+            <span class="comment-date">{{ comment.createdAt | date:'medium' }}</span>
+            <span class="comment-rating">Rating: {{ comment.rating }}/5</span>
+          </div>
+          <p class="comment-content">{{ comment.reviewText }}</p>
+          <!-- If you want to display car information -->
+          <div *ngIf="comment.carName" class="comment-car">
+            On: {{ comment.carName || 'Unknown car' }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+    <!-- User Bookings Section -->
+    <div class="section-container" *ngIf="bookings && bookings.length > 0">
+      <h3 class="section-title">User Bookings</h3>
+      <div class="bookings-list">
+        <div class="booking-item" *ngFor="let booking of bookings">
+          <div class="booking-header">
+            <div class="booking-meta">
+              <span class="booking-id">Booking #{{ booking.id }}</span>
+              <span class="car-name">{{ booking.carName }}</span> <!-- Added car name -->
+            </div>
+            <span class="booking-status" [ngClass]="{
+              'confirmed': booking.status === 'CONFIRMED',
+              'pending': booking.status === 'PENDING',
+              'cancelled': booking.status === 'CANCELED'
+            }">{{ booking.status | lowercase | titlecase }}</span>
+          </div>
+
+          <div class="booking-details">
+            <!-- Dates Section -->
+            <div class="date-group">
+              <span class="detail-label">Dates:</span>
+              <span class="booking-date">
+                {{ booking.startDate | date:'mediumDate' }} - {{ booking.endDate | date:'mediumDate' }}
+              </span>
+            </div>
+
+            <!-- Price Section -->
+            <div class="price-group">
+              <span class="detail-label">Price:</span>
+              <span class="booking-price">
+                {{ booking.price ? (booking.price | currency:'USD':'symbol':'1.2-2') : 'N/A' }}
+              </span>
+            </div>
+          </div>
+
+          <div class="booking-actions" *ngIf="showBookingActions">
+            <button class="btn-view-details" (click)="viewBookingDetails(booking.id)">
+              View Details
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="no-bookings-message" *ngIf="bookings && bookings.length === 0 && !isLoading">
+      <i class="pi pi-info-circle"></i>
+      <p>No bookings found for this user</p>
+    </div>
+
+    <div class="loading-bookings" *ngIf="isLoading">
+      <i class="pi pi-spinner pi-spin"></i>
+      <span>Loading bookings...</span>
+    </div>
+
+
+
+
+    <!-- User History Section -->
+<div class="section-container">
+  <h3 class="section-title">User Reviews</h3>
+  <div class="history-placeholder" *ngIf="!userReviews || userReviews.length === 0">
+    No reviews available for this user.
+  </div>
+  <div class="history-list" *ngIf="userReviews && userReviews.length > 0">
+    <div class="history-item" *ngFor="let review of userReviews">
+      <div class="history-header">
+        <span class="history-type">
+          <i class="pi pi-star" style="color: gold;"></i>
+          {{ review.rating }}/5
+        </span>
+        <span class="history-date">{{ review.createdAt | date:'mediumDate' }}</span>
+      </div>
+      <p class="history-details">{{ review.reviewText }}</p>
+      <div class="review-car">
+        <small>For: {{ review.carName }}</small>
+      </div>
+    </div>
+  </div>
+</div>

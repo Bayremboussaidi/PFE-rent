@@ -1,0 +1,130 @@
+.blog-details-container {
+    padding: 20px 40px 20px 100px;
+    margin: 100px 150px 20px 100px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff7f7ec;
+    box-shadow: 0 2px 4px rgba(72, 60, 60, 0.1);
+    display: flex;
+  }
+
+  .blog-content {
+    flex: 3;
+    margin-inline-end: 240px;
+  }
+
+  .blog-main-content {
+    margin-bottom: 100px; /* Adjusted to 100px to control the space */
+  }
+
+  .blog-sidebar {
+    flex: 1;
+    border-inline-start: 1px solid #ddd;
+    padding-inline-start: 20px;
+  }
+
+  .blog-sidebar h3 {
+    margin-block-end: 10px;
+  }
+
+  .blog-sidebar ul {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  .blog-item-box {
+    margin-block-end: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .blog-item-box a {
+    text-decoration: none;
+    color: #000d6b;
+    font-weight: 600;
+  }
+
+  .blog-item-box a:hover {
+    text-decoration: underline;
+  }
+
+  .blog__publisher span i {
+    color: #f9a826;
+  }
+
+  blockquote {
+    line-height: 35px;
+  }
+
+  .single__comment img {
+    inline-size: 70px;
+    block-size: 70px;
+    border-radius: 50%;
+    border: 2px solid #456F81;
+    object-fit: cover;
+  }
+
+  .replay i {
+    color: #f9a826;
+  }
+
+  .replay {
+    color: #000d6b;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .leave__comment-form input,
+  .leave__comment-form textarea {
+    border: 1px solid rgba(0, 12, 107, 0.118);
+  }
+
+  .leave__comment-form textarea:focus {
+    outline: none;
+  }
+
+  .comment__btn {
+    background: #456F81 !important;
+    color: #fff !important;
+  }
+
+  .recent__blog-item h6 a {
+    text-decoration: none;
+    color: #000d6b;
+    font-weight: 600;
+  }
+
+  @media only screen and (max-width: 768px) {
+    .recent__post {
+      margin-top: 30px;
+    }
+
+    .leave__comment-form input,
+    .leave__comment-form textarea {
+      font-size: 0.7rem;
+    }
+
+    .comment__btn {
+      padding: 5px 10px;
+      font-size: 0.8rem;
+      margin-top: 0px !important;
+    }
+
+    .leave__comment-form h4 {
+      font-size: 1.2rem;
+    }
+
+    .single__comment img {
+      width: 40px;
+      height: 40px;
+    }
+
+    .comment__content p,
+    .blog__details p {
+      font-size: 0.8rem;
+      line-height: 1.4rem;
+    }
+  }

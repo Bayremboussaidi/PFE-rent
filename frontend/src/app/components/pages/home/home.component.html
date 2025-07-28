@@ -1,0 +1,104 @@
+<div class='tik' data-aos="fade-up-right">
+  <section class="hero-slider-section">
+
+    <app-hero-slider></app-hero-slider>
+
+    <app-find-car-form
+      (searchFilters)="applyFilters($event)"
+      (resetFilters)=" resetFilters()"
+    ></app-find-car-form>
+
+
+
+    <!-- Car results section -->
+    <section *ngIf="filteredVoitures.length > 0">
+      <div class="responsive-container">
+        <div class="row">
+          <div class="column-full">
+            <h6 class="subtitle">Résultats de recherche</h6>
+            <h2 class="title">Voitures disponibles</h2>
+          </div>
+          <div
+            class="car-card"
+            *ngFor="let voiture of filteredVoitures"
+            data-aos="fade-up"
+            [routerLink]="['/listcars', voiture.id]"
+          >
+            <img
+              [src]="voiture.imgUrl || '/assets/default-car.jpg'"
+              alt="Car"
+              class="car-img"
+            />
+            <div class="car-info">
+              <h3>{{ voiture.brand }} - {{ voiture.carName }}</h3>
+              <p>Catégorie: {{ voiture.category }}</p>
+              <p>Prix: {{ voiture.price }} TND</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End car results -->
+
+  </section>
+
+  <div class="nous">
+    <app-about-section></app-about-section>
+  </div>
+
+  <section>
+    <div class="responsive-container">
+      <div class="row">
+        <div class="column-full">
+          <h6 class="subtitle">Consultez nos</h6>
+          <h2 class="title">Services populaires</h2>
+        </div>
+        <app-services-list></app-services-list>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="responsive-container">
+      <div class="row">
+        <div class="column-full">
+          <h6 class="subtitle">Venez avec</h6>
+          <h2 class="title">Offres exceptionnelles</h2>
+        </div>
+        <!--app-featured-voiture-list></app-featured-voiture-list-->
+      </div>
+    </div>
+  </section>
+
+  <app-become-driver-section></app-become-driver-section>
+
+  <app-become-driver></app-become-driver>
+
+  <!--app-video-player></app-video-player-->
+
+  <section>
+    <div class="responsive-container">
+      <div class="row">
+        <div class="column-full">
+          <h6 class="subtitle">Découvrez nos blogs</h6>
+          <h2 class="title">Derniers blogs</h2>
+        </div>
+      </div>
+    </div>
+  </section>
+  <app-blog-list></app-blog-list>
+
+
+  <section>
+    <div class="responsive-container">
+      <div class="row">
+        <div class="column-full">
+          <h6 class="subtitle">Nos clients disent</h6>
+          <h2 class="title">Témoignages</h2>
+        </div>
+        <app-testimonial></app-testimonial>
+      </div>
+    </div>
+  </section>
+
+</div>

@@ -1,0 +1,225 @@
+/* ====================================
+  🌟 Global CSS Variables
+==================================== */
+:root {
+  --default-color: #333;
+  --background-color: #fff;
+  --accent-color: #007bff;
+  --contrast-color: #fff;
+  --heading-color: #222;
+  --nav-color: #222;
+  --nav-hover-color: #007bff;
+  --nav-dropdown-color: #222;
+  --nav-dropdown-hover-color: #007bff;
+  --nav-dropdown-background-color: #fff;
+  --nav-font: "Poppins", sans-serif;
+}
+
+/* ====================================
+  🌟 Header Styling
+==================================== */
+.header {
+  background-color: var(--background-color);
+  transition: all 0.5s;
+  z-index: 997;
+  box-shadow: 0px 0 18px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+/* 🌟 Top Bar */
+.header .topbar {
+  background-color: var(--accent-color);
+  color: var(--contrast-color);
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.header .topbar .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* ====================================
+  🌟 Branding Section
+==================================== */
+.header .branding {
+  padding: 10px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header .logo img {
+  max-height: 36px;
+  margin-right: 8px;
+}
+
+.header .logo h1 {
+  font-size: 30px;
+  margin: 0;
+  font-weight: 700;
+  color: var(--heading-color);
+}
+
+/* ====================================
+  🌟 Navigation Menu
+==================================== */
+.navmenu {
+  display: flex;
+  align-items: center;
+}
+
+.navmenu ul {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  list-style: none;
+  align-items: center;
+}
+
+.navmenu li {
+  position: relative;
+}
+
+.navmenu a {
+  color: var(--nav-color);
+  padding: 18px 15px;
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  transition: all 0.3s ease-in-out;
+  text-decoration: none;
+  transform-origin: center;
+}
+
+/* Added hover effects */
+.navmenu a:hover,
+.navmenu .active {
+  color: var(--nav-hover-color);
+  transform: scale(1.1);
+  background-color: #f8f9fa;
+  border-radius: 4px;
+}
+
+/* 🌟 Dropdown Menu */
+.navmenu .dropdown ul {
+  position: absolute;
+  left: 0;
+  top: 100%;
+  background: var(--nav-dropdown-background-color);
+  padding: 10px 0;
+  min-width: 200px;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  transform: translateY(10px);
+  border-radius: 4px;
+}
+
+.navmenu .dropdown:hover > ul {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.navmenu .dropdown ul li {
+  position: relative;
+}
+
+.navmenu .dropdown ul a {
+  padding: 10px 20px;
+  font-size: 14px;
+  color: var(--nav-dropdown-color);
+  text-transform: none;
+  display: block;
+}
+
+.navmenu .dropdown ul a:hover {
+  color: var(--nav-dropdown-hover-color);
+}
+
+/* 🌟 Deep Dropdown */
+.navmenu .dropdown .dropdown ul {
+  left: 100%;
+  top: 0;
+  visibility: hidden;
+  opacity: 0;
+  transform: translateX(10px);
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.navmenu .dropdown .dropdown:hover > ul {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(0);
+}
+
+.logo {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #04066e92;
+}
+
+.logo span {
+  color: #a19d1b;
+}
+
+/* ====================================
+  🌟 Mobile Navigation
+==================================== */
+@media (max-width: 1199px) {
+  .navmenu {
+    display: none;
+  }
+
+  .mobile-nav-toggle {
+    display: block;
+    font-size: 24px;
+    cursor: pointer;
+  }
+
+  .navmenu.active {
+    display: block;
+    position: absolute;
+    background: var(--background-color);
+    width: 100%;
+    left: 0;
+    top: 60px;
+    padding: 20px;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .navmenu ul {
+    flex-direction: column;
+  }
+
+  .navmenu a {
+    padding: 10px 0;
+    display: block;
+  }
+}
+
+/* ====================================
+  🌟 CTA Button
+==================================== */
+.header .cta-btn {
+  color: var(--contrast-color);
+  background: var(--accent-color);
+  font-size: 14px;
+  padding: 8px 20px;
+  margin-left: 20px;
+  border-radius: 4px;
+  transition: 0.3s;
+  text-decoration: none;
+}
+
+.header .cta-btn:hover {
+  background: rgba(0, 123, 255, 0.85);
+}

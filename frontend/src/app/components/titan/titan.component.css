@@ -1,0 +1,953 @@
+
+/*chat bot*/
+/* chatbot.component.css */
+
+.chatbot-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
+}
+
+.chat-toggle-button {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.chat-window {
+  width: 300px;
+  height: 400px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.chat-header {
+  background-color: #007bff;
+  color: white;
+  padding: 10px;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chat-body {
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
+  background-color: #f8f9fa;
+}
+
+.chat-footer {
+  padding: 10px;
+  display: flex;
+  gap: 5px;
+  border-top: 1px solid #ddd;
+}
+
+.chat-footer input {
+  flex: 1;
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.chat-footer button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+/* Smooth transition for hover effects */
+.chat-footer button,
+.chat-header button {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Hover effect for Send button */
+.chat-footer button:hover {
+  background-color: #0056b3; /* darker blue */
+  color: #e2e6ea;
+}
+
+/* Close (✖) button styles */
+.chat-header button {
+  background-color: transparent;
+  border: none;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+/* Hover effect for Close button */
+.chat-header button:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #ffdddd;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Centered Dialog Styling */
+.email-dialog-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(2px);
+  animation: fadeIn 0.3s ease;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.email-dialog {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+  width: 90%;
+  max-width: 600px;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  transform: translateY(-20px);
+  animation: slideUp 0.3s ease forwards;
+  cursor: default;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.email-dialog:hover {
+  box-shadow: 0 12px 40px rgba(0,0,0,0.25);
+}
+
+/* Header Section */
+.navbar-header {
+  padding: 1.5rem;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f8f9fa;
+  border-radius: 12px 12px 0 0;
+}
+
+.navbar-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #2d3436;
+  letter-spacing: -0.5px;
+  position: relative;
+  display: inline-block;
+  background: linear-gradient(135deg, #2d3436 0%, #0984e3 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.navbar-title::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 40px;
+  height: 2px;
+  background: #0984e3;
+  border-radius: 2px;
+}
+
+/* Close Button */
+.close-btn {
+  font-size: 2rem;
+  line-height: 1;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  color: #636e72;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.close-btn:hover {
+  color: #e74c3c;
+  background: rgba(231, 76, 60, 0.1);
+  transform: rotate(90deg) scale(1.1);
+}
+
+.close-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 50%;
+  transform: scale(0.9);
+  transition: transform 0.3s ease;
+}
+
+.close-btn:hover::before {
+  transform: scale(1);
+}
+
+/* Content Area */
+.dialog-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.5rem;
+}
+
+/* Booking Items */
+.booking-item {
+  background: white;
+  border-radius: 8px;
+  padding: 1.2rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.booking-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  background: #f8f9fa;
+}
+
+.booking-link {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  gap: 1.2rem;
+  transition: opacity 0.2s ease;
+}
+
+.booking-link:hover {
+  opacity: 0.9;
+}
+
+.booking-image {
+  width: 120px;
+  height: 80px;
+  border-radius: 6px;
+  object-fit: cover;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.booking-item:hover .booking-image {
+  transform: scale(1.02);
+}
+
+/* Booking Info */
+.booking-info strong {
+  font-size: 1.1rem;
+  color: #34495e;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.booking-dates {
+  font-size: 0.9rem;
+  color: #7f8c8d;
+  margin-bottom: 0.5rem;
+}
+
+/* Status Badges */
+.booking-status {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: all 0.3s ease, box-shadow 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.booking-status:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+}
+
+.booking-status.pending {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.booking-status.confirmed {
+  background: #d4edda;
+  color: #155724;
+}
+
+.booking-status.cancelled {
+  background: #fee2e2;
+  color: #dc2626;
+  border: 1px solid #fecaca;
+}
+
+.booking-status.cancelled:hover {
+  background: #fecaca;
+  box-shadow: 0 2px 8px rgba(220, 38, 38, 0.15);
+}
+
+/* Delete Button */
+.delete-button {
+  float: right;
+  color: #e74c3c;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 50%;
+  padding: 6px;
+  margin-left: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.delete-button:hover {
+  color: #fff;
+  background: #e74c3c;
+  transform: translateY(-2px) scale(1.2);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.delete-button:active {
+  transform: translateY(1px) scale(1);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+.delete-button mat-icon {
+  transition: transform 0.25s ease, color 0.25s ease;
+}
+
+.delete-button:hover mat-icon {
+  transform: rotate(20deg) scale(1.1);
+  color: #020202;
+}
+
+
+/* Loading State */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  gap: 1rem;
+}
+
+.loading-container p {
+  color: #7f8c8d;
+  font-size: 0.95rem;
+}
+
+mat-spinner {
+  transition: opacity 0.3s ease;
+}
+
+/* Empty State */
+.no-bookings {
+  text-align: center;
+  padding: 2rem;
+  color: #7f8c8d;
+  transition: transform 0.3s ease;
+}
+
+.no-bookings:hover {
+  transform: scale(1.02);
+}
+
+.no-bookings mat-icon {
+  font-size: 3rem;
+  width: auto;
+  height: auto;
+  margin-bottom: 1rem;
+  color: #bdc3c7;
+  transition: all 0.4s ease;
+}
+
+.no-bookings:hover mat-icon {
+  color: #74b9ff;
+  transform: rotate(-5deg) scale(1.1);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+  .email-dialog {
+    width: 95%;
+    max-height: 90vh;
+  }
+
+  .booking-link {
+    flex-direction: column;
+  }
+
+  .booking-image {
+    width: 100%;
+    height: 150px;
+  }
+}
+
+
+
+
+/* Add these rules to your existing CSS */
+
+.booking-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.car-name {
+  /* Inherits from booking-info strong but could add specific styles */
+}
+
+.delete-icon {
+  vertical-align: middle;
+}
+
+.empty-cart-icon {
+  /* Already styled but explicit class helps */
+}
+
+.empty-text {
+  /* Already styled but explicit class helps */
+}
+
+.booking-container {
+  position: relative;
+  padding: 0.5rem;
+}
+
+
+
+
+/*notification*/
+/* Backdrop overlay */
+.navbar-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 9999; /* One less than navbar */
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease-in-out;
+}
+
+.navbar-backdrop.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+
+
+
+
+/* notification update */
+.notifications-navbar {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 300px;
+  height: 100vh;
+  background: #fff;
+  z-index: 10000;
+  transition: all 0.3s ease-in-out;
+  box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.notifications-navbar.show {
+  right: 0;
+  box-shadow: -5px 0 25px rgba(0, 0, 0, 0.2);
+}
+
+
+
+
+
+
+
+/*signin prompt */
+/* Sign In Prompt Styles */
+.signin-prompt-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 10002;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(2px);
+  transition: opacity 0.3s ease;
+}
+
+.signin-prompt-modal {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  animation: modalSlideIn 0.3s ease-out;
+}
+
+@keyframes modalSlideIn {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.signin-prompt-modal h3 {
+  margin-top: 0;
+  color: #333;
+  font-size: 1.5rem;
+}
+
+.signin-prompt-modal p {
+  color: #666;
+  margin-bottom: 1.5rem;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+
+.btn {
+  padding: 0.5rem 1.5rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.btn-primary {
+  background: #007bff;
+  color: white;
+}
+
+.btn-primary:hover {
+  background: #0056b3;
+}
+
+.btn-secondary {
+  background: #6c757d;
+  color: white;
+}
+
+.btn-secondary:hover {
+  background: #5a6268;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.header {
+  position: fixed;
+  top: 30px;
+  left: 0;
+  width: 100%;
+  transition: top 0.3s ease-in-out,
+              background-color 0.3s ease-in-out,
+              box-shadow 0.3s ease-in-out;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 200px;
+}
+
+
+.header.no-shadow {
+  box-shadow: none !important;
+}
+
+/* Sticky Header */
+.sticky-header {
+  top: 0;
+  background-color: rgba(255, 255, 255, 1);
+}
+
+/* Navigation */
+.nav {
+  height: var(--header-height);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1.5rem;
+  width: 100%;
+}
+
+/* Logo Styling */
+
+
+/* Mobile Toggle */
+.nav__toggle {
+  cursor: pointer;
+  font-size: 1.5rem;
+  color: var(--white-color);
+  display: none;
+}
+
+/* Desktop Menu */
+.nav__menu {
+  display: flex;
+  margin-right: 220px; /* Pushes the nav menu slightly to the left */
+  transform: translateY(-8px);
+
+
+}
+
+
+.nav__logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: var(--font-semi-bold);
+  color: rgba(0, 0, 0, 0.988); /* Changed to brighter white with 95% opacity */
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.3); /* Added glow effect */
+  letter-spacing: 0.5px; /* Optional: better readability */
+  transform: translateY(-8px);
+
+}
+
+.nav__logo-img {
+  width: 40px;
+  height: auto;
+  object-fit: contain;
+  filter: brightness(1.05) drop-shadow(0 0 4px rgba(255, 255, 255, 0.2)); /* Added glow to image */
+}
+
+.logo-text {
+  filter: brightness(1.4);
+}
+
+
+
+.nav__list {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+}
+
+.nav__link {
+  display: block;
+  text-decoration: none;
+  font-family: "Roboto Condensed", sans-serif;
+  text-transform: uppercase;
+
+  letter-spacing: 3px;
+  font-size: 12.5px;
+  padding: 1rem;
+  transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+  color: var(--white-color);
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+/* Hover Effect - Changes text color */
+.nav__link:hover {
+  background-color: var(--black-color-light);
+  color: blue;
+}
+
+/* Underline Hover Effect */
+.nav__link:before {
+  content: "";
+  position: absolute;
+  inset: calc(100% - 3px) 0 0 0;
+  background: #ce4f20;
+  scale: 0 1;
+  transition: 0.3s, translate 0s 0.3s;
+}
+
+.nav__link:hover:before {
+  scale: 1;
+  translate: 0;
+  transition: 0.3s;
+}
+
+/* Dropdown Styling */
+.dropdown__menu {
+  display: none;
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.9);
+  border: 1px solid var(--dropdown-border);
+  border-radius: 5px;
+  box-shadow: 0px 4px 10px var(--dropdown-shadow);
+  padding: 10px;
+  min-width: 180px;
+  z-index: 1000;
+  backdrop-filter: blur(5px);
+}
+
+.dropdown__item {
+  position: relative;
+}
+
+.dropdown__item:hover .dropdown__menu {
+  display: block;
+}
+
+/* Responsive: Mobile Mode */
+@media screen and (max-width: 768px) {
+  .nav__toggle {
+    display: block;
+  }
+
+  .nav__menu {
+    position: absolute;
+    text-decoration: none;
+    top: var(--header-height);
+    left: 0;
+    width: 100%;
+    background-color: var(--black-color);
+    flex-direction: column;
+    display: none;
+  }
+
+  .nav__list.nav__link{
+    text-decoration: none !important;
+}
+.a{text-decoration: none !important;}
+
+
+  .show-menu {
+    display: flex;
+  }
+
+  .nav__list {
+    flex-direction: column;
+  }
+
+  .dropdown__menu {
+    left: calc(100% - 30px);
+  }
+
+  .dropdown__submenu {
+    left: calc(100% + 30px);
+    top: 10px;
+  }
+}
+
+/* Animated Menu (Top-Right Corner, Moved Further Right) */
+.animated-menu {
+  display: flex;
+  gap: 15px;
+  position: absolute;
+  right: 25px; /* Moves it to the extreme right */
+  top: 50%;
+  transform: translateY(-70%);
+  z-index: 1001; /* Ensures it appears above other elements */
+}
+
+/* Animated Buttons */
+.animated-menu li {
+  position: relative;
+  list-style: none;
+  width: 35px;
+  height: 35px;
+  background: white;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  border-radius: 60px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.5s;
+}
+
+.animated-menu li::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 60px;
+  background: linear-gradient(45deg, var(--i), var(--j));
+  opacity: 0;
+  transition: 0.5s;
+}
+
+.animated-menu li::after {
+  content: "";
+  position: absolute;
+  top: 10px;
+  width: 100%;
+  height: 100%;
+  border-radius: 60px;
+  background: linear-gradient(45deg, var(--i), var(--j));
+  transition: 0.5s;
+  filter: blur(15px);
+  z-index: -1;
+  opacity: 0;
+}
+
+.animated-menu li:hover {
+  width: 180px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0);
+}
+
+.animated-menu li:hover::before {
+  opacity: 1;
+}
+
+.animated-menu li:hover::after {
+  opacity: 0.5;
+}
+
+/* Icon Styles */
+.animated-menu li ion-icon {
+  color: #777;
+  font-size: 1.75em;
+  transition: 0.5s;
+  transition-delay: 0.25s;
+}
+
+.animated-menu li:hover ion-icon {
+  transform: scale(0);
+  color: #fff;
+  transition-delay: 0s;
+}
+
+/* Title Animation */
+.animated-menu li span {
+  position: absolute;
+}
+
+.animated-menu li .title {
+  color: #fff;
+  font-size: 1.1em;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transform: scale(0);
+  transition: 0.5s;
+  transition-delay: 0s;
+}
+
+.animated-menu li:hover .title {
+  transform: scale(1);
+  transition-delay: 0.25s;
+}
+
+
+
+/* Responsive: Move Menu to Bottom on Mobile */
+@media screen and (max-width: 768px) {
+  .animated-menu {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .animated-menu li {
+    width: 50px;
+    height: 50px;
+  }
+
+  .animated-menu li:hover {
+    width: 150px;
+  }
+}

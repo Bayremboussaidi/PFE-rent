@@ -1,0 +1,122 @@
+/* footer.component.css */
+.footer {
+  background: #0d0d1f;
+  padding-block-start: 50px;
+  padding-block-end: 15px;
+}
+
+/* Footer Logo Styling */
+.footer__logo {
+  display: flex;
+  align-items: center;
+  gap: 1rem; /* Adjust spacing between logo and text */
+}
+
+.footer__logo-img {
+  inline-size: 60px; /* Adjust width */
+  block-size: 60px; /* Adjust height */
+  border-radius: 50%; /* Keeps the image circular */
+  object-fit: cover; /* Ensures the image fits well */
+}
+
+.footer__logo-text {
+  color: #fff;
+  font-weight: 500;
+  font-size: 1.2rem; /* Adjust text size */
+  font-style: italic;
+}
+
+/* Remove the old background-based logo styling */
+.logo-background {
+  display: none;
+}
+
+/* Footer Text */
+.footer__logo-content {
+  color: rgba(255, 255, 255, 0.715);
+  margin-block-start: 15px;
+  line-height: 30px;
+}
+
+.quick__link {
+  border: none !important;
+  background: transparent !important;
+}
+
+.quick__link a {
+  color: rgba(255, 255, 255, 0.715);
+  text-decoration: none;
+  font-weight: 300;
+  transition: 0.3s;
+}
+
+.quick__link a:hover {
+  color: #F7A600;
+}
+
+.footer__link-title {
+  color: #fff;
+}
+
+.office__info {
+  color: rgba(255, 255, 255, 0.715);
+  font-weight: 300;
+}
+
+/* Newsletter Section */
+.newsletter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  border: 1px solid #457F81;
+  border-radius: 50px;
+  background: #2f5a6d;
+}
+
+.newsletter input {
+  background: transparent;
+  color: #fff;
+  border: none;
+  outline: none;
+}
+
+.newsletter span i {
+  color: #fff;
+}
+
+/* Footer Bottom Border */
+.footer__bottom {
+  border-block-start: 1px solid #7c8a972f;
+}
+
+/* Responsive Design */
+@media only screen and (max-inline-size: 768px) {
+ .footer__logo-text {
+    font-size: 1rem;
+ }
+
+ .footer__logo-img {
+    inline-size: 50px;
+    block-size: 50px;
+ }
+
+ .footer__logo-content {
+    font-size: 0.8rem;
+ }
+
+ .quick__link,
+ .office__info {
+    font-size: 0.8rem;
+    line-height: 1.5rem;
+ }
+
+ .footer__link-title {
+    font-size: 1rem;
+    margin-block-start: 15px;
+ }
+
+ .footer__bottom p {
+    font-size: 0.7rem;
+ }
+}

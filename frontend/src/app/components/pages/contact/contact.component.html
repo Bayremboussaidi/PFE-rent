@@ -1,0 +1,103 @@
+<div title="Contact">
+  <app-common-section [title]="'Contact'"></app-common-section>
+
+  <section>
+    <div class="container">
+      <div class="formbold-flex-container" data-aos="fade-right" data-aos-duration="1500" data-aos-delay="500">
+        <!-- Contact Form -->
+        <div class="formbold-main-wrapper">
+          <div class="formbold-form-wrapper">
+            <div class="formbold-form-header">
+              <h3>Entrer en contact</h3>
+              <div class="social-icons">
+                <a *ngFor="let link of socialLinks"
+                   [href]="link.url"
+                   target="_blank"
+                   class="social-icon"
+                   title="Visit {{ link.url | slice:8:30 }}..."> <!-- optional title -->
+                  <i [class]="link.icon"></i>
+                </a>
+              </div>
+
+            </div>
+            <form (ngSubmit)="sendMessage()" class="formbold-chatbox-form">
+              <div class="formbold-mb-5">
+                <label for="name" class="formbold-form-label">Votre nom</label>
+                <input
+                  type="text"
+                  name="name"
+                  id="name"
+                  [(ngModel)]="name"
+                  [placeholder]="name"
+                  class="formbold-form-input"
+                  required
+                  disabled
+                />
+              </div>
+              <div class="formbold-mb-5">
+                <label for="email" class="formbold-form-label">Email</label>
+                <input
+                  type="email"
+                  name="email"
+                  id="email"
+                  [(ngModel)]="email"
+                  [placeholder]="email"
+                  class="formbold-form-input"
+                  required
+                  disabled
+                />
+              </div>
+              <div class="formbold-mb-5">
+                <label for="message" class="formbold-form-label">Message</label>
+                <textarea
+                rows="5"
+                name="message"
+                id="message"
+                [(ngModel)]="message"
+                placeholder="Votre message"
+                class="formbold-form-input"
+                required
+              ></textarea>
+              </div>
+              <div>
+                <button type="submit" class="formbold-btn w-full">Envoyer un message</button>
+              </div>
+            </form>
+
+
+          </div>
+        </div>
+
+
+
+        <div class="contact-image" data-aos="fade-left" data-aos-duration="1500" data-aos-delay="600">
+          <a href="https://www.google.com/maps/place/MyLoc/@36.8478473,10.2691722,671m/data=!3m2!1e3!4b1!4m6!3m5!1s0x12fd4b0006fb1ded:0xff42c38c374a06fa!8m2!3d36.847843!4d10.2717471!16s%2Fg%2F11wmqynqrh?entry=ttu&g_ep=EgoyMDI1MDEyMi4wIKXMDSoASAFQAw%3D%3D" target="_blank">
+            <img src="../../../../assets/maps.PNG" alt="MyLoc_position">
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</div>
+
+
+
+<app-contact-badge></app-contact-badge>
+
+
+
+
+
+
+
+
+<div class="signin-prompt-modal" *ngIf="showSignInPrompt" role="dialog" aria-labelledby="signin-title" aria-describedby="signin-description" (click)="$event.stopPropagation()">
+  <h3 id="signin-title">Sign In Required</h3>
+  <p id="signin-description">You need to be logged in to book a car.</p>
+  <div class="modal-actions">
+    <button class="btn btn-primary" (click)="navigateToLogin()">Sign In</button>
+    <button class="btn btn-secondary" (click)="closeSignInPrompt()">Cancel</button>
+  </div>
+</div>
+

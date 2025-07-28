@@ -1,0 +1,34 @@
+.row {
+  display: flex;
+  flex-wrap: wrap; /* Allow items to wrap to the next line */
+  gap: 20px; /* Add space between items */
+  justify-content: space-around; /* Distribute items evenly */
+}
+
+.service-item {
+  background: #fff; /* White background for better contrast */
+  border-radius: 12px; /* Rounded corners */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow around the item */
+  padding: 20px; /* Internal padding */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effect */
+  width: calc(33.333% - 20px); /* Adjust width for 3 items per row */
+}
+
+.service-item:hover {
+  transform: translateY(-10px); /* Lift the item on hover */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
+  background: rgba(245, 245, 245, 1); /* Slightly different background on hover */
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+  .service-item {
+    width: calc(50% - 20px); /* Adjust for 2 items per row on medium screens */
+  }
+}
+
+@media (max-width: 576px) {
+  .service-item {
+    width: 100%; /* Full width for small screens */
+  }
+}

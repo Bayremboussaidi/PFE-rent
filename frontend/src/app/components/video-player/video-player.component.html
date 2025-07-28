@@ -1,0 +1,32 @@
+<!--div class="video-container">
+  <iframe src="https://www.facebook.com/plugins/video.php?height=476&href=https%3A%2F%2Fwww.facebook.com%2Freel%2F1072445827958626%2F&show_text=false&width=267&t=0" width="267" height="476" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe>
+</div-->
+
+
+
+
+<div class="video-container">
+  <div *ngIf="isLoading" class="loading-spinner">
+    <!-- Add your spinner component or HTML here -->
+    <div class="spinner"></div>
+  </div>
+
+  <div *ngIf="hasError" class="error-message">
+    Failed to load Instagram reel. Please check the link.
+  </div>
+
+  <iframe
+    *ngIf="!hasError"
+    [src]="safeVideoUrl"
+    (load)="onFrameLoad()"
+    (error)="onFrameError()"
+    frameborder="0"
+    scrolling="no"
+    allowtransparency="true"
+    allowfullscreen
+    title="Instagram Reel"
+  ></iframe>
+</div>
+
+
+

@@ -1,0 +1,37 @@
+<div class="row blogs-container" data-aos="flip-right">
+  <!-- Blog Swiper Container -->
+  <div class="swiper blogSwiper">
+    <div class="swiper-wrapper">
+      <!-- Blog Items -->
+      <div class="swiper-slide" *ngFor="let item of blogData">
+        <div class="blog-item" [routerLink]="['/blogs', item.id]" style="cursor: pointer;">
+          <a [routerLink]="['/blogs', item.id]" class="blog-img">
+            <img [src]="item.imgUrl" alt="{{ item.title }}" />
+          </a>
+          <div class="blog-info">
+            <a [routerLink]="['/blogs', item.id]" class="blog-title">{{ item.title }}</a>
+            <p class="blog-description">
+              {{ item.description.length > 100 ? item.description.substring(0, 100) + '...' : item.description }}
+            </p>
+            <a [routerLink]="['/blogs', item.id]" class="read-more">Read More</a>
+            <div class="blog-time">
+              <span class="blog-author">
+                <i class="ri-user-line"></i> {{ item.author }}
+              </span>
+              <div class="d-flex align-items-center gap-3">
+                <span class="d-flex align-items-center gap-1">
+                  <i class="ri-calendar-line"></i> {{ item.date }}
+                </span>
+                <span class="d-flex align-items-center gap-1">
+                  <i class="ri-time-line"></i> {{ item.time }}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Swiper Pagination -->
+    <div class="swiper-pagination"></div>
+  </div>
+</div>

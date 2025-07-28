@@ -1,0 +1,245 @@
+<header class="header" [ngClass]="{'sticky-header': !isTopMenuVisible, 'no-shadow': isTopMenuVisible}"
+        [ngStyle]="{'background-color': 'rgba(255, 255, 255, ' + scrollOpacity + ')'}">
+  <nav class="nav container">
+    <div class="nav__data">
+      <div class="nav__logo">
+        <img src="../../../assets/all-images/logo2.png" alt="Comparator Logo2" class="nav__logo-img"><span class="logo-text">Comparator</span>
+      </div>
+
+      <div class="nav__toggle" id="nav-toggle" (click)="toggleMenu()">
+        <i class="ri-menu-line nav__burger" *ngIf="!isMenuOpen"></i>
+        <i class="ri-close-line nav__close" *ngIf="isMenuOpen"></i>
+      </div>
+    </div>
+
+    <!-- Navigation Menu -->
+    <div class="nav__menu" [ngClass]="{'show-menu': isMenuOpen}" data-aos="zoom-in" data-aos-duration="1500">
+      <ul class="nav__list">
+        <li><a routerLink="/home" class="nav__link">Home</a></li>
+        <li><a routerLink="/about" class="nav__link">About</a></li>
+        <li><a routerLink="/blogs" class="nav__link">Blogs</a></li>
+
+        <li><a routerLink="/listcars" class="nav__link">Cars</a></li>
+
+        <!--li class="dropdown__item">
+          <div class="nav__link">
+            Cars <i class="ri-arrow-down-s-line dropdown__arrow"></i>
+          </div>
+          <ul class="dropdown__menu">
+            <li><a href="#" class="dropdown__link"><i class="ri-user-line"></i> Profiles</a></li>
+            <li><a href="#" class="dropdown__link"><i class="ri-lock-line"></i> Accounts</a></li>
+            <li><a href="#" class="dropdown__link"><i class="ri-message-3-line"></i> Messages</a></li>
+          </ul>
+        </li-->
+
+        <li><a routerLink="/contact" class="nav__link">Contact</a></li>
+      </ul>
+    </div>
+
+    <!-- Animated Font Menu -->
+    <ul class="animated-menu">
+      <li style="--i:#a955ff;--j:#ea51ff">
+        <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
+        <span class="title">Home</span>
+        <a routerLink="/home" class="nav__link">.</a>
+      </li>
+
+      <li style="--i:#ff6b6b;--j:#ff8e8e" (click)="openNotif()">
+        <span class="icon"><ion-icon name="notifications-outline"></ion-icon></span>
+        <span class="title">Notifications</span>
+        <a class="nav__link">.</a>
+      </li>
+
+      <li style="--i:#4CAF50;--j:#2E7D32" (click)="login()">
+        <span class="icon"><i class="ri-login-circle-line"></i></span>
+        <span class="title">Login</span>
+      </li>
+
+      <li style="--i:#FF4C4C;--j:#B22222" (click)="logout()">
+        <span class="icon"><i class="ri-logout-circle-r-line"></i></span>
+        <span class="title">Log out</span>
+      </li>
+
+      <!-- Purchase Button -->
+      <li style="--i:#80FF72;--j:#7EE8FA"
+          (click)="openEmailDialog()"
+          role="button"
+          aria-label="View purchases"
+          [class.has-purchases]="hasPurchases"
+          [matBadge]="pendingPurchasesCount"
+          matBadgeColor="warn"
+          [matBadgeHidden]="pendingPurchasesCount === 0"
+          [class.hover-effect]="hoverState"
+          (mouseenter)="hoverState = true"
+          (mouseleave)="hoverState = false">
+        <span class="icon">
+          <ion-icon name="cart-outline"></ion-icon>
+        </span>
+        <span class="title">Purchase</span>
+        <mat-tooltip *ngIf="!isLoggedIn"></mat-tooltip>
+      </li>
+    </ul>
+
+    <!-- Bookings Display -->
+    <div *ngIf="userBookings.length > 0" class="bookings-container">
+      <h3>Your Bookings</h3>
+      <ul>
+        <li *ngFor="let booking of userBookings">
+          <strong>{{ booking.carName }}</strong> -
+          {{ booking.startDate }} to {{ booking.endDate }} ({{ booking.status }})
+        </li>
+      </ul>
+    </div>
+
+    <p *ngIf="responseMessage">{{ responseMessage }}</p>
+  </nav>
+</header>
+
+<!-- Backdrop Overlay -->
+<div class="navbar-backdrop"
+    [class.show]="isNotificationsVisible"
+    (click)="closeNotificationsNavbar()"></div>
+
+<!-- Notifications Navbar -->
+<div id="notifications-navbar"
+    class="notifications-navbar"
+    [class.show]="isNotificationsVisible"
+    (click)="$event.stopPropagation()">
+  <div class="navbar-header">
+    <span class="navbar-title">Notifications</span>
+    <button class="close-btn" (click)="closeNotificationsNavbar()">×</button>
+  </div>
+  <app-notifications></app-notifications>
+</div>
+
+
+
+
+
+
+
+<!-- Sign In Prompt -->
+<div class="signin-prompt-backdrop" *ngIf="showSignInPrompt">
+  <div class="signin-prompt-modal" (click)="$event.stopPropagation()">
+    <h3>Sign In Required</h3>
+    <p>You need to be logged in to access this feature.</p>
+    <div class="modal-actions">
+      <button class="btn btn-primary" (click)="navigateToLogin()">Sign In</button>
+      <button class="btn btn-secondary" (click)="closeSignInPrompt()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<!-- Purchase Dialog -->
+<div class="email-dialog-backdrop" *ngIf="showEmailDialog" (click)="checkBackdropClick($event)">
+  <div class="email-dialog" (click)="$event.stopPropagation()">
+    <!-- Dialog Header -->
+    <div class="navbar-header">
+      <span class="navbar-title">Your Bookings</span>
+      <button class="close-btn" (click)="closeEmailDialog()">×</button>
+    </div>
+
+    <!-- Dialog Content -->
+    <div class="dialog-content">
+      <!-- Loading State -->
+      <div *ngIf="isLoadingDialog" class="loading-container">
+        <mat-spinner diameter="40"></mat-spinner>
+        <p>Loading your bookings...</p>
+      </div>
+
+      <!-- Content when loaded -->
+      <div *ngIf="!isLoadingDialog" class="booking-container">
+        <!-- Bookings List -->
+        <ng-container *ngIf="emailDialogBookings.length > 0; else noBookings">
+          <ul class="booking-list">
+            <li *ngFor="let booking of emailDialogBookings"
+                class="booking-item"
+                [class.disabled]="booking.status !== 'PENDING'">
+
+              <!-- Booking Link -->
+              <a [routerLink]="['/listcars', booking.voitureId]"
+                 class="booking-link">
+
+                <!-- Car Image -->
+                <img [src]="booking.imgUrl"
+                     [alt]="booking.carName"
+                     class="booking-image"
+                     (error)="handleImageError(booking)">
+
+                <!-- Booking Info -->
+                <div class="booking-info">
+                  <strong class="car-name">{{ booking.carName }}</strong>
+
+                  <!-- Booking Dates -->
+                  <div class="booking-dates">
+                    {{ booking.startDate | date }} - {{ booking.endDate | date }}
+                  </div>
+
+                  <!-- Booking Status -->
+                  <span class="booking-status"
+                        [ngClass]="booking.status.toLowerCase()">
+                    {{ booking.status }}
+                  </span>
+
+                  <!-- Delete Button -->
+                  <button mat-icon-button
+                          (click)="deleteDialogBooking(booking.id); $event.stopPropagation()"
+                          [disabled]="booking.status !== 'PENDING'"
+                          class="delete-button">
+                    <mat-icon class="delete-icon">delete</mat-icon>
+                  </button>
+                </div>
+              </a>
+            </li>
+          </ul>
+        </ng-container>
+
+        <!-- Empty State -->
+        <ng-template #noBookings>
+          <div class="no-bookings">
+            <mat-icon class="empty-cart-icon">shopping_cart</mat-icon>
+            <p class="empty-text">No bookings found</p>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+<!-- chatbot.component.html -->
+
+
+<!-- chat bot component-->
+<div class="chatbot-container">
+  <!-- Chat Toggle Button -->
+  <button class="chat-toggle-button" (click)="toggleChat()">
+    💬
+  </button>
+
+  <!-- Chat Window -->
+  <div class="chat-window" *ngIf="isOpen" @fadeInOut>
+    <div class="chat-header">
+      <span>Chat with us</span>
+      <button (click)="toggleChat()">✖</button>
+    </div>
+    <div class="chat-body">
+      <div *ngFor="let message of messages" class="message">
+        <strong>{{ message.sender }}:</strong> {{ message.text }}
+      </div>
+    </div>
+    <div class="chat-footer">
+      <input [(ngModel)]="newMessage" (keydown.enter)="sendMessage()" placeholder="Type a message..." />
+      <button (click)="sendMessage()">Send</button>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,75 @@
+<!-- register.component.html -->
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 m-auto">
+        <div class="login__container d-flex justify-content-between">
+          <div class="login__img" data-aos="fade-right" data-aos-duration="1500" data-aos-delay="500">
+            <img src="assets/all-images/register.jpg" alt="Register" />
+          </div>
+
+          <div class="login__form" data-aos="fade-left" data-aos-duration="1500" data-aos-delay="500">
+            <div class="user">
+              <img src="../../assets/all-images/agns-img/agns-logo.jpg" alt="User Icon" />
+            </div>
+            <h2>Register</h2>
+            <form (submit)="handleClick($event)">
+              <div class="form-group">
+                <input type="text" placeholder="Username" required id="username" (input)="handleChange($event)" />
+              </div>
+              <div class="form-group">
+                <input type="text" placeholder="First Name" required id="firstName" (input)="handleChange($event)" />
+              </div>
+              <div class="form-group">
+                <input type="text" placeholder="Last Name" required id="lastName" (input)="handleChange($event)" />
+              </div>
+              <div class="form-group">
+                <input type="email" placeholder="Email" required id="email" (input)="handleChange($event)" />
+              </div>
+              <div class="form-group">
+                <input type="password" placeholder="Password" required id="password" (input)="handleChange($event)" />
+              </div>
+              <div class="form-group">
+                <input type="number" placeholder="Phone (Optional)" id="phone" (input)="handleChange($event)" />
+              </div>
+              <div class="form-group">
+                <input type="text" placeholder="Workplace (Optional)" id="workplace" (input)="handleChange($event)" />
+              </div>
+
+
+
+
+              <div class="form-group image-upload-container">
+                <div class="upload-wrapper" *ngIf="!previewImage; else previewTemplate">
+                  <label for="photo" class="upload-area">
+                    <i class="ri-upload-cloud-2-line"></i>
+                    <span>Click to upload your profile pic</span>
+                    <input type="file" id="photo" (change)="onFileChange($event)" accept="image/*" class="file-input">
+                  </label>
+                </div>
+
+                <ng-template #previewTemplate>
+                  <div class="image-preview-container">
+                    <img [src]="previewImage" class="preview-image" alt="Preview">
+                    <button type="button" class="remove-btn" (click)="removeImage()">
+                      <i class="ri-close-line"></i>
+                    </button>
+                  </div>
+                </ng-template>
+              </div>
+
+
+
+
+
+
+
+              <button class="btn secondary__btn auth__btn" type="submit">Créer</button>
+            </form>
+            <p>Vous avez déjà un compte? <a routerLink="/login" class="text-black">Se connecter</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

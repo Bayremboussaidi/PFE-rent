@@ -1,0 +1,45 @@
+/* Reset default margin and padding */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+/* Admin layout container */
+.admin-layout {
+  width: 100%;
+  min-height: 100vh; /* Ensure it takes at least the full viewport height */
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+/* Header */
+app-header-a {
+  width: 100%;
+  flex-shrink: 0; /* Prevent header from shrinking */
+}
+
+/* Main content area */
+.admin-main {
+  flex-grow: 1; /* Allow main content to grow and fill remaining space */
+  width: 100%;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+  padding: 20px; /* Add padding if needed */
+  box-sizing: border-box; /* Include padding in width calculation */
+}
+
+/* Ensure router-outlet content does not overflow */
+router-outlet {
+  display: block;
+  width: 100%;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+/* Optional: Ensure all child elements do not exceed the width */
+.admin-layout * {
+  box-sizing: border-box; /* Include padding and border in element width */
+  max-width: 100%; /* Prevent elements from overflowing */
+}

@@ -1,0 +1,103 @@
+version: "3.8"
+
+services:
+  #  MySQL Database
+  mysql:
+    image: mysql:8.0
+    container_name: mysql-container
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: comparateur
+      MYSQL_USER: root
+      MYSQL_PASSWORD: ""
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - my-network
+
+  #  Spring Boot Backend
+  backend:
+    build:
+      context: ./back
+      dockerfile: Dockerfile
+    container_name: comparateur-backend
+    restart: always
+    depends_on:
+      - mysql
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/comparateur?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: ""
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: com.mysql.cj.jdbc.Driver
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_JPA_DATABASE_PLATFORM: org.hibernate.dialect.MySQL8Dialect
+      SERVER_PORT: 8084
+      SPRING_WEB_CORS_ALLOWED_ORIGINS: http://localhost:4200
+    ports:
+      - "8084:8084"
+    networks:
+      - my-network
+
+  #  Angular Frontend
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: comparateur-frontend
+    restart: always
+    depends_on:
+      - backend
+    ports:
+      - "4200:80"
+    networks:
+      - my-network
+
+  # PostgreSQL for SonarQube
+  sonardb:
+    image: postgres:15
+    container_name: sonardb
+    restart: always
+    environment:
+      POSTGRES_USER: sonar
+      POSTGRES_PASSWORD: sonar
+      POSTGRES_DB: sonarqube
+    volumes:
+      - sonar_db_data:/var/lib/postgresql/data
+    networks:
+      - my-network
+
+  # SonarQube Server
+  sonarqube:
+    image: sonarqube:lts
+    container_name: sonarqube
+    restart: always
+    depends_on:
+      - sonardb
+    ports:
+      - "9000:9000"
+    environment:
+      SONAR_JDBC_URL: jdbc:postgresql://sonardb:5432/sonarqube
+      SONAR_JDBC_USERNAME: sonar
+      SONAR_JDBC_PASSWORD: sonar
+    volumes:
+      - sonarqube_data:/opt/sonarqube/data
+      - sonarqube_logs:/opt/sonarqube/logs
+      - sonarqube_extensions:/opt/sonarqube/extensions
+    networks:
+      - my-network
+
+#  Volumes for MySQL and SonarQube persistence
+volumes:
+  mysql_data:
+  sonar_db_data:
+  sonarqube_data:
+  sonarqube_logs:
+  sonarqube_extensions:
+
+#  Custom bridge network
+networks:
+  my-network:
+    driver: bridge

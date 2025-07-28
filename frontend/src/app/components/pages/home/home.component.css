@@ -1,0 +1,203 @@
+.responsive-container {
+  max-inline-size: 1000px; /* Reduced max width */
+  margin: 0 auto;
+  padding: 0 5px; /* Reduced padding */
+}
+
+.tik {
+  overflow-x: hidden;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -5px; /* Reduced margin */
+}
+
+.column-third, .column-two-third, .column-full {
+  padding: 5px; /* Reduced padding */
+}
+
+.column-third {
+  flex: 0 0 25%; /* Reduced width */
+  max-inline-size: 25%; /* Reduced width */
+  margin-block-start: -530px;
+}
+
+.column-two-third {
+  flex: 0 0 75%; /* Reduced width */
+  max-inline-size: 75%; /* Reduced width */
+  margin-block-start: 0;
+  margin-block-start: -530px;
+  transform: translateX(-185px);
+}
+
+.column-full {
+  flex: 0 0 100%;
+  max-inline-size: 100%;
+  text-align: center;
+}
+
+/* Hero Slider Section */
+.hero-slider-section {
+  position: relative;
+  inline-size: 100%;
+  background-color: #f5f5f5;
+  padding: 0px 0; /* Reduced padding */
+}
+
+.hero-slider-section .hero-form {
+  position: absolute;
+  inset-block-end: calc(10% - 70px); /* Adjusted to lower by 10% */
+  inset-inline-start: 50%;
+  transform: translate(-50%, 0) translateX(50px); /* Corrected translation */
+  inline-size: 60%; /* Reduced width */
+  background: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  padding: 10px; /* Reduced padding */
+}
+
+.hero-slider-section .nous {
+  margin-block-start: 0px;
+}
+
+.find-cars {
+  background-image: url('../../../../assets/back.jpg');
+  background-size: cover;
+  background-position: center; /* Center the image */
+  height: 120px;
+  padding: 30px; /* Add padding to ensure content is not too close to the edges */
+  margin-left: -150px;
+  margin-right: 60px;
+  border-radius: 8px; /* Optional: Add rounded corners */
+  color: rgb(244, 239, 239); /* Optional: Change text color for better contrast */
+  transform: translateX(-140px);
+}
+
+.find-cars h3 {
+  font-size: 1.5rem;
+  margin-block-end: 15px;
+  color: #f5f5f5;
+}
+
+/* Find Cars Section */
+.find-cars h3 {
+  font-size: 1.25rem; /* Reduced font size */
+  color: aliceblue;
+  margin-block-end: 10px; /* Reduced margin */
+}
+
+/* Subtitle and Title */
+.subtitle {
+  font-size: 0.875rem; /* Reduced font size */
+  color: #999;
+  margin-block-end: 5px;
+  text-transform: uppercase;
+}
+
+.title {
+  font-size: 1.75rem; /* Reduced font size */
+  font-weight: bold;
+  color: #333;
+  margin-block-end: 15px; /* Reduced margin */
+}
+
+/* Components */
+app-featured-voiture-list,
+app-testimonial,
+app-about-section,
+app-services-list,
+app-become-driver-section {
+  display: block;
+  margin: 10px 0; /* Reduced margin */
+}
+
+.app-blog-list {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+app-become-driver-section {
+  padding: 15px; /* Reduced padding */
+  background: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Car Cards Styling */
+.car-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fff;  /* White background for cards */
+  border: 1px solid #ddd;  /* Light border around the card */
+  border-radius: 8px;  /* Rounded corners */
+  padding: 20px;  /* Inner padding */
+  margin: 15px;  /* Margin around each card */
+  transition: transform 0.3s ease-in-out;  /* Smooth transition on hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  /* Soft shadow for 3D effect */
+}
+
+/* Hover effect to scale the card */
+.car-card:hover {
+  transform: translateY(-5px) scale(1.05);  /* Slight lift and scale effect on hover */
+}
+
+/* Style for the car image */
+.car-img {
+  width: 100%;  /* Make image responsive */
+  height: auto;  /* Keep aspect ratio */
+  border-radius: 5px;  /* Rounded corners for the image */
+  object-fit: cover;  /* Cover the space, maintaining aspect ratio */
+  max-height: 180px;  /* Limit the height */
+}
+
+/* Style for the car information */
+.car-info {
+  text-align: center;
+  margin-top: 15px;  /* Space between image and text */
+}
+
+.car-info h3 {
+  font-size: 18px;  /* Car name font size */
+  font-weight: bold;
+  color: #333;  /* Dark color for the title */
+  margin-bottom: 10px;  /* Space below the title */
+}
+
+.car-info p {
+  font-size: 14px;  /* Smaller text size for category and price */
+  color: #666;  /* Lighter text color */
+  margin: 5px 0;  /* Space between lines */
+}
+
+/* Responsive grid layout for the car cards */
+.responsive-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;  /* Center the items horizontally */
+}
+
+.column-full {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;  /* Spread items evenly */
+}
+
+/* Ensure cards stay small on mobile */
+@media (max-width: 768px) {
+  .car-card {
+    width: 90%;  /* Occupy most of the width on mobile */
+  }
+}

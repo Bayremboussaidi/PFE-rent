@@ -1,0 +1,35 @@
+<app-header-a></app-header-a>
+
+
+
+<div class="site-section bg-light">
+  <div class="container">
+    <div class="row">
+      <div *ngFor="let blog of blogs" class="col-lg-4 col-md-6 mb-4">
+        <div class="blog-card">
+          <a [routerLink]="['/blog-details', blog.id]">
+            <img
+              [src]="blog.imgUrl ? blog.imgUrl : '/assets/images/default-blog.png'"
+              alt="{{ blog.title }}"
+              class="blog-image">
+          </a>
+          <div class="blog-details">
+            <div class="text-center">
+              <h3 class="blog-title">
+                <a [routerLink]="['/blog-details', blog.id]">{{ blog.title }}</a>
+              </h3>
+              <p class="blog-meta">By {{ blog.author }} | {{ blog.date | date: 'mediumDate' }}</p>
+            </div>
+            <div class="blog-description">
+              <p>{{ blog.description | slice: 0:100 }}...</p>
+            </div>
+            <div class="action-buttons">
+              <button (click)="editBlog(blog)" class="btn btn-view">Edit</button>
+              <button (click)="deleteBlog(blog)" class="btn btn-delete">Delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

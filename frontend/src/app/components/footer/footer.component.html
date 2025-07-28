@@ -1,0 +1,64 @@
+<!-- footer.component.html -->
+<footer class="footer">
+  <div class="container">
+    <div class="row">
+
+      <!-- Logo Section -->
+      <div class="col-lg-4 col-md-4 col-sm-12">
+        <div class="logo footer__logo d-flex align-items-center">
+          <img src="../../../assets/all-images/logo.jpg" alt="Comparator Logo" class="footer__logo-img">
+          <span class="footer__logo-text">Comparator</span>
+        </div>
+        <p class="footer__logo-content">
+          Location de voiture, longue et courte durée. Livraison possible dans toute la Tunisie.
+        </p>
+      </div>
+
+      <!-- Quick Links Section -->
+      <div class="col-lg-2 col-md-4 col-sm-6">
+        <div class="mb-4">
+          <h5 class="footer__link-title">Liens rapides</h5>
+          <ul class="list-group">
+            <li *ngFor="let item of quickLinks" class="list-group-item p-0 mt-3 quick__link">
+              <a [routerLink]="item.path">{{ item.display }}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Office Info Section -->
+      <div class="col-lg-3 col-md-4 col-sm-6">
+        <div class="mb-4">
+          <h5 class="footer__link-title mb-4">Siège Social</h5>
+          <p class="office__info">Les Berges du Lac 2, Tunis, Tunisia</p>
+          <p class="office__info">Téléphone: +216 27 932 190</p>
+          <p class="office__info">Email: myloclac2&#64;gmail.com</p>
+          <p class="office__info">Ouvert: 7j/7, 9h - 20h</p>
+        </div>
+      </div>
+
+      <!-- Newsletter Section -->
+      <div class="col-lg-3 col-md-4 col-sm-12">
+        <div class="mb-4">
+          <h5 class="footer__link-title">Newsletter</h5>
+          <p class="section__description">Abonnez-vous à notre newsletter pour les dernières mises à jour.</p>
+          <div class="newsletter">
+            <input type="email" [(ngModel)]="email" placeholder="Email" />
+            <span><i class="ri-send-plane-line" (click)="subscribeToNewsletter()"></i></span>
+        </div>
+        </div>
+      </div>
+
+      <!-- Footer Bottom Section -->
+      <div class="col-lg-12">
+        <div class="footer__bottom">
+          <p class="section__description d-flex align-items-center justify-content-center gap-1 pt-4">
+            <i class="ri-copyright-line"></i> Copyright {{ currentYear }}, Developed by
+            <strong>bay</strong>. All rights reserved.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</footer>

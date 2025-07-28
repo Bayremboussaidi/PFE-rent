@@ -1,0 +1,59 @@
+<div class="card">
+  <div class="top-buttons">
+    <button class="add-record-button" (click)="openAddModal()">
+      <i class="pi pi-plus"></i> Add Car
+    </button>
+    <button class="export-button">
+      <i class="pi pi-external-link"></i> Export
+    </button>
+  </div>
+</div>
+
+<!-- Add Car Modal -->
+<p-dialog
+  [(visible)]="isAddModalOpen"
+  header="Add New Car"
+  [modal]="true"
+  [style]="{width: '50vw'}"
+  [draggable]="false"
+  [resizable]="false"
+  (onHide)="closeAddModal()">
+
+  <form (ngSubmit)="onAddCar()" #addCarForm="ngForm">
+    <div class="p-grid p-fluid">
+      <div class="p-field p-col-12">
+        <label for="carName">Car Name</label>
+        <input pInputText type="text" id="carName" [(ngModel)]="newCar.carName" name="carName" required />
+      </div>
+
+      <div class="p-field p-col-6">
+        <label for="brand">Brand</label>
+        <input pInputText type="text" id="brand" [(ngModel)]="newCar.brand" name="brand" required />
+      </div>
+
+      <div class="p-field p-col-6">
+        <label for="category">Category</label>
+        <input pInputText type="text" id="category" [(ngModel)]="newCar.category" name="category" required />
+      </div>
+
+      <div class="p-field p-col-6">
+        <label for="price">Price</label>
+        <input pInputText type="number" id="price" [(ngModel)]="newCar.price" name="price" required />
+      </div>
+
+      <div class="p-field p-col-6">
+        <p-checkbox [(ngModel)]="newCar.featured" name="featured" [binary]="true" label="Featured"></p-checkbox>
+      </div>
+
+      <div class="p-field p-col-12">
+        <label for="description">Description</label>
+        <textarea pInputTextarea id="description" [(ngModel)]="newCar.description" name="description" rows="3"></textarea>
+      </div>
+    </div>
+
+    <div class="p-d-flex p-jc-end p-mt-3">
+      <button type="button" pButton pRipple icon="pi pi-times" label="Cancel" class="p-button-text" (click)="closeAddModal()"></button>
+      <button type="submit" pButton pRipple icon="pi pi-check" label="Add Car" class="p-button-success"></button>
+    </div>
+  </form>
+</p-dialog>
