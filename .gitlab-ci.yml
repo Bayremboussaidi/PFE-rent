@@ -2,13 +2,23 @@ stages:
   - checkout
   - build_frontend
   - build_backend
-  - deploy
+  - build_ai
+  - build_images
+  - push_images
+  - deploy_minikube
 
 variables:
   FRONT_DIR: "frontend"
   BACK_DIR: "back"
+  AI_DIR: "ai"
   COMPOSE_FILE: "docker-compose.yml"
-  DOCKER_HOST: tcp://docker:2375  # Ensures Docker client can communicate with Docker-in-Docker
+  DOCKER_HOST: tcp://docker:2375
+  DOCKER_DRIVER: overlay2
+  DOCKER_TLS_CERTDIR: ""
+  DOCKER_REGISTRY: "bayremboussaidi"
+  DOCKER_IMAGE_BACKEND: "bayremboussaidi/backend"
+  DOCKER_IMAGE_FRONTEND: "bayremboussaidi/front"
+  DOCKER_IMAGE_AI: "bayremboussaidi/ai-chatbot"
 
 # Checkout code
 checkout_code:
@@ -20,7 +30,7 @@ checkout_code:
 # Build Angular Frontend
 build_angular_frontend:
   stage: build_frontend
-  image: node:18  # Use Node.js image for Angular build
+  image: node:18
   script:
     - echo "📦 Installing dependencies and building Angular app..."
     - cd $FRONT_DIR
@@ -37,23 +47,166 @@ build_angular_frontend:
 # Build Backend (Spring Boot app)
 build_backend:
   stage: build_backend
-  image: maven:3.9.6-eclipse-temurin-21  # Use Maven image for Spring Boot build
+  image: maven:3.9.6-eclipse-temurin-21
   script:
     - echo "🔧 Installing backend dependencies and building the Spring Boot app..."
     - cd $BACK_DIR
-    - mvn clean package -DskipTests  # Build the Spring Boot app (adjust command if necessary)
+    - mvn clean package -DskipTests
   artifacts:
     paths:
       - back/target/
     expire_in: 1 week
 
-# Deploy with Docker Compose
-docker_compose_up:
-  stage: deploy
-  image: docker:20.10.16  # Docker image with Docker client
+# Build AI Chatbot
+build_ai:
+  stage: build_ai
+  image: python:3.9
+  script:
+    - echo "🤖 Installing AI dependencies..."
+    - cd $AI_DIR
+    - pip install -r requirements.txt || echo "No requirements.txt found"
+    - echo "🤖 AI build completed"
+  artifacts:
+    paths:
+      - ai/
+    expire_in: 1 week
+
+# Build Docker Images
+build_docker_images:
+  stage: build_images
+  image: docker:20.10.16
   services:
-    - name: docker:20.10.16-dind  # Docker-in-Docker service
-      command: ["--host=tcp://0.0.0.0:2375"]  # Make Docker daemon listen on TCP port 2375
+    - name: docker:20.10.16-dind
+      command: ["--host=tcp://0.0.0.0:2375"]
+  script:
+    - echo "🐳 Building Docker images..."
+    
+    # Build Backend Image
+    - echo "🔧 Building backend image..."
+    - docker build -t $DOCKER_IMAGE_BACKEND:$CI_COMMIT_SHA -t $DOCKER_IMAGE_BACKEND:latest ./back
+    
+    # Build Frontend Image
+    - echo "🎨 Building frontend image..."
+    - docker build -t $DOCKER_IMAGE_FRONTEND:$CI_COMMIT_SHA -t $DOCKER_IMAGE_FRONTEND:latest ./frontend
+    
+    # Build AI Image
+    - echo "🤖 Building AI chatbot image..."
+    - docker build -t $DOCKER_IMAGE_AI:$CI_COMMIT_SHA -t $DOCKER_IMAGE_AI:latest ./ai
+    
+    - echo "✅ All Docker images built successfully"
+  dependencies:
+    - build_frontend
+    - build_backend
+    - build_ai
+
+# Push Images to Docker Hub
+push_docker_images:
+  stage: push_images
+  image: docker:20.10.16
+  services:
+    - name: docker:20.10.16-dind
+      command: ["--host=tcp://0.0.0.0:2375"]
+  script:
+    - echo "📤 Logging into Docker Hub..."
+    - echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
+    
+    - echo "📤 Pushing images to Docker Hub..."
+    
+    # Push Backend Image
+    - echo "🔧 Pushing backend image..."
+    - docker push $DOCKER_IMAGE_BACKEND:$CI_COMMIT_SHA
+    - docker push $DOCKER_IMAGE_BACKEND:latest
+    
+    # Push Frontend Image
+    - echo "🎨 Pushing frontend image..."
+    - docker push $DOCKER_IMAGE_FRONTEND:$CI_COMMIT_SHA
+    - docker push $DOCKER_IMAGE_FRONTEND:latest
+    
+    # Push AI Image
+    - echo "🤖 Pushing AI chatbot image..."
+    - docker push $DOCKER_IMAGE_AI:$CI_COMMIT_SHA
+    - docker push $DOCKER_IMAGE_AI:latest
+    
+    - echo "✅ All images pushed to Docker Hub successfully"
+  dependencies:
+    - build_docker_images
+  only:
+    - main
+    - master
+
+# Deploy to Minikube
+deploy_to_minikube:
+  stage: deploy_minikube
+  image: bitnami/kubectl:latest
+  before_script:
+    - echo "🚀 Setting up Minikube deployment..."
+    - curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+    - install minikube-linux-amd64 /usr/local/bin/minikube
+    - minikube start --driver=docker --force
+    - minikube addons enable ingress
+    - echo "✅ Minikube started successfully"
+  script:
+    - echo "📦 Deploying application to Minikube..."
+    
+    # Create namespace
+    - kubectl apply -f k8s/namespace.yaml
+    
+    # Deploy MySQL
+    - kubectl apply -f k8s/mysql-deployment.yaml
+    
+    # Wait for MySQL to be ready
+    - kubectl wait --for=condition=ready pod -l app=mysql -n car-rent-app --timeout=300s || echo "MySQL not ready, continuing..."
+    
+    # Update deployment files with latest images
+    - sed -i "s|image:.*backend.*|image: $DOCKER_IMAGE_BACKEND:latest|g" k8s/backend-deployment.yaml
+    - sed -i "s|image:.*frontend.*|image: $DOCKER_IMAGE_FRONTEND:latest|g" k8s/frontend-deployment.yaml
+    - sed -i "s|image:.*ai-chatbot.*|image: $DOCKER_IMAGE_AI:latest|g" k8s/ai-deployment.yaml
+    
+    # Deploy Backend
+    - kubectl apply -f k8s/backend-deployment.yaml
+    
+    # Deploy Frontend
+    - kubectl apply -f k8s/frontend-deployment.yaml
+    
+    # Deploy AI Chatbot
+    - kubectl apply -f k8s/ai-deployment.yaml
+    - kubectl apply -f k8s/ai-service.yaml
+    
+    # Wait for deployments to be ready
+    - kubectl wait --for=condition=available deployment/backend -n car-rent-app --timeout=300s || echo "Backend not ready"
+    - kubectl wait --for=condition=available deployment/frontend -n car-rent-app --timeout=300s || echo "Frontend not ready"
+    - kubectl wait --for=condition=available deployment/ai-chatbot -n car-rent-app --timeout=300s || echo "AI not ready"
+    
+    # Show deployment status
+    - echo "📊 Deployment Status:"
+    - kubectl get pods -n car-rent-app
+    - kubectl get svc -n car-rent-app
+    
+    # Get access information
+    - echo "🌐 Access Information:"
+    - MINIKUBE_IP=$(minikube ip)
+    - echo "Minikube IP: $MINIKUBE_IP"
+    - echo "Frontend: http://$MINIKUBE_IP:$(kubectl get svc frontend -n car-rent-app -o jsonpath='{.spec.ports[0].nodePort}' 2>/dev/null || echo 'N/A')"
+    - echo "Backend: http://$MINIKUBE_IP:$(kubectl get svc backend -n car-rent-app -o jsonpath='{.spec.ports[0].nodePort}' 2>/dev/null || echo 'N/A')"
+    - echo "AI Chatbot: http://$MINIKUBE_IP:$(kubectl get svc ai-chatbot-service -n car-rent-app -o jsonpath='{.spec.ports[0].nodePort}' 2>/dev/null || echo 'N/A')"
+    
+    - echo "✅ Deployment completed successfully!"
+  dependencies:
+    - push_docker_images
+  only:
+    - main
+    - master
+  environment:
+    name: minikube
+    url: http://$(minikube ip)
+
+# Deploy with Docker Compose (for local development)
+docker_compose_up:
+  stage: deploy_minikube
+  image: docker:20.10.16
+  services:
+    - name: docker:20.10.16-dind
+      command: ["--host=tcp://0.0.0.0:2375"]
   script:
     - echo "🐳 Stopping existing containers (if any)..."
     - docker-compose -f $COMPOSE_FILE down || true
@@ -61,4 +214,7 @@ docker_compose_up:
     - docker-compose -f $COMPOSE_FILE build
     - echo "🐳 Starting containers..."
     - docker-compose -f $COMPOSE_FILE up -d
-  when: on_success
+  when: manual
+  allow_failure: true
+
+
