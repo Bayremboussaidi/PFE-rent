@@ -15,6 +15,6 @@ spec:
     spec:
       containers:
       - name: ai-chatbot
-        image: ai-chatbot:latest # Replace with your image repo if pushing to registry
+        image: bayremboussaidi/ai-chatbot:latest
         ports:
         - containerPort: 8000
