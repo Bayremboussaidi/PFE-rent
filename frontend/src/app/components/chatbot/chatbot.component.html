@@ -1,0 +1,136 @@
+<!-- Chatbot Toggle Button -->
+<div class="chatbot-toggle" (click)="toggleChat()">
+  <i class="fas fa-comments"></i>
+  <span class="notification-badge" *ngIf="!isOpen">1</span>
+</div>
+
+<!-- Chatbot Interface -->
+<div class="chatbot-container" [class.open]="isOpen">
+  <!-- Chat Header -->
+  <div class="chat-header">
+    <div class="chat-title">
+      <i class="fas fa-robot"></i>
+      <span>Car Rental Assistant</span>
+    </div>
+    <button class="close-btn" (click)="toggleChat()">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+
+  <!-- Chat Messages -->
+  <div class="chat-messages" #messageContainer>
+    <div 
+      *ngFor="let message of messages" 
+      class="message"
+      [class.user-message]="message.isUser"
+      [class.bot-message]="!message.isUser"
+    >
+      <div class="message-content">
+        <div class="message-text">{{ message.text }}</div>
+        
+        <!-- Show voiture data if available -->
+        <div class="voiture-data" *ngIf="message.data?.voitures && message.data.voitures.length > 0">
+          <div class="voiture-item" *ngFor="let voiture of message.data.voitures.slice(0, 3)">
+            <div class="voiture-info">
+              <strong>{{ voiture.brand }} {{ voiture.carName }}</strong>
+              <span class="voiture-price">{{ voiture.price }}€/day</span>
+            </div>
+            <div class="voiture-details">
+              <small>{{ voiture.local }} • {{ voiture.agence }} • {{ voiture.category }} • {{ voiture.transmission }}</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- Show agency data if available -->
+        <div class="agency-data" *ngIf="message.data?.agencies && message.data.agencies.length > 0">
+          <div class="agency-item" *ngFor="let agency of message.data.agencies.slice(0, 3)">
+            <div class="agency-info">
+              <strong>{{ agency.agencyName }}</strong>
+              <span class="agency-location">{{ agency.city }}</span>
+            </div>
+            <div class="agency-details">
+              <small>{{ agency.phoneNumber }} • {{ agency.email }}</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- Show agence voitures data if available -->
+        <div class="agence-voitures-data" *ngIf="message.data?.agence_voitures && message.data.agence_voitures.length > 0">
+          <div class="voiture-item" *ngFor="let voiture of message.data.agence_voitures.slice(0, 3)">
+            <div class="voiture-info">
+              <strong>{{ voiture.brand }} {{ voiture.carName }}</strong>
+              <span class="voiture-price">{{ voiture.price }}€/day</span>
+            </div>
+            <div class="voiture-details">
+              <small>{{ voiture.category }} • {{ voiture.transmission }} • {{ voiture.carburant }}</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- Show availability data if available -->
+        <div class="availability-data" *ngIf="message.data?.availability">
+          <div class="availability-item">
+            <div class="availability-info">
+              <strong>Voiture #{{ message.data.availability.voitureId }}</strong>
+            </div>
+            <div class="availability-details" *ngIf="message.data.availability.unavailableDates && message.data.availability.unavailableDates.length > 0">
+              <small>Unavailable dates:</small>
+              <div *ngFor="let dateRange of message.data.availability.unavailableDates.slice(0, 3)">
+                <small>{{ dateRange.startDate }} to {{ dateRange.endDate }}</small>
+              </div>
+            </div>
+            <div class="availability-details" *ngIf="!message.data.availability.unavailableDates || message.data.availability.unavailableDates.length === 0">
+              <small class="available">Available for booking!</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- Message Suggestions -->
+        <div class="message-suggestions" *ngIf="message.suggestions && message.suggestions.length > 0">
+          <button 
+            *ngFor="let suggestion of message.suggestions"
+            class="suggestion-btn"
+            (click)="sendSuggestion(suggestion)"
+          >
+            {{ suggestion }}
+          </button>
+        </div>
+
+        <div class="message-time">
+          {{ message.timestamp | date:'shortTime' }}
+        </div>
+      </div>
+    </div>
+
+    <!-- Loading Indicator -->
+    <div class="message bot-message" *ngIf="isLoading">
+      <div class="message-content">
+        <div class="loading-indicator">
+          <div class="typing-dots">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chat Input -->
+  <div class="chat-input">
+    <input 
+      type="text" 
+      [(ngModel)]="currentMessage"
+      (keyup.enter)="sendMessage()"
+      placeholder="Type your message..."
+      [disabled]="isLoading"
+    >
+    <button 
+      class="send-btn" 
+      (click)="sendMessage()"
+      [disabled]="!currentMessage.trim() || isLoading"
+    >
+      <i class="fas fa-paper-plane"></i>
+    </button>
+  </div>
+</div>

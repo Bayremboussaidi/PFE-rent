@@ -18,3 +18,8 @@ spec:
         image: bayremboussaidi/ai-chatbot:latest
         ports:
         - containerPort: 8000
+        env:
+        - name: BACKEND_URL
+          value: "http://backend:8084"
+        - name: PYTHONUNBUFFERED
+          value: "1"
