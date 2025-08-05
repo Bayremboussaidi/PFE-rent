@@ -1,10 +1,8 @@
 stages:
   - checkout
   - test
-  - sonarqube
   - build_frontend
   - build_backend
-  - build_ai
   - build_images
   - push_images
   - deploy_minikube
@@ -12,7 +10,6 @@ stages:
 variables:
   FRONT_DIR: "frontend"
   BACK_DIR: "back"
-  AI_DIR: "ai"
   COMPOSE_FILE: "docker-compose.yml"
   DOCKER_HOST: tcp://docker:2375
   DOCKER_DRIVER: overlay2
@@ -20,7 +17,6 @@ variables:
   DOCKER_REGISTRY: "bayremboussaidi"
   DOCKER_IMAGE_BACKEND: "bayremboussaidi/backend"
   DOCKER_IMAGE_FRONTEND: "bayremboussaidi/front"
-  DOCKER_IMAGE_AI: "bayremboussaidi/ai-chatbot"
 
 # Checkout code
 checkout_code:
@@ -44,7 +40,6 @@ run_backend_tests:
     paths:
       - back/target/surefire-reports/
     expire_in: 1 week
-  allow_failure: true
 
 # Run Frontend Tests
 run_frontend_tests:
@@ -60,85 +55,6 @@ run_frontend_tests:
     paths:
       - frontend/coverage/
     expire_in: 1 week
-  allow_failure: true
-
-# Run AI Tests
-run_ai_tests:
-  stage: test
-  image: python:3.9
-  script:
-    - echo "🧪 Running AI tests..."
-    - cd ai
-    - pip install -r requirements.txt || echo "No requirements.txt found"
-    - python -m pytest test_ai_service.py -v || python test_ai_service.py
-    - echo "✅ AI tests completed"
-  allow_failure: true
-
-# SonarQube Analysis
-sonarqube_analysis:
-  stage: sonarqube
-  image: sonarqube:lts
-  services:
-    - name: postgres:15
-      alias: sonardb
-  variables:
-    SONAR_HOST_URL: "http://sonarqube:9000"
-    SONAR_JDBC_URL: "jdbc:postgresql://sonardb:5432/sonarqube"
-    SONAR_JDBC_USERNAME: "sonar"
-    SONAR_JDBC_PASSWORD: "sonar"
-  before_script:
-    - echo "🔍 Starting SonarQube analysis..."
-    - echo "Waiting for SonarQube to be ready..."
-    - timeout 300 bash -c 'until curl -s http://sonarqube:9000/api/system/status | grep -q "UP"; do sleep 5; done'
-  script:
-    # Backend Analysis
-    - echo "🔍 Analyzing Backend (Java)..."
-    - cd back
-    - mvn clean verify sonar:sonar \
-        -Dsonar.projectKey=car-rent-backend \
-        -Dsonar.projectName="Car Rent Backend" \
-        -Dsonar.host.url=$SONAR_HOST_URL \
-        -Dsonar.login=$SONAR_TOKEN \
-        -Dsonar.sources=src/main/java \
-        -Dsonar.tests=src/test/java \
-        -Dsonar.java.binaries=target/classes \
-        -Dsonar.java.test.binaries=target/test-classes \
-        -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml || echo "Backend analysis completed"
-    
-    # Frontend Analysis
-    - echo "🔍 Analyzing Frontend (TypeScript)..."
-    - cd ../frontend
-    - npm install --legacy-peer-deps
-    - npm run build -- --configuration=production
-    - npx sonar-scanner \
-        -Dsonar.projectKey=car-rent-frontend \
-        -Dsonar.projectName="Car Rent Frontend" \
-        -Dsonar.host.url=$SONAR_HOST_URL \
-        -Dsonar.login=$SONAR_TOKEN \
-        -Dsonar.sources=src \
-        -Dsonar.tests=src \
-        -Dsonar.typescript.lcov.reportPaths=coverage/lcov.info || echo "Frontend analysis completed"
-    
-    # AI Analysis
-    - echo "🔍 Analyzing AI (Python)..."
-    - cd ../ai
-    - pip install sonarqube-api || echo "SonarQube API not available"
-    - python -m pylint *.py || echo "Pylint analysis completed"
-    
-    - echo "✅ SonarQube analysis completed!"
-  artifacts:
-    reports:
-      coverage_report:
-        coverage_format: cobertura
-        path: back/target/site/jacoco/jacoco.xml
-    paths:
-      - back/target/site/jacoco/
-      - frontend/coverage/
-    expire_in: 1 week
-  allow_failure: true
-  only:
-    - main
-    - master
 
 # Build Angular Frontend
 build_angular_frontend:
@@ -170,20 +86,6 @@ build_backend:
       - back/target/
     expire_in: 1 week
 
-# Build AI Chatbot
-build_ai:
-  stage: build_ai
-  image: python:3.9
-  script:
-    - echo "🤖 Installing AI dependencies..."
-    - cd $AI_DIR
-    - pip install -r requirements.txt || echo "No requirements.txt found"
-    - echo "🤖 AI build completed"
-  artifacts:
-    paths:
-      - ai/
-    expire_in: 1 week
-
 # Build Docker Images
 build_docker_images:
   stage: build_images
@@ -201,16 +103,11 @@ build_docker_images:
     # Build Frontend Image
     - echo "🎨 Building frontend image..."
     - docker build -t $DOCKER_IMAGE_FRONTEND:$CI_COMMIT_SHA -t $DOCKER_IMAGE_FRONTEND:latest ./frontend
-    
-    # Build AI Image
-    - echo "🤖 Building AI chatbot image..."
-    - docker build -t $DOCKER_IMAGE_AI:$CI_COMMIT_SHA -t $DOCKER_IMAGE_AI:latest ./ai
-    
+
     - echo "✅ All Docker images built successfully"
   dependencies:
     - build_frontend
     - build_backend
-    - build_ai
 
 # Push Images to Docker Hub
 push_docker_images:
@@ -234,11 +131,6 @@ push_docker_images:
     - echo "🎨 Pushing frontend image..."
     - docker push $DOCKER_IMAGE_FRONTEND:$CI_COMMIT_SHA
     - docker push $DOCKER_IMAGE_FRONTEND:latest
-    
-    # Push AI Image
-    - echo "🤖 Pushing AI chatbot image..."
-    - docker push $DOCKER_IMAGE_AI:$CI_COMMIT_SHA
-    - docker push $DOCKER_IMAGE_AI:latest
     
     - echo "✅ All images pushed to Docker Hub successfully"
   dependencies:
@@ -271,9 +163,8 @@ deploy_to_minikube:
     - kubectl wait --for=condition=ready pod -l app=mysql -n car-rent-app --timeout=300s || echo "MySQL not ready, continuing..."
     
     # Update deployment files with latest images
-    - sed -i "s|image:.*backend.*|image: $DOCKER_IMAGE_BACKEND:latest|g" k8s/backend-deployment.yaml
-    - sed -i "s|image:.*frontend.*|image: $DOCKER_IMAGE_FRONTEND:latest|g" k8s/frontend-deployment.yaml
-    - sed -i "s|image:.*ai-chatbot.*|image: $DOCKER_IMAGE_AI:latest|g" k8s/ai-deployment.yaml
+    - sed -i "s|image:.*backend.*|image: ${DOCKER_IMAGE_BACKEND}\:latest|g" k8s/backend-deployment.yaml
+    - sed -i "s|image:.*frontend.*|image: ${DOCKER_IMAGE_FRONTEND}\:latest|g" k8s/frontend-deployment.yaml
     
     # Deploy Backend
     - kubectl apply -f k8s/backend-deployment.yaml
@@ -281,14 +172,9 @@ deploy_to_minikube:
     # Deploy Frontend
     - kubectl apply -f k8s/frontend-deployment.yaml
     
-    # Deploy AI Chatbot
-    - kubectl apply -f k8s/ai-deployment.yaml
-    - kubectl apply -f k8s/ai-service.yaml
-    
     # Wait for deployments to be ready
     - kubectl wait --for=condition=available deployment/backend -n car-rent-app --timeout=300s || echo "Backend not ready"
     - kubectl wait --for=condition=available deployment/frontend -n car-rent-app --timeout=300s || echo "Frontend not ready"
-    - kubectl wait --for=condition=available deployment/ai-chatbot -n car-rent-app --timeout=300s || echo "AI not ready"
     
     # Show deployment status
     - echo "📊 Deployment Status:"
@@ -301,7 +187,6 @@ deploy_to_minikube:
     - echo "Minikube IP: $MINIKUBE_IP"
     - echo "Frontend: http://$MINIKUBE_IP:$(kubectl get svc frontend -n car-rent-app -o jsonpath='{.spec.ports[0].nodePort}' 2>/dev/null || echo 'N/A')"
     - echo "Backend: http://$MINIKUBE_IP:$(kubectl get svc backend -n car-rent-app -o jsonpath='{.spec.ports[0].nodePort}' 2>/dev/null || echo 'N/A')"
-    - echo "AI Chatbot: http://$MINIKUBE_IP:$(kubectl get svc ai-chatbot-service -n car-rent-app -o jsonpath='{.spec.ports[0].nodePort}' 2>/dev/null || echo 'N/A')"
     
     - echo "✅ Deployment completed successfully!"
   dependencies:
@@ -311,7 +196,7 @@ deploy_to_minikube:
     - master
   environment:
     name: minikube
-    url: http://$(minikube ip)
+    url: "http://MINIKUBE_IP_PLACEHOLDER"
 
 # Deploy with Docker Compose (for local development)
 docker_compose_up:
@@ -329,5 +214,3 @@ docker_compose_up:
     - docker-compose -f $COMPOSE_FILE up -d
   when: manual
   allow_failure: true
-
-
