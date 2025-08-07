@@ -18,13 +18,6 @@ variables:
   DOCKER_IMAGE_BACKEND: "bayremboussaidi/backend"
   DOCKER_IMAGE_FRONTEND: "bayremboussaidi/front"
 
-# Checkout code
-checkout_code:
-  stage: checkout
-  script:
-    - echo "📥 Checking out the project..."
-    - echo "Code is already checked out by GitLab Runner."
-
 # Run Backend Tests
 run_backend_tests:
   stage: test
@@ -163,8 +156,8 @@ deploy_to_minikube:
     - kubectl wait --for=condition=ready pod -l app=mysql -n car-rent-app --timeout=300s || echo "MySQL not ready, continuing..."
     
     # Update deployment files with latest images
-    - sed -i "s|image:.*backend.*|image: ${DOCKER_IMAGE_BACKEND}\:latest|g" k8s/backend-deployment.yaml
-    - sed -i "s|image:.*frontend.*|image: ${DOCKER_IMAGE_FRONTEND}\:latest|g" k8s/frontend-deployment.yaml
+    - sed -i "s|image:.*backend.*|image: ${DOCKER_IMAGE_BACKEND}:latest|g" k8s/backend-deployment.yaml
+    - sed -i "s|image:.*frontend.*|image: ${DOCKER_IMAGE_FRONTEND}:latest|g" k8s/frontend-deployment.yaml
     
     # Deploy Backend
     - kubectl apply -f k8s/backend-deployment.yaml
@@ -196,7 +189,6 @@ deploy_to_minikube:
     - master
   environment:
     name: minikube
-    url: "http://MINIKUBE_IP_PLACEHOLDER"
 
 # Deploy with Docker Compose (for local development)
 docker_compose_up:
