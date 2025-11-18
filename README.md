@@ -1,4 +1,4 @@
-# 🚗 Car Rental Platform — Full-Stack Application
+#  Car Rental Platform — Full-Stack Application
 
 A modern full-stack car rental platform built with **Angular**, **Spring Boot**, **FastAPI chatbot**, and **MySQL**, featuring **JWT & Keycloak authentication**, **email notifications**, **PDF + QR booking confirmations**, **real-time chat**, and **follower updates**.
 
