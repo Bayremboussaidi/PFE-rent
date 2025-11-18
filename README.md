@@ -21,7 +21,7 @@ A modern full-stack car rental platform built with **Angular**, **Spring Boot**,
 
 ---
 
-## 🎯 Project Overview
+##  Project Overview
 
 Multi-role platform supporting:
 - **Admin:** Manages agencies, cars, blogs, and customers
@@ -31,7 +31,7 @@ Multi-role platform supporting:
 
 ---
 
-## ✨ Features
+##  Features
 - **Car Management:** CRUD operations, photo uploads, filtering
 - **Booking System:** Rental requests with agency approval
 - **PDF + QR Generation:** Automated booking confirmations
@@ -47,7 +47,7 @@ Multi-role platform supporting:
 
 ---
 
-## 🏗 Architecture
+##  Architecture
 
 --- diagram ---
 
@@ -56,7 +56,7 @@ Multi-role platform supporting:
 
 ---
 
-## 🎨 Frontend
+##  Frontend
 - **Framework:** Angular 16
 - **Styling:** Bootstrap 5, FontAwesome, Remix Icons, Ionicons
 - **Features:** Responsive design, car filtering, booking modal, real-time chat
@@ -71,29 +71,29 @@ Multi-role platform supporting:
 
 
 
-## ⚙️ Backend
+##  Backend
 - **Framework:** Spring Boot (Modular microservices)
 - **Database:** MySQL
 - **Features:** JWT security, DTO pattern, REST APIs
 - **Services:** CarService, BookingService, ChatService, NotificationService, EmailService, PDFService
 
-## 🤖 Chatbot
+##  Chatbot
 - **Framework:** FastAPI (Python)
 - **AI Integration:** OpenAI GPT
 - **Access:** Customers and visitors
 - **Deployment:** Microservice architecture
 
-## 🔒 Security
+##  Security
 - **Admin:** Keycloak authentication with realm roles
 - **Users:** JWT-secured APIs for Agency/Customer/Follower
 - **Frontend:** Angular AuthGuard for route protection
 
-## 📧 Notifications & Email System
+##  Notifications & Email System
 - **Real-Time Alerts:** Booking requests, agency decisions, chat messages
 - **Email (SMTP):** Booking confirmations, PDF+QR documents, follower updates
 - **Automated:** System-triggered notifications
 
-## 📄 Booking Flow with PDF & QR
+##  Booking Flow with PDF & QR
 1. Customer requests car booking
 2. Agency receives notification/email
 3. Agency approves/rejects request
@@ -103,13 +103,13 @@ Multi-role platform supporting:
    - Documents emailed to customer
 5. Real-time notifications updated
 
-## 🚀 Deployment & CI/CD
+##  Deployment & CI/CD
 - **Docker Compose:** Frontend, backend, MySQL, chatbot
 - **Kubernetes:** Minikube with YAML manifests
 - **CI/CD:** GitLab pipeline (build, test, deploy)
 - **Microservices:** Domain-based modular architecture
 
-## 🖼 Screenshots & UI
+##  Screenshots & UI
 *(Add your screenshots here)*
 - Keycloak Admin Panel
 - Car Listing Views
@@ -119,7 +119,7 @@ Multi-role platform supporting:
 - Notification Panel
 - Chatbot Window
 
-## 🛠 How to Run
+##  How to Run
 
 ### Frontend
 bash : 
@@ -152,7 +152,8 @@ docker run -d --name keycloak \
 
 
 
-  ### Author
+
+### Author
 
   Bayrem Boussaidi
 Software Engineer — Angular | Spring Boot | Docker | Kubernetes | FastAPI | Microservices
