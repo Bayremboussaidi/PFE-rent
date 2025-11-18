@@ -4,7 +4,7 @@ A modern full-stack car rental platform built with **Angular**, **Spring Boot**,
 
 ---
 
-## 📋 Table of Contents
+##  Table of Contents
 - [Project Overview](#project-overview)
 - [Features](#features)
 - [Architecture](#architecture)
