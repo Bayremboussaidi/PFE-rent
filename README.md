@@ -123,7 +123,7 @@ Multi-role platform supporting:
 
 | Feature                                  | Screenshot |
 |------------------------------------------|------------|
-| Keycloak Admin Panel                     | ![Keycloak](screenshots/clients_key.PNG) |
+| Keycloak Admin Panel                     | ![Keycloak](screenshots/clients_key.PNG)   |
 | Realm Overview                            | ![Realm](screenshots/comparateur.PNG) |
 | Admin Car Listing                         | ![Cars](screenshots/administatorcars.PNG) |
 | Edit Car Details (Admin)                  | ![Edit Car](screenshots/editcaradmin.PNG) |
@@ -135,6 +135,7 @@ Multi-role platform supporting:
 | Notifications Table                         | ![Notifications](screenshots/notifications.PNG) |
 | Admin – Create Agency Page                 | ![Create Agency](screenshots/createagence.PNG) |
 | Login Page                                 | ![Login](screenshots/login.PNG) |
+| Rental PDF Confirmation Example | [Download PDF](screenshots/rental_contract_example.pdf) |
 
 ---
 
