@@ -135,7 +135,7 @@ Multi-role platform supporting:
 | Notifications Table                         | ![Notifications](screenshots/notifications.PNG) |
 | Admin – Create Agency Page                 | ![Create Agency](screenshots/createagence.PNG) |
 | Login Page                                 | ![Login](screenshots/login.PNG) |
-| Rental PDF Confirmation Example | [Download PDF](screenshots/rental_contract_example.pdf) |
+| Rental PDF Confirmation Example | [Download PDF](screenshots/booking-confirmation.pdf) |
 
 ---
 
