@@ -134,7 +134,7 @@ Multi-role platform supporting:
 | Chat Interface (Admin ↔ Agency) – Demo with Test Agency                       | ![Message](screenshots/message.PNG) |
 | Notifications Table  ( Client )                       | ![Notifications](screenshots/notifications.PNG) |
 | Admin – Create Agency Page                 | ![Create Agency](screenshots/createagence.PNG) |
-| Login Page  ( Admin , Agency , Client )                               | ![Login](screenshots/login.PNG) |
+| Login Page                                 | ![Login](screenshots/login.PNG) |
 | Rental PDF Confirmation Example Zahida Aloui – Client Demo | [Download PDF](screenshots/booking-confirmation.pdf) |
 
 ---
