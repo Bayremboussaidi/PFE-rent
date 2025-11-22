@@ -127,15 +127,15 @@ Multi-role platform supporting:
 | Realm Overview                            | ![Realm](screenshots/comparateur.PNG) |
 | Admin Car Listing                         | ![Cars](screenshots/administatorcars.PNG) |
 | Edit Car Details (Admin)                  | ![Edit Car](screenshots/editcaradmin.PNG) |
-| Car List Interface                         | ![Car List](screenshots/listecars.PNG) |
+| Car List Interface for Client s Dashboard – Demo                      | ![Car List](screenshots/listecars.PNG) |
 | Blog Management (Admin)                    | ![Blogs Admin](screenshots/blogsadmin.PNG) |
-| Booking History                            | ![Bookings](screenshots/bookings.PNG) |
-| Chat Interface (Admin ↔ Agency)           | ![Chat](screenshots/chat.PNG) |
-| Messaging Example                          | ![Message](screenshots/message.PNG) |
-| Notifications Table                         | ![Notifications](screenshots/notifications.PNG) |
+| Booking History  - Demo                          | ![Bookings](screenshots/bookings.PNG) |
+|      Chatbot Interface       | ![Chat](screenshots/chat.PNG) |
+| Chat Interface (Admin ↔ Agency) – Demo with Test Agency                       | ![Message](screenshots/message.PNG) |
+| Notifications Table  ( Client )                       | ![Notifications](screenshots/notifications.PNG) |
 | Admin – Create Agency Page                 | ![Create Agency](screenshots/createagence.PNG) |
-| Login Page                                 | ![Login](screenshots/login.PNG) |
-| Rental PDF Confirmation Example | [Download PDF](screenshots/booking-confirmation.pdf) |
+| Login Page  ( Admin , Agency , Client )                               | ![Login](screenshots/login.PNG) |
+| Rental PDF Confirmation Example Zahida Aloui – Client Demo | [Download PDF](screenshots/booking-confirmation.pdf) |
 
 ---
 
