@@ -124,13 +124,13 @@ Multi-role platform supporting:
 | Feature                                  | Screenshot |
 |------------------------------------------|------------|
 | Keycloak Admin Panel                     | ![Keycloak](screenshots/clients_key.PNG) |
-| Realm Overview                            | ![Realm](screenshots/M comparateur.PNG) |
+| Realm Overview                            | ![Realm](screenshots/comparateur.PNG) |
 | Admin Car Listing                         | ![Cars](screenshots/administatorcars.PNG) |
-| Edit Car Details (Admin)                  | ![Edit Car](screenshots/M editcaradmin.PNG) |
+| Edit Car Details (Admin)                  | ![Edit Car](screenshots/editcaradmin.PNG) |
 | Car List Interface                         | ![Car List](screenshots/listecars.PNG) |
 | Blog Management (Admin)                    | ![Blogs Admin](screenshots/blogsadmin.PNG) |
 | Booking History                            | ![Bookings](screenshots/bookings.PNG) |
-| Chat Interface (Admin ↔ Agency)           | ![Chat](screenshots/M chat.PNG) |
+| Chat Interface (Admin ↔ Agency)           | ![Chat](screenshots/chat.PNG) |
 | Messaging Example                          | ![Message](screenshots/message.PNG) |
 | Notifications Table                         | ![Notifications](screenshots/notifications.PNG) |
 | Admin – Create Agency Page                 | ![Create Agency](screenshots/createagence.PNG) |
