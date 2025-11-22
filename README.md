@@ -59,13 +59,6 @@ Multi-role platform supporting:
 - **Styling:** Bootstrap 5, FontAwesome, Remix Icons, Ionicons
 - **Features:** Responsive design, car filtering, booking system, real-time chat
 
-### Dependencies
-```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css">
-<script type="module" src="https://cdn.jsdelivr.net/npm/ionicons@7.4.0/dist/ionicons/ionicons.esm.js"></script>
-```
 
 ---
 
