@@ -1,27 +1,28 @@
-#  Car Rental Platform — Full-Stack Application
+# Car Rental Platform — Full-Stack Application
 
-A modern full-stack car rental platform built with **Angular**, **Spring Boot**, **FastAPI chatbot**, and **MySQL**, featuring **JWT & Keycloak authentication**, **email notifications**, **PDF + QR booking confirmations**, **real-time chat**, and **follower updates**.
-
----
-
-##  Table of Contents
-- [Project Overview](#project-overview)
-- [Features](#features)
-- [Architecture](#architecture)
-- [Frontend](#frontend)
-- [Backend](#backend)
-- [Chatbot](#chatbot)
-- [Security](#security)
-- [Notifications & Email System](#notifications--email-system)
-- [Booking Flow with PDF & QR](#booking-flow-with-pdf--qr)
-- [Deployment & CI/CD](#deployment--cicd)
-- [Screenshots & UI](#screenshots--ui)
-- [How to Run](#how-to-run)
-- [Author](#author)
+A modern full-stack car rental platform built with **Angular**, **Spring Boot**, **FastAPI chatbot**, and **MySQL**, featuring **JWT & Keycloak authentication**, **email notifications**, **PDF + QR booking confirmations**, **real-time chat**, and **follower updates**. Future plans include **online payment via PayPal**, with automated payment link delivery.
 
 ---
 
-##  Project Overview
+## Table of Contents
+1. [Project Overview](#project-overview)
+2. [Features](#features)
+3. [Architecture](#architecture)
+4. [Frontend](#frontend)
+5. [Backend](#backend)
+6. [Chatbot](#chatbot)
+7. [Security](#security)
+8. [Notifications & Email System](#notifications--email-system)
+9. [Booking Flow with PDF & QR](#booking-flow-with-pdf--qr)
+10. [Deployment & CI/CD](#deployment--cicd)
+11. [Screenshots & UI](#screenshots--ui)
+12. [How to Run](#how-to-run)
+13. [Future Work](#future-work)
+14. [Author](#author)
+
+---
+
+## Project Overview
 
 Multi-role platform supporting:
 - **Admin:** Manages agencies, cars, blogs, and customers
@@ -31,7 +32,7 @@ Multi-role platform supporting:
 
 ---
 
-##  Features
+## Features
 - **Car Management:** CRUD operations, photo uploads, filtering
 - **Booking System:** Rental requests with agency approval
 - **PDF + QR Generation:** Automated booking confirmations
@@ -47,114 +48,140 @@ Multi-role platform supporting:
 
 ---
 
-##  Architecture
+## Architecture
 
 --- diagram ---
 
-
-
-
 ---
 
-##  Frontend
+## Frontend
 - **Framework:** Angular 16
 - **Styling:** Bootstrap 5, FontAwesome, Remix Icons, Ionicons
-- **Features:** Responsive design, car filtering, booking modal, real-time chat
+- **Features:** Responsive design, car filtering, booking system, real-time chat
 
-
-<!-- Dependencies -->
+### Dependencies
+```html
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css">
 <script type="module" src="https://cdn.jsdelivr.net/npm/ionicons@7.4.0/dist/ionicons/ionicons.esm.js"></script>
+```
 
+---
 
-
-
-##  Backend
+## Backend
 - **Framework:** Spring Boot (Modular microservices)
 - **Database:** MySQL
 - **Features:** JWT security, DTO pattern, REST APIs
-- **Services:** CarService, BookingService, ChatService, NotificationService, EmailService, PDFService
+- **Services:** CarService, BookingService, ChatService, NotificationService, EmailService, PDFService, future PayPalPaymentService (planned)
 
-##  Chatbot
+---
+
+## Chatbot
 - **Framework:** FastAPI (Python)
 - **AI Integration:** OpenAI GPT
 - **Access:** Customers and visitors
 - **Deployment:** Microservice architecture
 
-##  Security
+---
+
+## Security
 - **Admin:** Keycloak authentication with realm roles
 - **Users:** JWT-secured APIs for Agency/Customer/Follower
 - **Frontend:** Angular AuthGuard for route protection
 
-##  Notifications & Email System
+---
+
+## Notifications & Email System
 - **Real-Time Alerts:** Booking requests, agency decisions, chat messages
 - **Email (SMTP):** Booking confirmations, PDF+QR documents, follower updates
 - **Automated:** System-triggered notifications
 
-##  Booking Flow with PDF & QR
+---
+
+## Booking Flow with PDF & QR
 1. Customer requests car booking
 2. Agency receives notification/email
 3. Agency approves/rejects request
 4. On approval:
-   - Payment link sent to customer
+   - Payment link sent to customer (**planned future PayPal integration**)
    - PDF+QR confirmation generated automatically
    - Documents emailed to customer
 5. Real-time notifications updated
 
-##  Deployment & CI/CD
+---
+
+## Deployment & CI/CD
 - **Docker Compose:** Frontend, backend, MySQL, chatbot
 - **Kubernetes:** Minikube with YAML manifests
 - **CI/CD:** GitLab pipeline (build, test, deploy)
 - **Microservices:** Domain-based modular architecture
 
-##  Screenshots & UI
-*(Add your screenshots here)*
-- Keycloak Admin Panel
-- Car Listing Views
-- Booking Modal
-- Chat Interface
-- PDF Booking Confirmations
-- Notification Panel
-- Chatbot Window
+---
 
-##  How to Run
+## Screenshots & UI
+
+| Feature                                  | Screenshot |
+|------------------------------------------|------------|
+| Keycloak Admin Panel                     | ![Keycloak](screenshots/clients_key.PNG) |
+| Realm Overview                            | ![Realm](screenshots/M comparateur.PNG) |
+| Admin Car Listing                         | ![Cars](screenshots/administatorcars.PNG) |
+| Edit Car Details (Admin)                  | ![Edit Car](screenshots/M editcaradmin.PNG) |
+| Car List Interface                         | ![Car List](screenshots/listecars.PNG) |
+| Blog Management (Admin)                    | ![Blogs Admin](screenshots/blogsadmin.PNG) |
+| Booking History                            | ![Bookings](screenshots/bookings.PNG) |
+| Chat Interface (Admin ↔ Agency)           | ![Chat](screenshots/M chat.PNG) |
+| Messaging Example                          | ![Message](screenshots/message.PNG) |
+| Notifications Table                         | ![Notifications](screenshots/notifications.PNG) |
+| Admin – Create Agency Page                 | ![Create Agency](screenshots/createagence.PNG) |
+| Login Page                                 | ![Login](screenshots/login.PNG) |
+
+---
+
+## How to Run
 
 ### Frontend
-bash : 
+```bash
 cd frontend
 npm install
 ng serve
-
+```
 
 ### Backend
-
+```bash
 cd backend
 mvn spring-boot:run
-
+```
 
 ### FastAPI Chatbot
-
+```bash
 cd chatbot
 pip install -r requirements.txt
 uvicorn main:app --host 0.0.0.0 --port 8000
-
-
+```
 
 ### Keycloak (Admin)
-
+```bash
 docker run -d --name keycloak \
   -p 9090:8080 \
   -e KEYCLOAK_ADMIN=bayrem \
   -e KEYCLOAK_ADMIN_PASSWORD=YourPassword \
   quay.io/keycloak/keycloak:21.1.1 start-dev
+```
+
+---
+
+## Future Work
+- **Online Payment Integration (PayPal Microservice):**
+  - Microservice app has already been created
+  - Requires a PayPal account and configuration to enable automated payment links to customers
+  - Will be integrated into the booking approval flow once ready
+  - Currently postponed due to external constraints with employer; implementation planned for next steps
 
 
+---
 
+## Author
 
-### Author
-
-  Bayrem Boussaidi
+Bayrem Boussaidi  
 Software Engineer — Angular | Spring Boot | Docker | Kubernetes | FastAPI | Microservices
-
