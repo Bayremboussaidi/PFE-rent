@@ -2,14 +2,14 @@
 <div class="modal-overlay" *ngIf="showModal" (click)="closeModal()">
   <div class="modal-content" (click)="$event.stopPropagation()">
     <span class="close-btn" (click)="closeModal()">&times;</span>
-    <h2>Réservez votre voiture</h2>
+    <h2>Book your car</h2>
 
     <form (ngSubmit)="onSubmit()">
 
-      <label for="username">Nom complet :</label>
+      <label for="username">complete name :</label>
       <input type="text" id="username" [(ngModel)]="bookingData.username" name="username" required />
 
-      <label for="carName">Nom de la voiture :</label>
+      <label for="carName">car name :</label>
       <input type="text" id="carName" [(ngModel)]="bookingData.carName" name="carName" readonly />
 
       <div class="form-group">
@@ -27,7 +27,7 @@
 
 
       <div class="form-group">
-        <label for="phone">Numéro de téléphone :</label>
+        <label for="phone">Tel Num:</label>
         <input type="tel"
               id="phone"
               name="phone"
@@ -43,7 +43,7 @@
 
 <!-- Start Date with X button -->
 <div class="datepicker-wrapper">
-  <label for="startDate">Date de début <span style="color: red;">(Doit être aujourd'hui ou plus tard)</span></label>
+  <label for="startDate">Start date <span style="color: red;">(Must be today or later)</span></label>
   <div class="input-with-x">
     <input type="text"
           id="startDate"
@@ -62,7 +62,7 @@
 
 <!-- End Date with X button -->
 <div class="datepicker-wrapper">
-  <label for="endDate">Date de fin <span style="color: red;">(Doit être après la date de début)</span></label>
+  <label for="endDate">Date de fin <span style="color: red;">(Must be after the start date)</span></label>
   <div class="input-with-x">
     <input type="text"
           id="endDate"
@@ -80,23 +80,23 @@
 </div>
 
 
-      <p><strong>Agence :</strong> {{ bookingData.agence }}</p>
+      <p><strong>Agency :</strong> {{ bookingData.agence }}</p>
 
 
-      <p><strong>Nombre de jours :</strong> {{ bookingData.nbrJrs }}</p>
+      <p><strong>Number of days:</strong> {{ bookingData.nbrJrs }}</p>
 
 
-      <p><strong>Prix total :</strong> DT {{ bookingData.price }}</p>
+      <p><strong>Total price:</strong> DT {{ bookingData.price }}</p>
 
 
 
-      <label for="pickupLocation">Lieu de prise en charge :</label>
+      <label for="pickupLocation">Pick-up location:</label>
       <input type="text" id="pickupLocation" [(ngModel)]="bookingData.pickupLocation" name="pickupLocation" required />
 
-      <label for="dropoffLocation">Lieu de dépôt :</label>
+      <label for="dropoffLocation">Drop-off location:</label>
       <input type="text" id="dropoffLocation" [(ngModel)]="bookingData.dropoffLocation" name="dropoffLocation" required />
 
-      <button type="submit">Confirmer la réservation</button>
+      <button type="submit">Confirm the reservation</button>
     </form>
 
     <p *ngIf="responseMessage">{{ responseMessage }}</p>
