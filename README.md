@@ -128,6 +128,8 @@ Multi-role platform supporting:
 | Notifications Table  ( Client )                       | ![Notifications](screenshots/notifications.PNG) |
 | Admin – Create Agency Page                 | ![Create Agency](screenshots/createagence.PNG) |
 | Login Page                                 | ![Login](screenshots/login.PNG) |
+| Sign In Required for Booking (Customer)       | ![Sign In Required](screenshots/signinrequired.PNG) |
+| Car Availability Calendar (Only Available Dates Shown) | ![Availability Calendar](screenshots/calandrier.PNG) |
 | Rental PDF Confirmation Example Zahida Aloui – Client Demo | [Download PDF](screenshots/booking-confirmation.pdf) |
 
 ---
