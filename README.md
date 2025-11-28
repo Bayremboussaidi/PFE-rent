@@ -48,9 +48,9 @@ Multi-role platform supporting:
 
 ---
 
-## Architecture
+## Architecture    systemarchitecture.png
 
---- diagram ---
+![Architect](screenshots/systemarchitecture.png)
 
 ---
 
