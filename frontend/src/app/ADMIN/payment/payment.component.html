@@ -1,0 +1,135 @@
+<div class="payment-container">
+  <div class="payment-card">
+    <h2>💳 Secure Payment</h2>
+
+    <!-- Secure Badge -->
+    <div class="secure-badge">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+      </svg>
+      256-bit SSL Encrypted
+    </div>
+
+    <!-- Booking Summary -->
+    <div class="booking-summary">
+      <h3>📋 Booking Summary</h3>
+      <div class="summary-row">
+        <span>🚗 Car</span>
+        <strong>{{ paymentData.carName }}</strong>
+      </div>
+      <div class="summary-row">
+        <span>📅 Period</span>
+        <strong>{{ paymentData.startDate }} - {{ paymentData.endDate }}</strong>
+      </div>
+      <div class="summary-row total">
+        <span>Total Amount</span>
+        <strong>${{ paymentData.amount }}</strong>
+      </div>
+    </div>
+
+    <!-- Payment Form -->
+    <form (ngSubmit)="processPayment()">
+      <div class="form-group">
+        <label>👤 Full Name *</label>
+        <input type="text" [(ngModel)]="paymentData.customerName" name="customerName"
+               placeholder="John Doe" required>
+      </div>
+
+      <div class="form-group">
+        <label>📧 Email *</label>
+        <input type="email" [(ngModel)]="paymentData.customerEmail" name="customerEmail"
+               placeholder="john@example.com" required>
+      </div>
+
+      <div class="form-group">
+        <label>📱 Phone</label>
+        <input type="tel" [(ngModel)]="paymentData.phone" name="phone"
+               placeholder="+1 234 567 890">
+      </div>
+
+      <div class="form-group">
+        <label>💳 Card Details</label>
+        <div class="card-element-wrapper">
+          <div id="card-element" class="card-element"></div>
+        </div>
+
+        <!-- Card Icons -->
+        <div class="card-icons">
+          <img class="card-icon" src="https://cdn.jsdelivr.net/gh/lipis/flag-icons@6.6.6/flags/4x3/us.svg" alt="Card" style="display:none;">
+          <svg class="card-icon" viewBox="0 0 38 24" xmlns="http://www.w3.org/2000/svg">
+            <path fill="#1434CB" d="M35 0H3C1.3 0 0 1.3 0 3v18c0 1.7 1.3 3 3 3h32c1.7 0 3-1.3 3-3V3c0-1.7-1.3-3-3-3z"/>
+            <path fill="#fff" d="M14.4 17.2l1.5-9.4h2.4l-1.5 9.4zM25.8 8c-.5-.2-1.2-.4-2.1-.4-2.3 0-4 1.2-4 2.9 0 1.3 1.2 2 2.1 2.4.9.4 1.2.7 1.2 1.1 0 .6-.7.9-1.4.9-1 0-1.5-.1-2.3-.5l-.3-.2-.3 2c.6.3 1.6.5 2.7.5 2.5 0 4.1-1.2 4.1-3 0-1-.6-1.8-2-2.4-.8-.4-1.3-.7-1.3-1.1 0-.4.4-.8 1.3-.8.8 0 1.3.2 1.8.4l.2.1.3-1.9zM30.5 7.8h-1.8c-.6 0-1 .2-1.2.7l-3.5 8.3h2.5l.5-1.4h3c.1.3.3 1.4.3 1.4h2.2l-1.9-9h-.1zm-2.4 5.8c.2-.5 1-2.4 1-2.4l.2-.6.2.6s.5 2.3.6 2.4h-2zM11.3 7.8l-2.3 6.4-.2-1.2c-.4-1.4-1.7-3-3.2-3.7l2.1 7.9h2.5l3.7-9.4h-2.6z"/>
+            <path fill="#F9A533" d="M6.3 7.8H2.5l-.1.2c3 .8 5 2.7 5.8 4.9l-.8-4.1c-.1-.6-.6-.9-1.1-1z"/>
+          </svg>
+          <svg class="card-icon" viewBox="0 0 38 24" xmlns="http://www.w3.org/2000/svg">
+            <path fill="#000" d="M35 0H3C1.3 0 0 1.3 0 3v18c0 1.7 1.3 3 3 3h32c1.7 0 3-1.3 3-3V3c0-1.7-1.3-3-3-3z"/>
+            <circle fill="#EB001B" cx="15" cy="12" r="7"/>
+            <circle fill="#F79E1B" cx="23" cy="12" r="7"/>
+            <path fill="#FF5F00" d="M19 7.5c-1.4 1.2-2.3 3-2.3 4.9 0 2 .9 3.7 2.3 4.9 1.4-1.2 2.3-3 2.3-4.9 0-2-.9-3.7-2.3-4.9z"/>
+          </svg>
+          <svg class="card-icon" viewBox="0 0 38 24" xmlns="http://www.w3.org/2000/svg">
+            <path fill="#016FD0" d="M35 0H3C1.3 0 0 1.3 0 3v18c0 1.7 1.3 3 3 3h32c1.7 0 3-1.3 3-3V3c0-1.7-1.3-3-3-3z"/>
+            <path fill="#fff" d="M19.8 16.5h-1.5l1-5.8h1.5l-1 5.8zm-3.3 0l-1.5-4-1.4 4h-1.6l2.4-5.8h1.4l.8 4.1.2-.8.9-3.3h1.6l-2.4 5.8h-.4zm9.2 0l-.3-1.1h-2l-.5 1.1h-1.6l2.5-5.8h1.8l1.7 5.8h-1.6zm-.6-2.3l-.5-1.8-.4-.3-.7 2.1h1.6zm3.5 2.3v-5.8h2.5c.5 0 1 .1 1.3.4.3.3.5.7.5 1.2 0 .4-.1.8-.4 1.1-.2.3-.6.5-1 .6l1.5 2.5h-1.7l-1.2-2.3h-.4v2.3h-1.1zm1.1-3.3h1.1c.2 0 .4-.1.5-.2.1-.1.2-.3.2-.5s-.1-.3-.2-.4c-.1-.1-.3-.2-.5-.2h-1.1v1.3z"/>
+          </svg>
+          <svg class="card-icon" viewBox="0 0 38 24" xmlns="http://www.w3.org/2000/svg">
+            <path fill="#1A1F71" d="M35 0H3C1.3 0 0 1.3 0 3v18c0 1.7 1.3 3 3 3h32c1.7 0 3-1.3 3-3V3c0-1.7-1.3-3-3-3z"/>
+            <path fill="#FF5F00" d="M10 17h18v-2H10v2z"/>
+            <path fill="#fff" d="M10 9h18V7H10v2zm0 4h18v-2H10v2z"/>
+          </svg>
+        </div>
+        <p class="accepted-cards-label">We accept all major credit cards</p>
+      </div>
+
+      <!-- Error Message -->
+      <div class="error-message" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </div>
+
+      <!-- Success Message -->
+      <div class="success-message" *ngIf="successMessage">
+        {{ successMessage }}
+      </div>
+
+      <!-- Pay Button -->
+      <button type="submit" [disabled]="isLoading" class="pay-button">
+        <div class="button-content">
+          <span *ngIf="!isLoading">🔒 Pay ${{ paymentData.amount }} Securely</span>
+          <span *ngIf="isLoading" class="button-content">
+            <div class="spinner"></div>
+            Processing...
+          </span>
+        </div>
+      </button>
+    </form>
+
+    <!-- Trust Badges -->
+    <div class="trust-badges">
+      <div class="trust-badge">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+        </svg>
+        Secure
+      </div>
+      <div class="trust-badge">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+        </svg>
+        Encrypted
+      </div>
+      <div class="trust-badge">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+        </svg>
+        Verified
+      </div>
+    </div>
+
+    <!-- Powered by Stripe -->
+    <div class="powered-by">
+      Powered by
+      <svg class="stripe-logo" viewBox="0 0 60 25" xmlns="http://www.w3.org/2000/svg">
+        <path fill="#635BFF" d="M59.64 14.28h-8.06c.19 1.93 1.6 2.55 3.2 2.55 1.64 0 2.96-.37 4.05-.95v3.32a8.33 8.33 0 0 1-4.56 1.1c-4.01 0-6.83-2.5-6.83-7.48 0-4.19 2.39-7.52 6.3-7.52 3.92 0 5.96 3.28 5.96 7.5 0 .4-.02 1.04-.06 1.48zm-4.25-5.81c-1.03 0-1.94.66-2.16 2.33h4.32c-.02-1.5-.83-2.33-2.16-2.33zM43.5 19.8V9.3l4.04-.6v10.5c0 .88.56 1.14 1.21 1.14.4 0 .87-.12 1.21-.28v3.42c-.56.28-1.34.52-2.48.52-2.64 0-3.98-1.48-3.98-4.2zM29.5 19.8V.5l4.04-.62v7.46c.85-.52 1.89-.84 3.07-.84 3.12 0 5.08 2.5 5.08 6.94 0 5.08-2.52 7.86-5.98 7.86-1.52 0-2.76-.6-3.56-1.6l-.17 1.1H29.5zm6.03-8.1c0-2.17-.8-3.42-2.24-3.42-.73 0-1.34.26-1.75.68v5.68c.44.46 1.03.68 1.8.68 1.37 0 2.19-1.16 2.19-3.62zM23.5 19.8V9.72l-4.28.6v9.48h4.28zm-2.12-12.16c1.32 0 2.4-1.08 2.4-2.4s-1.08-2.4-2.4-2.4-2.4 1.08-2.4 2.4 1.08 2.4 2.4 2.4zM11.9 20.3c-3.72 0-5.64-1.9-5.64-4.56 0-3.18 2.52-4.74 7.08-5.24v-.36c0-1.06-.66-1.56-2.06-1.56-1.4 0-3.04.46-4.28 1.14V6.38c1.18-.52 3.12-1.08 5.32-1.08 3.82 0 5.46 1.76 5.46 5.48v9.02h-3.24l-.24-1.42c-.72 1.04-2.02 1.92-3.4 1.92zm1.4-7.08c-2.12.32-3.04 1.02-3.04 2.24 0 .94.62 1.52 1.66 1.52.76 0 1.44-.26 1.82-.66v-3.1h-.44zM.64 18.62c1.18.62 2.96 1.18 4.62 1.18 1.08 0 1.62-.32 1.62-.92 0-.52-.4-.78-1.7-1.12-2.86-.74-4.22-1.9-4.22-4.3 0-2.58 2.02-4.16 5.24-4.16 1.6 0 3.12.32 4.22.82v3.66c-1.16-.52-2.64-.92-3.94-.92-.96 0-1.48.3-1.48.84 0 .5.38.72 1.52 1.02 2.98.78 4.4 1.86 4.4 4.32 0 2.74-2.06 4.26-5.48 4.26-1.76 0-3.56-.4-4.8-1.04v-3.64z"/>
+      </svg>
+    </div>
+  </div>
+</div>

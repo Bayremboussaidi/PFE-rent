@@ -122,6 +122,7 @@ import { BlogsAComponent } from './ADMIN/blogs-a/blogs-a.component';
 import { BlogDetailsAComponent } from './ADMIN/blog-details/blog-details.component';
 import { UserGuard } from './guards/userguard.guard';
 import { ChatbotComponent } from './components/chatbot/chatbot.component';
+import { PaymentComponent } from './ADMIN/payment/payment.component';
 
 
 // ✅ Keycloak Initialization Function
@@ -189,6 +190,7 @@ export function kcFactory(kcService: KeycloakService) {
     BlogsAComponent,
     BlogDetailsAComponent,
     ChatbotComponent,
+    PaymentComponent,
 
   ],
   imports: [
