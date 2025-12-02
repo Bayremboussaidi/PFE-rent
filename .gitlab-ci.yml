@@ -23,10 +23,10 @@ run_backend_tests:
   stage: test
   image: maven:3.9.6-eclipse-temurin-21
   script:
-    - echo "🧪 Running backend tests..."
+    - echo " Running backend tests..."
     - cd back
     - mvn test -DskipTests=false
-    - echo "✅ Backend tests completed"
+    - echo " Backend tests completed"
   artifacts:
     reports:
       junit: back/target/surefire-reports/TEST-*.xml
@@ -43,7 +43,7 @@ run_frontend_tests:
     - cd frontend
     - npm install --legacy-peer-deps
     - npm test -- --watch=false --browsers=ChromeHeadless
-    - echo "✅ Frontend tests completed"
+    - echo "Frontend tests completed"
   artifacts:
     paths:
       - frontend/coverage/
@@ -54,7 +54,7 @@ build_angular_frontend:
   stage: build_frontend
   image: node:18
   script:
-    - echo "📦 Installing dependencies and building Angular app..."
+    - echo " Installing dependencies and building Angular app..."
     - cd $FRONT_DIR
     - npm install --legacy-peer-deps
     - npm run build -- --configuration=production
@@ -87,17 +87,17 @@ build_docker_images:
     - name: docker:20.10.16-dind
       command: ["--host=tcp://0.0.0.0:2375"]
   script:
-    - echo "🐳 Building Docker images..."
+    - echo " Building Docker images..."
     
     # Build Backend Image
     - echo "🔧 Building backend image..."
     - docker build -t $DOCKER_IMAGE_BACKEND:$CI_COMMIT_SHA -t $DOCKER_IMAGE_BACKEND:latest ./back
     
     # Build Frontend Image
-    - echo "🎨 Building frontend image..."
+    - echo " Building frontend image..."
     - docker build -t $DOCKER_IMAGE_FRONTEND:$CI_COMMIT_SHA -t $DOCKER_IMAGE_FRONTEND:latest ./frontend
 
-    - echo "✅ All Docker images built successfully"
+    - echo " All Docker images built successfully"
   dependencies:
     - build_frontend
     - build_backend
@@ -110,22 +110,22 @@ push_docker_images:
     - name: docker:20.10.16-dind
       command: ["--host=tcp://0.0.0.0:2375"]
   script:
-    - echo "📤 Logging into Docker Hub..."
+    - echo " Logging into Docker Hub..."
     - echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
     
     - echo "📤 Pushing images to Docker Hub..."
     
     # Push Backend Image
-    - echo "🔧 Pushing backend image..."
+    - echo " Pushing backend image..."
     - docker push $DOCKER_IMAGE_BACKEND:$CI_COMMIT_SHA
     - docker push $DOCKER_IMAGE_BACKEND:latest
     
     # Push Frontend Image
-    - echo "🎨 Pushing frontend image..."
+    - echo " Pushing frontend image..."
     - docker push $DOCKER_IMAGE_FRONTEND:$CI_COMMIT_SHA
     - docker push $DOCKER_IMAGE_FRONTEND:latest
     
-    - echo "✅ All images pushed to Docker Hub successfully"
+    - echo " All images pushed to Docker Hub successfully"
   dependencies:
     - build_docker_images
   only:
@@ -142,7 +142,7 @@ deploy_to_minikube:
     - install minikube-linux-amd64 /usr/local/bin/minikube
     - minikube start --driver=docker --force
     - minikube addons enable ingress
-    - echo "✅ Minikube started successfully"
+    - echo " Minikube started successfully"
   script:
     - echo "📦 Deploying application to Minikube..."
     

@@ -4,7 +4,7 @@
       <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-6">
           <div class="header__top__left">
-            <span>Besoin d'aide?</span>
+            <span>Need help?</span>
             <span class="header__top__help">
               <i class="ri-phone-fill"></i>+216 27 932 190
             </span>
@@ -14,15 +14,15 @@
           <div class="header__top__right d-flex align-items-center justify-content-end gap-3">
             <ng-container *ngIf="user; else guestLinks">
               <h5 class="mb-0">{{ user.username }}</h5>
-              <a routerLink="/login" class="btn btn-dark">Se connecter</a>
-              <a routerLink="/register" class="btn btn-dark">S'inscrire</a>
+              <a routerLink="/login" class="btn btn-dark">Login</a>
+              <a routerLink="/register" class="btn btn-dark">Register</a>
             </ng-container>
             <ng-template #guestLinks>
               <a routerLink="/login" class="d-flex align-items-center gap-1">
-                <i class="ri-login-circle-line"></i> Se connecter
+                <i class="ri-login-circle-line"></i> Login
               </a>
               <a routerLink="/register" class="d-flex align-items-center gap-1">
-                <i class="ri-user-line"></i> S'inscrire
+                <i class="ri-user-line"></i> Register
               </a>
             </ng-template>
           </div>
@@ -48,7 +48,7 @@
             <span><i class="ri-earth-line"></i></span>
             <div class="header__location-content">
               <h4>Tunisia</h4>
-              <h6>Les berges du lac 2, Tunis</h6>
+              <h6>Les Berges du Lac 2, Tunis</h6>
             </div>
           </div>
         </div>
@@ -56,15 +56,15 @@
           <div class="header__location d-flex align-items-center gap-2">
             <span><i class="ri-time-line"></i></span>
             <div class="header__location-content">
-              <h4>Ouvert 7j/7</h4>
-              <h6>9h - 20h</h6>
+              <h4>Open 7 days/week</h4>
+              <h6>9am - 8pm</h6>
             </div>
           </div>
         </div>
         <div class="col-lg-2 col-md-3 col-sm-0 d-flex align-items-center justify-content-end">
           <button class="header__btn btn">
             <a routerLink="/contact">
-              <i class="ri-phone-line"></i> appel
+              <i class="ri-phone-line"></i> Call
             </a>
           </button>
         </div>

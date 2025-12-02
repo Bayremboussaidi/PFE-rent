@@ -35,14 +35,14 @@
             <li>Brand: {{ voiture.brand }}</li>
             <li>Category: {{ voiture.category }}</li>
             <li>Transmission: {{ voiture.transmission }}</li>
-            <li>agence: {{ voiture.agence }}</li>
-            <li>Toit: {{ voiture.toit }}</li>
-            <li>Carburant: {{ voiture.carburant }}</li>
+            <li>Agency: {{ voiture.agence }}</li>
+            <li>Roof: {{ voiture.toit }}</li>
+            <li>Fuel: {{ voiture.carburant }}</li>
             <li>Price: DT{{ voiture.price }}</li>
             <li>
-              Disponibilité:
+              Availability:
               <span [ngClass]="voiture.disponible ? 'available' : 'not-available'">
-                {{ voiture.disponible ? 'Disponible' : 'Non disponible' }}
+                {{ voiture.disponible ? 'Available' : 'Not available' }}
               </span>
             </li>
           </ul>
@@ -104,6 +104,3 @@
     </div>
   </div>
 </div>
-
-
-

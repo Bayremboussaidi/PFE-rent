@@ -38,8 +38,8 @@ export class FooterComponent {
     }
 
   quickLinks = [
-    { path: '/home', display: 'Accueil' },
-    { path: '/about', display: 'À Propos' },
+    { path: '/home', display: 'Home' },
+    { path: '/about', display: 'À About' },
     { path: '/services', display: 'Services' },
     { path: '/contact', display: 'Contact' },
     { path: '/faq', display: 'FAQ' }

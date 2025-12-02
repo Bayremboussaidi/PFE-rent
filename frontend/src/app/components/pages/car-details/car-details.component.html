@@ -41,21 +41,21 @@
           <i class="ri-dashboard-line"></i> Category: {{ detail.category }}
         </span>
         <span class="d-flex align-items-center gap-1 section__description">
-          <i class="ri-building-line"></i> Agence: {{ detail.agence }}
+          <i class="ri-building-line"></i> Agency: {{ detail.agence }}
         </span>
       </div>
 
       <p class="section__description">{{ detail.description }}</p>
 
       <ul class="car-details-list">
-        <li><strong>Toit:</strong> {{ detail.toit }}</li>
-        <li><strong>Carburant:</strong> {{ detail.carburant }}</li>
+        <li><strong>Roof:</strong> {{ detail.toit }}</li>
+        <li><strong>Fuel:</strong> {{ detail.carburant }}</li>
         <li><strong>Price:</strong> ${{ detail.price }}</li>
       </ul>
 
-      <!-- Reviews Section (Les Avis des Clients) -->
+      <!-- Reviews Section -->
       <div class="reviews-section" *ngIf="car?.reviews?.length">
-        <h4>Les Avis des Clients</h4>
+        <h4>Customer Reviews</h4>
         <div class="reviews-list">
           <div class="review-item" *ngFor="let review of car.reviews">
             <div class="review-header">
@@ -70,7 +70,7 @@
         </div>
       </div>
 
-      <!--  Star Rating System - Placed Above the Comment Section -->
+      <!-- Star Rating System - Placed Above the Comment Section -->
       <div class="rating">
         <input type="radio" name="rating" id="r5" (click)="review.rating = 5">
         <label for="r5">★</label>
@@ -90,18 +90,18 @@
 
 
       <div class="purchase-cta">
-        <p class="cta-text">🚗 Don’t miss your opportunity — <strong>purchase now!</strong></p>
+        <p class="cta-text"> Don't miss your opportunity — <strong>purchase now!</strong></p>
         <button class="purchase-btn" (click)="openBookingModal(car)">
           <i class="pi pi-cart-minus"></i> Purchase
         </button>
       </div>
 
-      <!--  Comment Section (Laisser une commentaire) - Placed Below Star Rating -->
+      <!-- Comment Section - Placed Below Star Rating -->
       <div class="leave__comment-form mt-5">
         <div class="comment-section mt-4 p-4 rounded shadow-sm bg-light">
-          <h4 class="mb-2 text-primary fw-bold">Laisser un commentaire</h4>
+          <h4 class="mb-2 text-primary fw-bold">Leave a Comment</h4>
           <p class="section__description text-muted mb-0">
-            Vous devez vous connecter pour créer ou commenter une publication.
+            You must be logged in to create or comment on a post.
           </p>
         </div>
 
@@ -130,7 +130,7 @@
           </div>
 
           <button type="submit" class="submit-comment-btn">
-            📝 Poster un commentaire
+            📝 Post a Comment
           </button>
 
         </form>
@@ -139,13 +139,13 @@
   </div>
 
 
-  <!--  Sidebar: Voitures similaires (Alone on Sidebar) -->
+  <!-- Sidebar: Similar Cars -->
 
 
   <div class="car-sidebar">
 
     <div class="carousel-container">
-      <h5 style="margin-top: 40px;">Voitures similaires</h5>
+      <h5 style="margin-top: 40px;">Similar Cars</h5>
 
       <div class="carousel-box" *ngIf="otherCars.length">
         <div

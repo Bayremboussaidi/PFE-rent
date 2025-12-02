@@ -8,7 +8,7 @@
         <div class="formbold-main-wrapper">
           <div class="formbold-form-wrapper">
             <div class="formbold-form-header">
-              <h3>Entrer en contact</h3>
+              <h3>Get in Touch</h3>
               <div class="social-icons">
                 <a *ngFor="let link of socialLinks"
                    [href]="link.url"
@@ -22,7 +22,7 @@
             </div>
             <form (ngSubmit)="sendMessage()" class="formbold-chatbox-form">
               <div class="formbold-mb-5">
-                <label for="name" class="formbold-form-label">Votre nom</label>
+                <label for="name" class="formbold-form-label">Your Name</label>
                 <input
                   type="text"
                   name="name"
@@ -54,13 +54,13 @@
                 name="message"
                 id="message"
                 [(ngModel)]="message"
-                placeholder="Votre message"
+                placeholder="Your message"
                 class="formbold-form-input"
                 required
               ></textarea>
               </div>
               <div>
-                <button type="submit" class="formbold-btn w-full">Envoyer un message</button>
+                <button type="submit" class="formbold-btn w-full">Send Message</button>
               </div>
             </form>
 
@@ -100,4 +100,3 @@
     <button class="btn btn-secondary" (click)="closeSignInPrompt()">Cancel</button>
   </div>
 </div>
-

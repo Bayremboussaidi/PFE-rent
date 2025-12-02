@@ -72,12 +72,12 @@ async def test_chatbot():
                 "user_id": "test_user"
             }
             response = await client.post(f"{base_url}/chat", json=chat_data)
-            print(f"✅ Agence voitures request: {response.status_code}")
+            print(f" Agence voitures request: {response.status_code}")
             result = response.json()
             print(f"   Response: {result.get('response', '')[:100]}...")
             print(f"   Confidence: {result.get('confidence')}")
         except Exception as e:
-            print(f"❌ Agence voitures request failed: {e}")
+            print(f" Agence voitures request failed: {e}")
         
         # Test 6: Chat with availability request
         print("\n6. Testing availability request...")
@@ -87,12 +87,12 @@ async def test_chatbot():
                 "user_id": "test_user"
             }
             response = await client.post(f"{base_url}/chat", json=chat_data)
-            print(f"✅ Availability request: {response.status_code}")
+            print(f" Availability request: {response.status_code}")
             result = response.json()
             print(f"   Response: {result.get('response', '')[:100]}...")
             print(f"   Confidence: {result.get('confidence')}")
         except Exception as e:
-            print(f"❌ Availability request failed: {e}")
+            print(f" Availability request failed: {e}")
         
         # Test 7: Chat with pricing request
         print("\n7. Testing pricing request...")
@@ -102,15 +102,15 @@ async def test_chatbot():
                 "user_id": "test_user"
             }
             response = await client.post(f"{base_url}/chat", json=chat_data)
-            print(f"✅ Pricing request: {response.status_code}")
+            print(f" Pricing request: {response.status_code}")
             result = response.json()
             print(f"   Response: {result.get('response', '')[:100]}...")
             print(f"   Confidence: {result.get('confidence')}")
         except Exception as e:
-            print(f"❌ Pricing request failed: {e}")
+            print(f" Pricing request failed: {e}")
         
         print("\n" + "=" * 50)
-        print("🎉 Chatbot API testing completed!")
+        print(" Chatbot API testing completed!")
 
 if __name__ == "__main__":
     asyncio.run(test_chatbot()) 

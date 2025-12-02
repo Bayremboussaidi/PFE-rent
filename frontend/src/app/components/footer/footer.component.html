@@ -10,14 +10,14 @@
           <span class="footer__logo-text">Comparator</span>
         </div>
         <p class="footer__logo-content">
-          Location de voiture, longue et courte durée. Livraison possible dans toute la Tunisie.
+          Car rental, long and short term. Delivery available throughout Tunisia.
         </p>
       </div>
 
       <!-- Quick Links Section -->
       <div class="col-lg-2 col-md-4 col-sm-6">
         <div class="mb-4">
-          <h5 class="footer__link-title">Liens rapides</h5>
+          <h5 class="footer__link-title">Quick Links</h5>
           <ul class="list-group">
             <li *ngFor="let item of quickLinks" class="list-group-item p-0 mt-3 quick__link">
               <a [routerLink]="item.path">{{ item.display }}</a>
@@ -29,11 +29,11 @@
       <!-- Office Info Section -->
       <div class="col-lg-3 col-md-4 col-sm-6">
         <div class="mb-4">
-          <h5 class="footer__link-title mb-4">Siège Social</h5>
+          <h5 class="footer__link-title mb-4">Head Office</h5>
           <p class="office__info">Les Berges du Lac 2, Tunis, Tunisia</p>
-          <p class="office__info">Téléphone: +216 27 932 190</p>
+          <p class="office__info">Phone: +216 27 932 190</p>
           <p class="office__info">Email: myloclac2&#64;gmail.com</p>
-          <p class="office__info">Ouvert: 7j/7, 9h - 20h</p>
+          <p class="office__info">Open: 7 days/week, 9am - 8pm</p>
         </div>
       </div>
 
@@ -41,7 +41,7 @@
       <div class="col-lg-3 col-md-4 col-sm-12">
         <div class="mb-4">
           <h5 class="footer__link-title">Newsletter</h5>
-          <p class="section__description">Abonnez-vous à notre newsletter pour les dernières mises à jour.</p>
+          <p class="section__description">Subscribe to our newsletter for the latest updates.</p>
           <div class="newsletter">
             <input type="email" [(ngModel)]="email" placeholder="Email" />
             <span><i class="ri-send-plane-line" (click)="subscribeToNewsletter()"></i></span>

@@ -20,22 +20,19 @@
       </h6>
     </div>
 
-
-
     <div class="comments-section mt-5">
-      <h4>Commentaires</h4>
+      <h4>Comments</h4>
       <div *ngFor="let comment of blog.comments" class="comment-box mb-4">
-        <p><strong>{{ comment.fullName || 'Anonyme' }}</strong> (<i>{{ comment.email }}</i>)</p>
-        <p>{{ comment.content || 'Aucun contenu.' }}</p>
+        <p><strong>{{ comment.fullName || 'Anonymous' }}</strong> (<i>{{ comment.email }}</i>)</p>
+        <p>{{ comment.content || 'No content.' }}</p>
       </div>
     </div>
 
-
     <!-- Comment Form -->
     <div class="leave__comment-form mt-5">
-      <h4>Laisser une commentaire</h4>
+      <h4>Leave a Comment</h4>
       <p class="section__description">
-        Vous devez vous connecter pour créer ou commenter une publication
+        You must be logged in to create or comment on a post
       </p>
 
       <form (ngSubmit)="submitComment()">
@@ -70,7 +67,7 @@
         </div>
 
         <button type="submit" class="btn comment__btn mt-3">
-          Poster un commentaire
+          Post a Comment
         </button>
       </form>
     </div>
@@ -78,7 +75,7 @@
 
   <!-- Sidebar -->
   <div class="blog-sidebar">
-    <h5>Articles récents</h5>
+    <h5>Recent Articles</h5>
     <ul>
       <li *ngFor="let otherBlog of otherBlogs" class="blog-item-box">
         <a [routerLink]="['/blogs', otherBlog.id]">{{ otherBlog.title }}</a>

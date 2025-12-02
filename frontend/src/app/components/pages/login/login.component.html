@@ -1,7 +1,7 @@
 <div class="conditions-overlay" *ngIf="showConditions">
   <div class="conditions-dialog">
     <div class="dialog-header">
-      <h3>Conditions de location</h3>
+      <h3>Rental Conditions</h3>
       <button class="close-btn" (click)="closeConditions()">&times;</button>
     </div>
 
@@ -32,7 +32,7 @@
             <div class="user">
               <img src="../../assets/all-images/logo2.png" alt="User Icon" />
             </div>
-            <h2>Se connecter</h2>
+            <h2>Sign In</h2>
 
             <p *ngIf="errorMessage" class="text-danger">{{ errorMessage }}</p>
 
@@ -41,37 +41,37 @@
                 <input type="email" placeholder="Email" required id="email" [(ngModel)]="credentials.email" name="email">
               </div>
               <div class="form-group">
-                <input type="password" placeholder="Mot de passe" required id="password" [(ngModel)]="credentials.password" name="password">
+                <input type="password" placeholder="Password" required id="password" [(ngModel)]="credentials.password" name="password">
               </div>
 
               <div class="robot-check">
                 <label>
                   <input type="checkbox" [(ngModel)]="isRobot" name="robotCheck">
-                  <span>J'accepte les conditions de location</span>
+                  <span>I accept the rental conditions</span>
                   <button class="conditions-button" (click)="showConditions = true">
                     <span class="button-icon">!</span>
-                    <span class="hover-text">Lire les conditions de location</span>
+                    <span class="hover-text">Read the rental conditions</span>
                   </button>
                 </label>
               </div>
               <div class="robot-check">
                 <label>
                   <input type="checkbox" [checked]="isUser" name="userCheck" (change)="toggleCheck('user')">
-                  Je suis un client
+                  I am a customer
                 </label>
               </div>
 
               <div class="robot-check">
                 <label>
                   <input type="checkbox" [checked]="isAgence" name="agenceCheck" (change)="toggleCheck('agence')">
-                  Je suis agence
+                  I am an agency
                 </label>
               </div>
               <button class="btn secondary__btn auth__btn" type="submit">
-                <p>Se connecter</p>
+                <p>Sign In</p>
               </button>
             </form>
-            <p>Vous n'avez pas de compte ? <a routerLink="/register" class="text-black">Créer</a></p>
+            <p>Don't have an account? <a routerLink="/register" class="text-black">Create</a></p>
           </div>
         </div>
       </div>
@@ -96,7 +96,7 @@
             <div class="user">
               <img src="../../assets/all-images/logo2.png" alt="User Icon" />
             </div>
-            <h2>Se connecter</h2>
+            <h2>Sign In</h2>
 
             <p *ngIf="errorMessage" class="text-danger">{{ errorMessage }}</p>
 
@@ -117,7 +117,7 @@
               <div class="form-group">
                 <input
                   type="password"
-                  placeholder="Mot de passe"
+                  placeholder="Password"
                   required
                   id="password"
                   [(ngModel)]="credentials.password"
@@ -134,27 +134,27 @@
                     name="robotCheck"
                     required
                   />
-                  <span>J'accepte les conditions de location</span>
+                  <span>I accept the rental conditions</span>
                   <button
                     class="conditions-button"
                     type="button"
                     (click)="showConditions = true"
                   >
                     <span class="button-icon">!</span>
-                    <span class="hover-text">Lire les conditions de location</span>
+                    <span class="hover-text">Read the rental conditions</span>
                   </button>
                 </label>
               </div>
 
               <!-- Submit Button -->
               <button class="btn secondary__btn auth__btn" type="submit">
-                <p>Se connecter</p>
+                <p>Sign In</p>
               </button>
             </form>
 
             <p>
-              Vous n'avez pas de compte ?
-              <a routerLink="/register" class="text-black">Créer</a>
+              Don't have an account?
+              <a routerLink="/register" class="text-black">Create</a>
             </p>
           </div>
         </div>
@@ -162,5 +162,3 @@
     </div>
   </div>
 </section>
-
-
