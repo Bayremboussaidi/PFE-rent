@@ -11,13 +11,13 @@ A modern full-stack car rental platform built with **Angular**, **Spring Boot**,
 4. [Frontend](#frontend)
 5. [Backend](#backend)
 6. [Chatbot](#chatbot)
-7. [Security](#security)
-8. [Notifications & Email System](#notifications--email-system)
-9. [Booking Flow with PDF & QR](#booking-flow-with-pdf--qr)
-10. [Deployment & CI/CD](#deployment--cicd)
-11. [Screenshots & UI](#screenshots--ui)
-12. [How to Run](#how-to-run)
-13. [Future Work](#future-work)
+7. [Online Payment](#online-payment)
+8. [Security](#security)
+9. [Notifications and Email System](#notifications-and-email-system)
+10. [Booking Flow with PDF and QR](#booking-flow-with-pdf-and-qr)
+11. [Deployment and CI/CD](#deployment-and-cicd)
+12. [Screenshots and UI](#screenshots-and-ui)
+13. [How to Run](#how-to-run)
 14. [Author](#author)
 
 ---
@@ -78,6 +78,22 @@ Multi-role platform supporting:
 
 ---
 
+
+## Online Payment
+- **Provider:** Stripe
+- **Integration:** Embedded in Backend (Port 8084)
+- **Endpoints:**
+  - POST /api/payment/create-checkout-session
+  - GET /api/payment/session-status/{sessionId}
+  - GET /api/payment/public-key
+- **Features:**
+  - Secure checkout via Stripe Checkout
+  - Payment confirmation and status tracking
+  - Email receipt after successful payment
+  - Metadata linking to booking ID
+
+---
+
 ## Security
 - **Admin:** Keycloak authentication with realm roles
 - **Users:** JWT-secured APIs for Agency/Customer/Follower
@@ -104,13 +120,25 @@ Multi-role platform supporting:
 
 ---
 
-## Deployment & CI/CD
-- **Docker Compose:** Frontend, backend, MySQL, chatbot
-- **Kubernetes:** Minikube with YAML manifests
-- **CI/CD:** GitLab pipeline (build, test, deploy)
-- **Microservices:** Domain-based modular architecture
+## Deployment and CI/CD
 
----
+### Docker Services
+| Service | Port | Description |
+|---------|------|-------------|
+| mysql | 3306 | MySQL Database |
+| backend | 8084 | Spring Boot Backend (with Payment) |
+| frontend | 4200 | Angular Frontend |
+| ai-chatbot | 8000 | FastAPI Chatbot |
+
+### CI/CD Pipeline
+- **Platform:** GitLab CI/CD
+- **Stages:** test, build_frontend, build_backend, build_images, push_images, deploy_minikube
+- **Docker Registry:** Docker Hub (bayremboussaidi)
+
+### Kubernetes Deployment
+- **Platform:** Minikube
+- **Namespace:** car-rent-app
+- **Pods:** mysql, backend, frontend, ai-chatbot
 
 ## Screenshots & UI
 
@@ -131,6 +159,7 @@ Multi-role platform supporting:
 | Sign In Required for Booking (Customer)       | ![Sign In Required](screenshots/signinrequired.PNG) |
 | Car Availability Calendar (Only Available Dates Shown) | ![Availability Calendar](screenshots/calandrier.PNG) |
 | Rental PDF Confirmation Example Zahida Aloui – Client Demo | [Download PDF](screenshots/booking-confirmation.pdf) |
+| Kubernetes Pods (Minikube) | ![K8s Pods](screenshots/k8s-pods.PNG) |
 
 ---
 
@@ -156,6 +185,16 @@ pip install -r requirements.txt
 uvicorn main:app --host 0.0.0.0 --port 8000
 ```
 
+
+### Kubernetes (Minikube)
+```bash
+minikube start
+kubectl apply -f k8s/namespace.yaml
+kubectl apply -f k8s/mysql-deployment.yaml
+kubectl apply -f k8s/backend-deployment.yaml
+kubectl apply -f k8s/frontend-deployment.yaml
+kubectl apply -f k8s/ai-chatbot-deployment.yaml
+minikube dashboard
 ### Keycloak (Admin)
 ```bash
 docker run -d --name keycloak \
@@ -165,14 +204,6 @@ docker run -d --name keycloak \
   quay.io/keycloak/keycloak:21.1.1 start-dev
 ```
 
----
-
-## Future Work
-- **Online Payment Integration (PayPal Microservice):**
-  - Microservice app has already been created
-  - Requires a PayPal account and configuration to enable automated payment links to customers
-  - Will be integrated into the booking approval flow once ready
-  - Currently postponed due to external constraints with employer; implementation planned for next steps
 
 
 ---
@@ -181,3 +212,11 @@ docker run -d --name keycloak \
 
 Bayrem Boussaidi  
 Software Engineer — Angular | Spring Boot | Docker | Kubernetes | FastAPI | Microservices
+
+
+
+
+
+
+
+

@@ -8,35 +8,87 @@ import { ReportRequest } from '../models/ReportRequest.model';
   providedIn: 'root'
 })
 export class EmailService {
+  private baseUrl = 'http://localhost:8080/api';
 
-  private apiUrl = 'http://localhost:8084/sendEmail';
+  constructor(private http: HttpClient) {}
 
-
-  constructor(private http: HttpClient) { }
-
-
-  sendEmail(emailRequest: any): Observable<any> {
-    return this.http.post(this.apiUrl, emailRequest);
-  }
-
-
-  toadmin(emailRequest: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/toadmin`, emailRequest);
-
+  // Existing methods
+  sendEmail(emailRequest: EmailRequest): Observable<any> {
+    return this.http.post(`${this.baseUrl}/email/send`, emailRequest);
   }
 
   informEmail(emailRequest: EmailRequest): Observable<any> {
-    return this.http.post(`${this.apiUrl}/inform`, emailRequest);
+    return this.http.post(`${this.baseUrl}/email/inform`, emailRequest);
   }
-
 
   sendReportEmail(reportRequest: ReportRequest): Observable<any> {
-    return this.http.post(`http://localhost:8084/api/reports/generate`, reportRequest);
+    return this.http.post(`${this.baseUrl}/report/generate`, reportRequest);
+  }
+
+  /**
+   * Send email to admin
+   */
+  toadmin(emailRequest: EmailRequest): Observable<any> {
+    return this.http.post(`${this.baseUrl}/email/toadmin`, emailRequest);
+  }
+
+  // ========== NEW PAYMENT EMAIL METHODS ==========
+
+  /**
+   * Send Payment Link to customer
+   */
+  sendPaymentLink(request: {
+    email: string;
+    customerName: string;
+    carName: string;
+    startDate: string | null;
+    endDate: string | null;
+    amount: number;
+    bookingId: number;
+    phone?: string;
+  }): Observable<any> {
+    return this.http.post(`${this.baseUrl}/payment-email/send-payment-link`, request);
+  }
+
+  /**
+   * Send Payment Confirmation with PDF
+   */
+  sendPaymentConfirmation(request: {
+    email: string;
+    customerName: string;
+    carName: string;
+    startDate: string;
+    endDate: string;
+    amount: string;
+    transactionId: string;
+    phone?: string;
+  }): Observable<any> {
+    return this.http.post(`${this.baseUrl}/payment-email/send-confirmation`, request);
+  }
+
+  /**
+   * Generate Payment Link only (without sending email)
+   */
+  generatePaymentLink(
+    bookingId: number,
+    customerName: string,
+    customerEmail: string,
+    carName: string,
+    startDate: string,
+    endDate: string,
+    amount: number,
+    phone?: string
+  ): Observable<any> {
+    const params = new URLSearchParams({
+      bookingId: bookingId.toString(),
+      customerName,
+      customerEmail,
+      carName,
+      startDate,
+      endDate,
+      amount: amount.toString(),
+      phone: phone || ''
+    });
+    return this.http.get(`${this.baseUrl}/payment-email/generate-link?${params.toString()}`);
   }
 }
-
-
-
-
-
-

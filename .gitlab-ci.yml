@@ -1,5 +1,4 @@
 stages:
-  - checkout
   - test
   - build_frontend
   - build_backend
@@ -10,11 +9,9 @@ stages:
 variables:
   FRONT_DIR: "frontend"
   BACK_DIR: "back"
-  COMPOSE_FILE: "docker-compose.yml"
   DOCKER_HOST: tcp://docker:2375
   DOCKER_DRIVER: overlay2
   DOCKER_TLS_CERTDIR: ""
-  DOCKER_REGISTRY: "bayremboussaidi"
   DOCKER_IMAGE_BACKEND: "bayremboussaidi/backend"
   DOCKER_IMAGE_FRONTEND: "bayremboussaidi/front"
 
@@ -23,10 +20,10 @@ run_backend_tests:
   stage: test
   image: maven:3.9.6-eclipse-temurin-21
   script:
-    - echo " Running backend tests..."
+    - echo "Running backend tests..."
     - cd back
     - mvn test -DskipTests=false
-    - echo " Backend tests completed"
+    - echo "Backend tests completed"
   artifacts:
     reports:
       junit: back/target/surefire-reports/TEST-*.xml
@@ -39,7 +36,7 @@ run_frontend_tests:
   stage: test
   image: node:18
   script:
-    - echo "🧪 Running frontend tests..."
+    - echo "Running frontend tests..."
     - cd frontend
     - npm install --legacy-peer-deps
     - npm test -- --watch=false --browsers=ChromeHeadless
@@ -54,7 +51,7 @@ build_angular_frontend:
   stage: build_frontend
   image: node:18
   script:
-    - echo " Installing dependencies and building Angular app..."
+    - echo "Installing dependencies and building Angular app..."
     - cd $FRONT_DIR
     - npm install --legacy-peer-deps
     - npm run build -- --configuration=production
@@ -66,12 +63,12 @@ build_angular_frontend:
     paths:
       - frontend/node_modules/
 
-# Build Backend (Spring Boot app)
+# Build Backend
 build_backend:
   stage: build_backend
   image: maven:3.9.6-eclipse-temurin-21
   script:
-    - echo "🔧 Installing backend dependencies and building the Spring Boot app..."
+    - echo "Installing backend dependencies and building the Spring Boot app..."
     - cd $BACK_DIR
     - mvn clean package -DskipTests=true
   artifacts:
@@ -87,19 +84,12 @@ build_docker_images:
     - name: docker:20.10.16-dind
       command: ["--host=tcp://0.0.0.0:2375"]
   script:
-    - echo " Building Docker images..."
-    
-    # Build Backend Image
-    - echo "🔧 Building backend image..."
+    - echo "Building Docker images..."
     - docker build -t $DOCKER_IMAGE_BACKEND:$CI_COMMIT_SHA -t $DOCKER_IMAGE_BACKEND:latest ./back
-    
-    # Build Frontend Image
-    - echo " Building frontend image..."
     - docker build -t $DOCKER_IMAGE_FRONTEND:$CI_COMMIT_SHA -t $DOCKER_IMAGE_FRONTEND:latest ./frontend
-
-    - echo " All Docker images built successfully"
+    - echo "All Docker images built successfully"
   dependencies:
-    - build_frontend
+    - build_angular_frontend
     - build_backend
 
 # Push Images to Docker Hub
@@ -110,22 +100,15 @@ push_docker_images:
     - name: docker:20.10.16-dind
       command: ["--host=tcp://0.0.0.0:2375"]
   script:
-    - echo " Logging into Docker Hub..."
+    - echo "Logging into Docker Hub..."
     - echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
-    
-    - echo "📤 Pushing images to Docker Hub..."
-    
-    # Push Backend Image
-    - echo " Pushing backend image..."
+    - echo "Pushing backend image..."
     - docker push $DOCKER_IMAGE_BACKEND:$CI_COMMIT_SHA
     - docker push $DOCKER_IMAGE_BACKEND:latest
-    
-    # Push Frontend Image
-    - echo " Pushing frontend image..."
+    - echo "Pushing frontend image..."
     - docker push $DOCKER_IMAGE_FRONTEND:$CI_COMMIT_SHA
     - docker push $DOCKER_IMAGE_FRONTEND:latest
-    
-    - echo " All images pushed to Docker Hub successfully"
+    - echo "All images pushed to Docker Hub successfully"
   dependencies:
     - build_docker_images
   only:
@@ -137,51 +120,26 @@ deploy_to_minikube:
   stage: deploy_minikube
   image: bitnami/kubectl:latest
   before_script:
-    - echo "🚀 Setting up Minikube deployment..."
+    - echo "Setting up Minikube deployment..."
     - curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
     - install minikube-linux-amd64 /usr/local/bin/minikube
     - minikube start --driver=docker --force
     - minikube addons enable ingress
-    - echo " Minikube started successfully"
+    - echo "Minikube started successfully"
   script:
-    - echo "📦 Deploying application to Minikube..."
-    
-    # Create namespace
+    - echo "Deploying application to Minikube..."
     - kubectl apply -f k8s/namespace.yaml
-    
-    # Deploy MySQL
     - kubectl apply -f k8s/mysql-deployment.yaml
-    
-    # Wait for MySQL to be ready
-    - kubectl wait --for=condition=ready pod -l app=mysql -n car-rent-app --timeout=300s || echo "MySQL not ready, continuing..."
-    
-    # Update deployment files with latest images
-    - sed -i "s|image:.*backend.*|image: ${DOCKER_IMAGE_BACKEND}:latest|g" k8s/backend-deployment.yaml
-    - sed -i "s|image:.*frontend.*|image: ${DOCKER_IMAGE_FRONTEND}:latest|g" k8s/frontend-deployment.yaml
-    
-    # Deploy Backend
+    - kubectl wait --for=condition=ready pod -l app=mysql -n car-rent-app --timeout=300s || echo "MySQL not ready"
+    - #sed -i "s|image:.*backend.*|image: ${DOCKER_IMAGE_BACKEND}:latest|g" k8s/backend-deployment.yaml
+    - #sed -i "s|image:.*frontend.*|image: ${DOCKER_IMAGE_FRONTEND}:latest|g" k8s/frontend-deployment.yaml
     - kubectl apply -f k8s/backend-deployment.yaml
-    
-    # Deploy Frontend
     - kubectl apply -f k8s/frontend-deployment.yaml
-    
-    # Wait for deployments to be ready
-    - kubectl wait --for=condition=available deployment/backend -n car-rent-app --timeout=300s || echo "Backend not ready"
-    - kubectl wait --for=condition=available deployment/frontend -n car-rent-app --timeout=300s || echo "Frontend not ready"
-    
-    # Show deployment status
-    - echo "📊 Deployment Status:"
+    - kubectl apply -f k8s/ai-chatbot-deployment.yaml
+    - echo "Deployment Status:"
     - kubectl get pods -n car-rent-app
     - kubectl get svc -n car-rent-app
-    
-    # Get access information
-    - echo "🌐 Access Information:"
-    - MINIKUBE_IP=$(minikube ip)
-    - echo "Minikube IP: $MINIKUBE_IP"
-    - echo "Frontend: http://$MINIKUBE_IP:$(kubectl get svc frontend -n car-rent-app -o jsonpath='{.spec.ports[0].nodePort}' 2>/dev/null || echo 'N/A')"
-    - echo "Backend: http://$MINIKUBE_IP:$(kubectl get svc backend -n car-rent-app -o jsonpath='{.spec.ports[0].nodePort}' 2>/dev/null || echo 'N/A')"
-    
-    - echo "✅ Deployment completed successfully!"
+    - echo "Deployment completed successfully"
   dependencies:
     - push_docker_images
   only:
@@ -189,20 +147,3 @@ deploy_to_minikube:
     - master
   environment:
     name: minikube
-
-# Deploy with Docker Compose (for local development)
-docker_compose_up:
-  stage: deploy_minikube
-  image: docker:20.10.16
-  services:
-    - name: docker:20.10.16-dind
-      command: ["--host=tcp://0.0.0.0:2375"]
-  script:
-    - echo "🐳 Stopping existing containers (if any)..."
-    - docker-compose -f $COMPOSE_FILE down || true
-    - echo "🐳 Building Docker images..."
-    - docker-compose -f $COMPOSE_FILE build
-    - echo "🐳 Starting containers..."
-    - docker-compose -f $COMPOSE_FILE up -d
-  when: manual
-  allow_failure: true
