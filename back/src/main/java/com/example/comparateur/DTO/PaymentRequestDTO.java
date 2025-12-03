@@ -1,4 +1,4 @@
-package com.example.comparateur.Dto;
+package com.example.comparateur.DTO;
 
 import java.math.BigDecimal;
 
