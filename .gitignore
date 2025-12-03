@@ -1,1 +1,5 @@
 minikube-linux-amd64
+
+# Environment files with secrets
+frontend/src/environments/environment.ts
+frontend/src/environments/environment.prod.ts
